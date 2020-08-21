@@ -10,30 +10,49 @@ class User extends \TCG\Voyager\Models\User implements MustVerifyEmail
 {
     use Notifiable;
 
-    /**
-     * The attributes that are mass assignable.
-     *
-     * @var array
-     */
     protected $fillable = [
         'name', 'last_name', 'email', 'phone', 'reserve_phone',  'passport_number',  'date_of_issue',  'date_of_birth',  'role_id',  'avatar', 'password',
     ];
-
-    /**
-     * The attributes that should be hidden for arrays.
-     *
-     * @var array
-     */
     protected $hidden = [
         'password', 'remember_token',
     ];
 
-    /**
-     * The attributes that should be cast to native types.
-     *
-     * @var array
-     */
     protected $casts = [
         'email_verified_at' => 'datetime',
     ];
+
+    public function role()
+    {
+        return $this->belongsTo('TCG\Voyager\Models\Role');
+    }
+
+    public function flats()
+    {
+        return $this->hasMany('App\Flat');
+    }
+
+    public function flat_orders()
+    {
+        return $this->hasMany('App\Flat');
+    }
+
+    public function dialogs()
+    {
+        return $this->hasMany('App\Dialog');
+    }
+
+    public function messages()
+    {
+        return $this->hasMany('App\Message');
+    }
+
+    public function household_services()
+    {
+        return $this->hasMany('App\HouseholdService');
+    }
+
+    public function household_orders()
+    {
+        return $this->hasMany('App\HouseholdServiceOrder');
+    }
 }
