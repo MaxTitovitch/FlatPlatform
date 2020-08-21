@@ -24,7 +24,6 @@ class CreateUsersTable extends Migration
             $table->string('passport_number')->nullable();
             $table->date('date_of_issue')->nullable();
             $table->date('date_of_birth')->nullable();
-            $table->enum('type', ['Арендатор', 'Арендодатель', 'Работник']);
             $table->timestamp('email_verified_at')->nullable();
             $table->rememberToken();
             $table->timestamps();

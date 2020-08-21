@@ -12,16 +12,16 @@
                         @csrf
 
                         <div class="form-group row">
-                            <label for="name" class="col-md-4 col-form-label text-md-right">{{ __('Тип аккаунта') }}</label>
+                            <label for="role_id" class="col-md-4 col-form-label text-md-right">{{ __('Тип аккаунта') }}</label>
 
                             <div class="col-md-6">
-                                <select id="type" type="text" class="form-control @error('type') is-invalid @enderror" name="type" value="{{ old('type') }}" required autocomplete="type" autofocus>
-                                    <option value="Арендатор">Арендатор</option>
-                                    <option value="Арендодатель">Арендодатель</option>
-                                    <option value="Работник">Работник</option>
+                                <select id="role_id" type="text" class="form-control @error('role_id') is-invalid @enderror" name="role_id" value="{{ old('role_id') }}" required autocomplete="role_id" autofocus>
+                                    @foreach($roles as $role)
+                                        <option value="{{ $role->id }}">{{ $role->display_name }}</option>
+                                    @endforeach
                                 </select>
 
-                                @error('type')
+                                @error('role_id')
                                     <span class="invalid-feedback" role="alert">
                                         <strong>{{ $message }}</strong>
                                     </span>

@@ -17,7 +17,9 @@ use TCG\Voyager\Facades\Voyager;
 
 Route::group(['prefix' => 'admin'], function () {
     Voyager::routes();
+    Route::get('logs', '\Rap2hpoutre\LaravelLogViewer\LogViewerController\Rap2hpoutre\LaravelLogViewer\LogViewerController@index')->name('error-log');
 });
+
 
 Auth::routes(['verify' => true]);
 

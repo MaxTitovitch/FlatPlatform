@@ -8,6 +8,10 @@ use App\User;
 use Illuminate\Foundation\Auth\RegistersUsers;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Validator;
+use TCG\Voyager\Models\Role;
+use Illuminate\Http\Request;
+use Illuminate\Auth\Events\Registered;
+use Illuminate\Http\Response;
 
 class RegisterController extends Controller
 {
@@ -59,8 +63,7 @@ class RegisterController extends Controller
 //            'passport_number' => ['string', 'regex:/^[0-9]{9}$/'],
 //            'date_of_birth' => ['date', 'before:today'],
 //            'date_of_issue' => ['date', 'before:today'],
-            'type' => ['required', 'in:Арендатор,Арендодатель,Работник'],
-//            'photo' => ['string'],
+            'role_id' => ['required', 'exists:TCG\Voyager\Models\Role,id'],
         ]);
     }
 
@@ -73,18 +76,21 @@ class RegisterController extends Controller
     protected function create(array $data)
     {
         $data['phone'] = str_replace([' ', '-', '(', ')', '_', ':', '='], '', $data['phone']);
-        return User::create([
+        return  User::create([
             'name' => $data['name'],
             'phone' => $data['phone'],
             'last_name' => $data['last_name'],
-            'type' => $data['type'],
+            'role_id' => $data['role_id'],
             'email' => $data['email'],
             'password' => Hash::make($data['password']),
             'reserve_phone' => $data['reserve_phone'] ?? null,
-//            'passport_number' => $data['passport_number'] ?? null,
-//            'date_of_birth' => $data['date_of_birth'] ?? null,
-//            'date_of_issue' => $data['date_of_issue'] ?? null,
-//            'photo' => $data['photo'] ?? null,
         ]);
+
     }
+
+    public function showRegistrationForm()
+    {
+        return view('auth.register', ['roles' => Role::where('id', '<>', 1)->get()]);
+    }
+
 }
