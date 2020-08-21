@@ -51,8 +51,16 @@ class RegisterController extends Controller
     {
         return Validator::make($data, [
             'name' => ['required', 'string', 'max:255'],
+            'last_name' => ['required', 'string', 'max:255'],
             'email' => ['required', 'string', 'email', 'max:255', 'unique:users'],
             'password' => ['required', 'string', 'min:8', 'confirmed'],
+            'phone' => ['required', 'string', 'regex:/^(\s*)?(\+)?([- _():=+]?\d[- _():=+]?){10,14}(\s*)?$/'],
+            'reserve_phone' => ['nullable', 'regex:/^(\s*)?(\+)?([- _():=+]?\d[- _():=+]?){10,14}(\s*)?$/'],
+//            'passport_number' => ['string', 'regex:/^[0-9]{9}$/'],
+//            'date_of_birth' => ['date', 'before:today'],
+//            'date_of_issue' => ['date', 'before:today'],
+            'type' => ['required', 'in:Арендатор,Арендодатель,Работник'],
+//            'photo' => ['string'],
         ]);
     }
 
@@ -64,10 +72,19 @@ class RegisterController extends Controller
      */
     protected function create(array $data)
     {
+        $data['phone'] = str_replace([' ', '-', '(', ')', '_', ':', '='], '', $data['phone']);
         return User::create([
             'name' => $data['name'],
+            'phone' => $data['phone'],
+            'last_name' => $data['last_name'],
+            'type' => $data['type'],
             'email' => $data['email'],
             'password' => Hash::make($data['password']),
+            'reserve_phone' => $data['reserve_phone'] ?? null,
+//            'passport_number' => $data['passport_number'] ?? null,
+//            'date_of_birth' => $data['date_of_birth'] ?? null,
+//            'date_of_issue' => $data['date_of_issue'] ?? null,
+//            'photo' => $data['photo'] ?? null,
         ]);
     }
 }
