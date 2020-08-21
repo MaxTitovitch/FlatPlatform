@@ -25,7 +25,6 @@ class CreateUsersTable extends Migration
             $table->date('date_of_issue')->nullable();
             $table->date('date_of_birth')->nullable();
             $table->enum('type', ['Арендатор', 'Арендодатель', 'Работник']);
-            $table->string('photo')->nullable();
             $table->timestamp('email_verified_at')->nullable();
             $table->rememberToken();
             $table->timestamps();
