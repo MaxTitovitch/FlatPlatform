@@ -123,23 +123,23 @@
 {{--                                </div>--}}
                             @endcan
 
-{{--                            @php--}}
-{{--                                if (isset($dataTypeContent->locale)) {--}}
-{{--                                    $selected_locale = $dataTypeContent->locale;--}}
-{{--                                } else {--}}
-{{--                                    $selected_locale = config('app.locale', 'en');--}}
-{{--                                }--}}
+                            @php
+                                if (isset($dataTypeContent->locale)) {
+                                    $selected_locale = $dataTypeContent->locale;
+                                } else {
+                                    $selected_locale = config('app.locale', 'en');
+                                }
 
-{{--                            @endphp--}}
-{{--                            <div class="form-group">--}}
-{{--                                <label for="locale">{{ __('voyager::generic.locale') }}</label>--}}
-{{--                                <select class="form-control select2" id="locale" name="locale">--}}
-{{--                                    @foreach (Voyager::getLocales() as $locale)--}}
-{{--                                        <option value="{{ $locale }}"--}}
-{{--                                                {{ ($locale == $selected_locale ? 'selected' : '') }}>{{ $locale }}</option>--}}
-{{--                                    @endforeach--}}
-{{--                                </select>--}}
-{{--                            </div>--}}
+                            @endphp
+                            <div class="form-group">
+                                <label for="locale">{{ __('voyager::generic.locale') }}</label>
+                                <select class="form-control select2" id="locale" name="locale">
+                                    @foreach (Voyager::getLocales() as $locale)
+                                        <option value="{{ $locale }}"
+                                                {{ ($locale == $selected_locale ? 'selected' : '') }}>{{ $locale }}</option>
+                                    @endforeach
+                                </select>
+                            </div>
                         </div>
                     </div>
                 </div>
