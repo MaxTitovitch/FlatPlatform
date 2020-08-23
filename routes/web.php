@@ -21,12 +21,19 @@ Route::group(['prefix' => 'admin'], function () {
 });
 Auth::routes(['verify' => true]);
 
-
+// Static pages
 Route::get('/', 'StaticController@index')->name('index');
 Route::get('/about', 'StaticController@about')->name('about');
 Route::get('/rules', 'StaticController@rules')->name('rules');
+
+// Flat pages
 Route::get('/search', 'FlatController@search')->name('flat-search');
 Route::get('/apartment/{id}', 'FlatController@index')->name('flat-page');
+Route::middleware(['auth', 'verified'])->group(function () {
+    Route::post('/add-flat-request/{id}', 'FlatController@addRequest')->name('flat-add-request');
+    Route::patch('/reject-flat-request/{id}', 'FlatController@rejectRequest')->name('flat-reject-request');
+    Route::patch('/accept-flat-request/{id}', 'FlatController@acceptRequest')->name('flat-accept-request');
+});
 
 
 

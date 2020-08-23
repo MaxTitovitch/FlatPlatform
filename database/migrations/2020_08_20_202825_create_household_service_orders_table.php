@@ -22,10 +22,12 @@ class CreateHouseholdServiceOrdersTable extends Migration
             $table->date('date_of_completion');
             $table->foreignId('landlord_id')->unsigned();
             $table->foreignId('household_service_id')->unsigned();
+            $table->foreignId('flat_id')->unsigned();
             $table->timestamps();
 
             $table->foreign('landlord_id')->references('id')->on('users');
             $table->foreign('household_service_id')->references('id')->on('household_services');
+            $table->foreign('flat_id')->references('id')->on('flats');
         });
     }
 

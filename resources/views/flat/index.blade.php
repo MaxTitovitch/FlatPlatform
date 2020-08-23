@@ -2,6 +2,6 @@
 
 @section('content')
     <div>
-        @dd($flat)
+        @dd($flat, $flat->orders)
     </div>
 @endsection
