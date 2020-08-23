@@ -19,13 +19,16 @@ Route::group(['prefix' => 'admin'], function () {
     Voyager::routes();
     Route::get('logs', '\Rap2hpoutre\LaravelLogViewer\LogViewerController@index')->name('error-log');
 });
-
-
 Auth::routes(['verify' => true]);
 
-Route::get('/home', 'HomeController@index')->name('home')->middleware('verified');
 
-Route::get('/', function () {
-    return view('welcome');
-});
+Route::get('/', 'StaticController@index')->name('index');
+Route::get('/about', 'StaticController@about')->name('about');
+Route::get('/rules', 'StaticController@rules')->name('rules');
+Route::get('/search', 'FlatController@search')->name('flat-search');
+Route::get('/apartment/{id}', 'FlatController@index')->name('flat-page');
+
+
+
+Route::get('/home', 'HomeController@index')->name('home')->middleware('verified');
 

@@ -2,6 +2,6 @@
 
 @section('content')
     <div>
-        @dd($flats, $services, $statistic)
+        @dd($flat)
     </div>
 @endsection

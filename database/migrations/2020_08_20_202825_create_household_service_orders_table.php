@@ -16,7 +16,7 @@ class CreateHouseholdServiceOrdersTable extends Migration
         Schema::create('household_service_orders', function (Blueprint $table) {
             $table->id();
             $table->double('price', 15, 2);
-            $table->string('status');
+            $table->enum('status', ['Создан', "Принят", 'Утверждён', 'Выполнен', 'Отменён', 'Отозван']);
             $table->boolean('employee_confirmation');
             $table->boolean('landlord_confirmation');
             $table->date('date_of_completion');
