@@ -47,8 +47,8 @@ class FlatCRUDController extends Controller
 
     public function update(FlatCRUDRequest $request, Flat $flat)
     {
-        $flat = Flat::create($request->all());
-        $flat->updateAvatar($request);
+        $flat->update($request->all());
+        $flat->updateImages($request);
         $flat->user_id = Auth::id();
         $flat->save();
         Session::flash('status-success', 'Объявление изменено!');

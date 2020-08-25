@@ -57,5 +57,6 @@ Route::middleware(['auth', 'verified'])->group(function () {
     Route::get('/home', 'HomeController@index')->name('home');
     Route::put('/home', 'HomeController@updateUser')->name('home-update');
     Route::resource('/home/flats', 'FlatCRUDController')->middleware('authorization:landlord');
+    Route::resource('/home/services', 'HouseholdServiceCRUDController')->middleware('authorization:employee');
 });
 
