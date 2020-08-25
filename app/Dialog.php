@@ -7,7 +7,7 @@ use Illuminate\Database\Eloquent\Model;
 class Dialog extends Model
 {
     protected $fillable = [
-        'type', 'first_user_id', 'second_user_id',
+        'type', 'first_user_id', 'second_user_id', 'flat_id', 'household_service_id'
     ];
 
     public function first_user()
@@ -23,5 +23,15 @@ class Dialog extends Model
     public function messages()
     {
         return $this->hasMany('App\Message');
+    }
+
+    public function flat_order()
+    {
+        return $this->belongsTo('App\FlatServiceOrder', 'flat_order_id', 'id');
+    }
+
+    public function household_service_order()
+    {
+        return $this->belongsTo('App\HouseholdServiceOrder');
     }
 }

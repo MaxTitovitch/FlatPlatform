@@ -26,4 +26,9 @@ class FlatServiceOrder extends Model
     {
         return $this->hasOneThrough('App\User', 'App\Flat');
     }
+
+    public function dialogs()
+    {
+        return $this->hasMany('App\Dialog', 'flat_order_id');
+    }
 }

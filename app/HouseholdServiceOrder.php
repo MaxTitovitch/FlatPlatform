@@ -24,4 +24,9 @@ class HouseholdServiceOrder extends Model
     {
         return $this->hasOneThrough('App\User', 'App\HouseholdService');
     }
+
+    public function dialogs()
+    {
+        return $this->hasMany('App\Dialog');
+    }
 }
