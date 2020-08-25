@@ -4,6 +4,8 @@ namespace App;
 
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Storage;
+use Illuminate\Support\Str;
 
 class Flat extends Model
 {
@@ -109,5 +111,28 @@ class Flat extends Model
             $query = $query->withCound('orders')->orderBy('orders_count', 'desc');
         }
         return $query;
+    }
+
+    public function uploadImages($request) {
+        $files = $request->file('photos'); $arrayPhotos = [];
+        if($request->hasFile('photos')) {
+            foreach ($files as $file) {
+                $path = Storage::disk('public')->putFile("flats/{${date('FY')}}", Str::random(20) . '.' . $file->extension());
+                $arrayPhotos[] = str_replace('public', '', $path);
+            }
+        }
+        $this->photos = json_encode($arrayPhotos);
+    }
+
+    public function updateImages($request) {
+        $this->deleteImages();
+        $this->uploadImages($request);
+    }
+
+    public function deleteImages() {
+        $files = json_decode($this->photos);
+        foreach ($files as $file) {
+            Storage::delete("{${env('APP_URL')}}/storage/public/flats/$file");
+        }
     }
 }

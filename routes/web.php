@@ -52,5 +52,10 @@ Route::middleware(['auth', 'verified'])->group(function () {
     Route::post('/remove-message/{id}', 'DialogController@removeMessage')->name('remove-message');
 });
 
-Route::get('/home', 'HomeController@index')->name('home')->middleware('verified');
+// Personal
+Route::middleware(['auth', 'verified'])->group(function () {
+    Route::get('/home', 'HomeController@index')->name('home');
+    Route::put('/home', 'HomeController@updateUser')->name('home-update');
+    Route::resource('/home/flats', 'FlatCRUDController')->middleware('authorization:landlord');
+});
 

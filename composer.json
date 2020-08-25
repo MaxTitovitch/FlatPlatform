@@ -19,7 +19,8 @@
         "model-log": "^1.0",
         "rap2hpoutre/laravel-log-viewer": "^1.6",
         "tcg/voyager": "^1.4",
-        "voyager-relation-selector": "dev-master"
+        "voyager-relation-selector": "dev-master",
+      "ext-json": "*"
     },
     "require-dev": {
         "facade/ignition": "^2.0",
