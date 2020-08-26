@@ -44,6 +44,11 @@ Route::middleware(['auth', 'verified'])->group(function () {
     Route::patch('/update-flat-price/{id}', 'FlatController@updateRequest')->name('flat-update-price');
 });
 
+
+// Household Service pages
+Route::get('/household-service/{id}', 'HouseholdServiceController@index')->name('household-service-page');
+Route::get('/household-service-search', 'HouseholdServiceController@search')->name('household-service-search');
+
 // Dialog queries & pages
 Route::middleware(['auth', 'verified'])->group(function () {
     Route::get('/dialog', 'DialogController@index')->name('dialog-list');

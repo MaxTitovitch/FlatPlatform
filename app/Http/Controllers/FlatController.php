@@ -12,7 +12,7 @@ use App\Http\Requests\FlatRequest;
 
 class FlatController extends Controller
 {
-    public function index(Request $request, $id) {
+    public function index($id) {
         $flat = Flat::find($id);
         if($flat != null) {
             $dates = $flat->calculateReservedDates();

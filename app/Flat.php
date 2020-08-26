@@ -92,25 +92,14 @@ class Flat extends Model
     }
 
     private static function addSortQuery(Request $request, $query) {
-        if($request->order === 'new') {
-            $query = $query->orderBy('id', 'desc');
+        switch($request->order) {
+            default:case 'new': return $query->orderBy('id', 'desc');
+            case 'last': return $query->orderBy('id', 'asc');
+            case 'price_asc': return $query->orderBy('price', 'asc');
+            case 'price_desc': return $query->orderBy('price', 'desc');
+            case 'popular_asc': return $query->withCount('orders')->orderBy('orders_count', 'asc');
+            case 'popular_desc': return $query->withCount('orders')->orderBy('orders_count', 'desc');
         }
-        if($request->order === 'last') {
-            $query = $query->orderBy('id', 'asc');
-        }
-        if($request->order === 'price_asc') {
-            $query = $query->orderBy('price', 'asc');
-        }
-        if($request->order === 'price_desc') {
-            $query = $query->orderBy('price', 'desc');
-        }
-        if($request->order === 'popular_asc') {
-            $query = $query->withCound('orders')->orderBy('orders_count', 'asc');
-        }
-        if($request->order === 'popular_desc') {
-            $query = $query->withCound('orders')->orderBy('orders_count', 'desc');
-        }
-        return $query;
     }
 
     public function uploadImages($request) {
