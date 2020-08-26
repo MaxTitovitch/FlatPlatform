@@ -63,11 +63,7 @@ Route::middleware(['auth', 'verified'])->group(function () {
     Route::resource('/home/service-orders', 'HouseholdOrderCRUDController')->only(['index', 'show'])->middleware('authorization:landlord,employee');
 });
 
-//Route::get('/socialite/{provider}', ["as" => "socialite.auth", function ( $provider ) {
-//            return Socialite::driver( $provider )->redirect();
-//}]);
-//
-//Route::get('/socialite/{provider}/callback', function ($provider) {
-//    $user = Socialite::driver($provider)->user();
-//    dd($user);
-//});
+// Socialite
+Route::get('/socialite/{provider}', "SocialiteController@index")->name('socialite.auth');
+Route::get('/socialite/{provider}/callback', "SocialiteController@callback");
+Route::post('/socialite/{provider}/save', "SocialiteController@save")->name('socialite.save');

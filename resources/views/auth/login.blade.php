@@ -61,6 +61,16 @@
                                         {{ __('Забыли пароль?') }}
                                     </a>
                                 @endif
+
+                                <a href="{{ route('socialite.auth', 'facebook') }}" title="Facebook">
+                                    FB
+                                </a>
+                                <a href="{{ route('socialite.auth', 'instagram') }}" title="Facebook">
+                                    Isnta
+                                </a>
+                                <a href="{{ route('socialite.auth', 'vkontakte') }}" title="Facebook">
+                                    VK
+                                </a>
                             </div>
                         </div>
                     </form>
