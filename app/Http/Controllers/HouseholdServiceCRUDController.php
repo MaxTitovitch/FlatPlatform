@@ -6,6 +6,7 @@ use App\HouseholdService;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Session;
+use App\Http\Requests\HouseholdServiceCRUDRequest;
 
 class HouseholdServiceCRUDController extends Controller
 {
@@ -20,7 +21,7 @@ class HouseholdServiceCRUDController extends Controller
         return view('service-crud.create');
     }
 
-    public function store(Request $request)
+    public function store(HouseholdServiceCRUDRequest $request)
     {
         $service = HouseholdService::create($request->all());
         $service->user_id = Auth::id();
@@ -39,7 +40,7 @@ class HouseholdServiceCRUDController extends Controller
         return view('service-crud.create', ['service', $householdService]);
     }
 
-    public function update(Request $request, HouseholdService $householdService)
+    public function update(HouseholdServiceCRUDRequest $request, HouseholdService $householdService)
     {
         $householdService->update($request->all());
         $householdService->user_id = Auth::id();
