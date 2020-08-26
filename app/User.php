@@ -5,6 +5,8 @@ namespace App;
 use Illuminate\Contracts\Auth\MustVerifyEmail;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
+use Illuminate\Support\Facades\Storage;
+use Illuminate\Support\Str;
 
 class User extends \TCG\Voyager\Models\User implements MustVerifyEmail
 {
@@ -54,5 +56,22 @@ class User extends \TCG\Voyager\Models\User implements MustVerifyEmail
     public function household_orders()
     {
         return $this->hasMany('App\HouseholdServiceOrder');
+    }
+
+    public function uploadAvatar($request) {
+        $file = $request->file('avatar');
+        $path = Storage::disk('public')->putFile("users/{${date('FY')}}", Str::random(20) . '.' . $file->extension());
+        $this->avatar = str_replace('public', '', $path);
+    }
+
+    public function deleteAvatar() {
+        Storage::delete("{${env('APP_URL')}}/storage/public/flats/{${$this->avatar}}");
+    }
+
+    public function updateAvatar($request) {
+        if($request->hasFile('avatar')) {
+            $this->deleteAvatar();
+            $this->uploadAvatar($request);
+        }
     }
 }

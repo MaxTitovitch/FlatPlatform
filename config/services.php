@@ -30,4 +30,21 @@ return [
         'region' => env('AWS_DEFAULT_REGION', 'us-east-1'),
     ],
 
+    'facebook' => [
+        'client_id' => 'идентификатор клиента (1)',
+        'client_secret' => 'Секретный ключ (2)',
+        'redirect' => 'http://flatproject/socialite/facebook/callback',
+    ],
+
+    'instagram' => [
+        'client_id' => env('INSTAGRAM_CLIENT_ID'),
+        'client_secret' => env('INSTAGRAM_CLIENT_SECRET'),
+        'redirect' => 'http://flatproject.loc/socialite/instagram/callback'
+    ],
+
+    'vkontakte' => [
+        'client_id' => env('INSTAGRAM_CLIENT_ID'),
+        'client_secret' => env('INSTAGRAM_CLIENT_SECRET'),
+        'redirect' => 'http://flatproject.loc/socialite/vkontakte/callback'
+    ],
 ];

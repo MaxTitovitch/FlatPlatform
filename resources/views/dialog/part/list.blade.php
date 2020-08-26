@@ -1,0 +1,4 @@
+
+<div>
+    @dump($dialogs)
+</div>
