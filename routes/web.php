@@ -35,6 +35,9 @@ Route::middleware(['auth', 'verified'])->group(function () {
     Route::patch('/accept-flat-request/{id}', 'FlatController@acceptRequest')->name('flat-accept-request');
 });
 
+// Household Service pages
+Route::get('/household-service/{id}', 'HouseholdServiceController@index')->name('household-service-page');
+Route::get('/household-service-search', 'HouseholdServiceController@search')->name('household-service-search');
 
 
 Route::get('/home', 'HomeController@index')->name('home')->middleware('verified');
