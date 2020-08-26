@@ -7,16 +7,9 @@ use Illuminate\Support\Facades\Auth;
 
 class Authorization
 {
-    /**
-     * Handle an incoming request.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @param  \Closure  $next
-     * @return mixed
-     */
-    public function handle($request, Closure $next, $role)
-    {
-        if(Auth::user()->role->name != $role) {
+    public function handle($request, Closure $next, $role, $secondRole = null) {
+        $userRole = Auth::user()->role->name;
+        if($userRole != $role && $userRole != $secondRole) {
             return redirect()->route('home');
         }
         return $next($request);

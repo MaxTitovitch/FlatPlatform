@@ -3,6 +3,7 @@
 use Illuminate\Support\Facades\Route;
 use Illuminate\Support\Facades\Auth;
 use TCG\Voyager\Facades\Voyager;
+use Laravel\Socialite\Facades\Socialite;
 
 /*
 |--------------------------------------------------------------------------
@@ -58,5 +59,15 @@ Route::middleware(['auth', 'verified'])->group(function () {
     Route::put('/home', 'HomeController@updateUser')->name('home-update');
     Route::resource('/home/flats', 'FlatCRUDController')->middleware('authorization:landlord');
     Route::resource('/home/services', 'HouseholdServiceCRUDController')->middleware('authorization:employee');
+    Route::resource('/home/orders', 'FlatOrderCRUDController')->only(['index', 'show'])->middleware('authorization:tenant,landlord');
+    Route::resource('/home/service-orders', 'HouseholdOrderCRUDController')->only(['index', 'show'])->middleware('authorization:landlord,employee');
 });
 
+//Route::get('/socialite/{provider}', ["as" => "socialite.auth", function ( $provider ) {
+//            return Socialite::driver( $provider )->redirect();
+//}]);
+//
+//Route::get('/socialite/{provider}/callback', function ($provider) {
+//    $user = Socialite::driver($provider)->user();
+//    dd($user);
+//});
