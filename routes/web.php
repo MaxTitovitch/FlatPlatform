@@ -35,7 +35,7 @@ Route::get('/rules', 'StaticController@rules')->name('rules');
 // Flat queries & pages
 Route::get('/search', 'FlatController@search')->name('flat-search');
 Route::get('/apartment/{id}', 'FlatController@index')->name('flat-page');
-Route::middleware(['auth', 'verified'])->group(function () {
+Route::middleware(['auth', 'verified', 'passport'])->group(function () {
     Route::post('/add-flat-request/{id}', 'FlatController@addRequest')->name('flat-add-request');
     Route::patch('/reject-flat-request/{id}', 'FlatController@rejectRequest')->name('flat-reject-request');
     Route::patch('/accept-flat-request/{id}', 'FlatController@acceptRequest')->name('flat-accept-request');
@@ -62,10 +62,12 @@ Route::middleware(['auth', 'verified'])->group(function () {
 Route::middleware(['auth', 'verified'])->group(function () {
     Route::get('/home', 'HomeController@index')->name('home');
     Route::put('/home', 'HomeController@updateUser')->name('home-update');
-    Route::resource('/home/flats', 'FlatCRUDController')->middleware('authorization:landlord');
-    Route::resource('/home/services', 'HouseholdServiceCRUDController')->middleware('authorization:employee');
-    Route::resource('/home/orders', 'FlatOrderCRUDController')->only(['index', 'show'])->middleware('authorization:tenant,landlord');
-    Route::resource('/home/service-orders', 'HouseholdOrderCRUDController')->only(['index', 'show'])->middleware('authorization:landlord,employee');
+    Route::middleware(['passport'])->group(function () {
+        Route::resource('/home/flats', 'FlatCRUDController')->middleware('authorization:landlord');
+        Route::resource('/home/services', 'HouseholdServiceCRUDController')->middleware('authorization:employee');
+        Route::resource('/home/orders', 'FlatOrderCRUDController')->only(['index', 'show'])->middleware('authorization:tenant,landlord');
+        Route::resource('/home/service-orders', 'HouseholdOrderCRUDController')->only(['index', 'show'])->middleware('authorization:landlord,employee');
+    });
 });
 
 // Socialite
