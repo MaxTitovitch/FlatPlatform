@@ -16,6 +16,7 @@ use Laravel\Socialite\Facades\Socialite;
 |
 */
 
+// Voyager Admin routes
 Route::group(['prefix' => 'admin'], function () {
     Voyager::routes();
     Route::get('logs', '\Rap2hpoutre\LaravelLogViewer\LogViewerController@index')->name('error-log');
@@ -25,14 +26,19 @@ Route::group(['prefix' => 'admin'], function () {
     Route::post('/send-message/{id}', 'DialogController@createMessage')->name('admin-send-message');
     Route::post('/remove-message/{id}', 'DialogController@removeMessage')->name('admin-remove-message');
 });
+
+// Auth & Socialite routes
 Auth::routes(['verify' => true]);
+Route::get('/socialite/{provider}', "SocialiteController@index")->name('socialite.auth');
+Route::get('/socialite/{provider}/callback', "SocialiteController@callback");
+Route::post('/socialite/{provider}/save', "SocialiteController@save")->name('socialite.save');
 
 // Static pages
 Route::get('/', 'StaticController@index')->name('index');
 Route::get('/about', 'StaticController@about')->name('about');
 Route::get('/rules', 'StaticController@rules')->name('rules');
 
-// Flat queries & pages
+// Flat pages & routes
 Route::get('/search', 'FlatController@search')->name('flat-search');
 Route::get('/apartment/{id}', 'FlatController@index')->name('flat-page');
 Route::middleware(['auth', 'verified', 'passport'])->group(function () {
@@ -44,12 +50,20 @@ Route::middleware(['auth', 'verified', 'passport'])->group(function () {
     Route::patch('/update-flat-price/{id}', 'FlatController@updateRequest')->name('flat-update-price');
 });
 
-
-// Household Service pages
+// Household Service pages & routes
 Route::get('/household-service/{id}', 'HouseholdServiceController@index')->name('household-service-page');
 Route::get('/household-service-search', 'HouseholdServiceController@search')->name('household-service-search');
+Route::middleware(['auth', 'verified', 'passport'])->group(function () {
+    Route::post('/add-service-request/{id}', 'HouseholdServiceController@addRequest')->name('service-add-request');
+    Route::patch('/reject-service-request/{id}', 'HouseholdServiceController@rejectRequest')->name('service-reject-request');
+    Route::patch('/accept-service-request/{id}', 'HouseholdServiceController@acceptRequest')->name('service-accept-request');
+    Route::patch('/confirm-service-request/{id}', 'HouseholdServiceController@confirmRequest')->name('service-confirm-request');
+    Route::patch('/complete-service-request/{id}', 'HouseholdServiceController@completeRequest')->name('service-complete-request');
+    Route::patch('/update-service-price/{id}', 'HouseholdServiceController@updateRequest')->name('service-update-price');
+});
 
-// Dialog queries & pages
+
+// Dialog and messages pages & routes
 Route::middleware(['auth', 'verified'])->group(function () {
     Route::get('/dialog', 'DialogController@index')->name('dialog-list');
     Route::get('/dialog/{id}', 'DialogController@show')->name('dialog-show');
@@ -58,7 +72,7 @@ Route::middleware(['auth', 'verified'])->group(function () {
     Route::post('/remove-message/{id}', 'DialogController@removeMessage')->name('remove-message');
 });
 
-// Personal
+// Personal area pages & routes
 Route::middleware(['auth', 'verified'])->group(function () {
     Route::get('/home', 'HomeController@index')->name('home');
     Route::put('/home', 'HomeController@updateUser')->name('home-update');
@@ -69,8 +83,3 @@ Route::middleware(['auth', 'verified'])->group(function () {
         Route::resource('/home/service-orders', 'HouseholdOrderCRUDController')->only(['index', 'show'])->middleware('authorization:landlord,employee');
     });
 });
-
-// Socialite
-Route::get('/socialite/{provider}', "SocialiteController@index")->name('socialite.auth');
-Route::get('/socialite/{provider}/callback', "SocialiteController@callback");
-Route::post('/socialite/{provider}/save', "SocialiteController@save")->name('socialite.save');

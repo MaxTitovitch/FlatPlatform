@@ -60,8 +60,8 @@ class FlatController extends Controller
             'landlord',
             function ($flatOrder, $request, $messageError) {
                 $dialog = Dialog::create([
-                    'first_user_id' => $flatOrder->landlord,
-                    'second_user_id' => $flatOrder->tenant,
+                    'first_user_id' => $flatOrder->landlord->id,
+                    'second_user_id' => $flatOrder->tenant->id,
                     'type' => 'Квартира',
                     'flat_order_id' => $flatOrder->id
                 ]);
