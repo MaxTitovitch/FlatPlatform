@@ -68,6 +68,7 @@ Route::middleware(['auth', 'verified'])->group(function () {
     Route::get('/dialog', 'DialogController@index')->name('dialog-list');
     Route::get('/dialog/{id}', 'DialogController@show')->name('dialog-show');
     Route::post('/dialog/user/{id}', 'DialogController@create')->name('dialog-create');
+    Route::post('/dialog/support', 'DialogController@support')->name('dialog-support');
     Route::post('/send-message/{id}', 'DialogController@createMessage')->name('send-message');
     Route::post('/remove-message/{id}', 'DialogController@removeMessage')->name('remove-message');
 });

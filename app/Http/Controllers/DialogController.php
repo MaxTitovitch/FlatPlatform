@@ -13,7 +13,14 @@ class DialogController extends Controller
 {
     public function index(Request $request) {
         $viewName = $request->route()->getName() == "admin-dialog-list" ? 'dialog.admin-list' : 'dialog.user-list';
-        $dialogs = Dialog::with('messages')->withCount('messages')->having('messages_count', '>', 0)->get();
+        $dialogs = Dialog::with('messages')->withCount('messages')->having('messages_count', '>', 0);
+        if($viewName === 'dialog.admin-list') {
+            $dialogs = $dialogs->where('type', 'Поддержка');
+        } else {
+            $dialogs = $dialogs->whereRaw("first_user_id", Auth::id())->orWhereRaw("second_user_id", Auth::id());
+        }
+
+        $dialogs = $dialogs->get();
         return view($viewName, ['dialogs' => $dialogs]);
     }
 
@@ -21,6 +28,9 @@ class DialogController extends Controller
         $viewName = $request->route()->getName() == "admin-dialog-show" ? 'dialog.admin-show' : 'dialog.user-show';
         $dialog = Dialog::find($id);
         if($dialog != null) {
+            if(!($dialog->first_user_id == Auth::id() || $dialog->second_user_id == Auth::id() || Auth::user()->role->name == 'admin')) {
+                return redirect()->route('index');
+            }
             return view($viewName, ['dialog' => $dialog]);
         } else {
             return redirect()->route('index');
@@ -32,9 +42,10 @@ class DialogController extends Controller
         $user = User::find($id);
         if($user != null) {
             $authId = Auth::id(); $id = $user->id;
-            $dialog = Dialog::whereRaw("first_user_id in ($authId, $id)")->whereRaw("second_user_id in ($authId, $id)")->where('type', 'Обычный')->get();
+            $type = Auth::user()->role->name == 'admin' ? 'Поддержка' : 'Обычный';
+            $dialog = Dialog::whereRaw("first_user_id in ($authId, $id)")->orWhereRaw("second_user_id in ($authId, $id)")->where('type', $type)->get();
             if($user == null) {
-                $dialog = Dialog::create(['first_user_id' => $authId, 'second_user_id' => $id, 'type' => 'Обычный']);
+                $dialog = Dialog::create(['first_user_id' => $authId, 'second_user_id' => $id, 'type' => $type]);
                 $dialog->save();
             }
             return redirect()->route($routeName, ['id' => $dialog->id]);
@@ -43,9 +54,19 @@ class DialogController extends Controller
         }
     }
 
+    public function support(Request $request) {
+        $id = Auth::id();
+        $dialog = Dialog::create(['first_user_id' => $id, 'second_user_id' => $id, 'type' => 'Поддержка']);
+        $dialog->save();
+        return redirect()->route('dialog-show', ['id' => $dialog->id]);
+    }
+
     public function createMessage(MessageRequest $request, $id) {
         $routeName = $request->route()->getName() == "admin-send-message" ? 'admin-dialog-show' : 'dialog-show';
-        if(!Dialog::find($id)) {
+        $dialog = Dialog::find($id);
+        if(!$dialog) {
+            return redirect()->route('index');
+        } else if( !($dialog->first_user_id == Auth::id() || $dialog->second_user_id == Auth::id() || Auth::user()->role->name == 'admin')) {
             return redirect()->route('index');
         }
         if($request->file) {
