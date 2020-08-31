@@ -27,18 +27,10 @@ class StaticController extends Controller
 
     private function calculateStatistic() {
         return [
-            'flatsQuantity' => [
-                'name' => 'Количество квартир',
-                'value' => Flat::count()
-            ],
-            'servicesQuantity' => [
-                'name' => 'Количество объявлений о работе',
-                'value' => HouseholdService::count()
-            ],
-            'usersQuantity' => [
-                'name' => 'Количество уникальных пользователей',
-                'value' => User::count()
-            ],
+            'flatsQuantity' => Flat::where('type_of_premises', 'Квартира')->orWhere('type_of_premises', 'Комната')->count(),
+            'housesQuantity' => Flat::where('type_of_premises', 'Частный дом')->count(),
+            'servicesQuantity' =>  HouseholdService::count(),
+            'usersQuantity' => User::count(),
         ];
     }
 }
