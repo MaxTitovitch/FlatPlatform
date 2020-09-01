@@ -3,7 +3,9 @@
 namespace App\Http\Controllers;
 
 use App\HouseholdService;
+use App\Http\Requests\DateIssueRequest;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 
 class HouseholdServiceController extends Controller
 {
@@ -21,5 +23,11 @@ class HouseholdServiceController extends Controller
     {
         $householdServices = HouseholdService::filtrateHouseholdService($request);
         return view('household-service.search', ['householdServices' => $householdServices]);
+    }
+
+    public function addRequest(DateIssueRequest $request, $id)
+    {
+        $user = Auth::user();
+        $service = HouseholdService::find($id);
     }
 }

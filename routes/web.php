@@ -48,6 +48,14 @@ Route::middleware(['auth', 'verified'])->group(function () {
 // Household Service pages
 Route::get('/household-service/{id}', 'HouseholdServiceController@index')->name('household-service-page');
 Route::get('/household-service-search', 'HouseholdServiceController@search')->name('household-service-search');
+Route::middleware(['auth', 'verified'])->group(function (){
+    Route::post('/add-household-service-request/{id}', 'HouseholdServiceController@addRequest')->name('household-service-add-request');
+    Route::patch('/reject-household-service-request/{id}', 'HouseholdServiceController@rejectRequest')->name('household-service-reject-request');
+    Route::patch('/accept-household-service-request/{id}', 'HouseholdServiceController@acceptRequest')->name('household-service-accept-request');
+    Route::patch('/confirm-household-service-request/{id}', 'HouseholdServiceController@confirmRequest')->name('household-service-confirm-request');
+    Route::patch('/complete-household-service-request/{id}', 'HouseholdServiceController@completeRequest')->name('household-service-complete-request');
+    Route::patch('/update-household-service-request/{id}', 'HouseholdServiceController@updateRequest')->name('household-service-update-request');
+});
 
 // Dialog queries & pages
 Route::middleware(['auth', 'verified'])->group(function () {
