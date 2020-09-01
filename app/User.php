@@ -74,4 +74,8 @@ class User extends \TCG\Voyager\Models\User implements MustVerifyEmail
             $this->uploadAvatar($request);
         }
     }
+
+    public function isEnteredPassportData() {
+        return $this->passport_number && $this->date_of_issue && $this->date_of_birth;
+    }
 }

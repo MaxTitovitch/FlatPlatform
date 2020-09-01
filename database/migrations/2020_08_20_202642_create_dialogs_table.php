@@ -18,8 +18,8 @@ class CreateDialogsTable extends Migration
             $table->enum('type', ['Обычный', 'Квартира', 'Робота', 'Поддержка']);
             $table->foreignId('first_user_id')->unsigned();
             $table->foreignId('second_user_id')->unsigned();
-            $table->foreignId('flat_id')->unsigned()->nullable();
-            $table->foreignId('household_service_id')->unsigned()->nullable();
+            $table->foreignId('flat_order_id')->unsigned()->nullable();
+            $table->foreignId('household_service_order_id')->unsigned()->nullable();
             $table->timestamps();
 
             $table->foreign('first_user_id')->references('id')->on('users');

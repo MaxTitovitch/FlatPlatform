@@ -4,7 +4,7 @@ namespace App\Http\Requests;
 
 use Illuminate\Foundation\Http\FormRequest;
 
-class DateIssueRequest extends FormRequest
+class HouseholdServiceCRUDRequest extends FormRequest
 {
     /**
      * Determine if the user is authorized to make this request.
@@ -24,7 +24,11 @@ class DateIssueRequest extends FormRequest
     public function rules()
     {
         return [
-            'date_of_completion' => 'required|date|after_or_equal:today',
+            'title' => 'required|string|min:3|max:255',
+            'city' => 'required|string|min:3|max:255',
+            'description' => 'required|text|min:10|max:5000',
+            'price' => 'required|numeric|min:1|max:10000000',
+            'household_service_category_id' => 'required|exists:App\HouseholdServiceCategory,id',
         ];
     }
 }
