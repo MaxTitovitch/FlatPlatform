@@ -64,13 +64,13 @@
                             <div class="socialite mt-4 ">
                                 <p class=" w-100 text-center mb-3">Или войти через соцсети</p>
                                 <div class="row justify-content-center">
-                                    <a href="" class="mr-5 btn btn-light">
+                                    <a href="{{ route('socialite.auth', ['provider' => 'facebook']) }}" class="mr-5 btn btn-light">
                                         <i class="fa fa-2x fa-facebook bg-white" aria-hidden="true"></i>
                                     </a>
-                                    <a href="" class=" btn btn-light">
+                                    <a href="{{ route('socialite.auth', ['provider' => 'vkontakte']) }}" class=" btn btn-light">
                                         <i class="fa fa-2x fa-vk bg-white" aria-hidden="true"></i>
                                     </a>
-                                    <a href="" class="ml-5 btn btn-light">
+                                    <a href="{{ route('socialite.auth', ['provider' => 'instagram']) }}" class="ml-5 btn btn-light">
                                         <i class="fa fa-2x fa-instagram bg-white" aria-hidden="true"></i>
                                     </a>
                                 </div>
