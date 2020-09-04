@@ -214,26 +214,68 @@
 
 
 
+.main-row{
+    background-color: #183E62;
+}
 
+.link-style a, .link-style{
+    color: white;
+}
 
+.link-style a:hover{
+    text-decoration: none;
+    color: lightgrey;
+}
 
+.secondary-row{
+    background-color: black;
+}
 
+.user-name{
+    font-weight: 400;
+    font-size: 28px;
+}
 
+.nav-item a .fa, .nav-item a span{
+    color: #004182;
+}
 
+.nav-item-one li a{
+    font-weight: 500;
+    font-size: 28px;
+    color: #118DF0!important;
+}
 
+.nav-item-one li a:hover{
+    color: #004182!important;
+}
 
+.sign-in{
+    height: 100%;
+    font-weight: 400;
+    font-size: 28px;
+}
 
+.sign-in-block a{
+    display: flex;
+}
 
+.dropdown-menu-right a span{
+    font-size: 1.4rem;
+}
 
+.dropdown-menu-right a{
+    display: flex;
+}
 
+.nav-user-avatar{
+    width: 50px;
+    height: 50px;
+}
 
-
-
-
-
-
-
-
+.new-household-main-one a:hover{
+    text-decoration: none;
+}
 
 
 
