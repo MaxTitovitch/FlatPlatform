@@ -280,27 +280,230 @@
 
 
 
+.ui-form {
+    /*padding-left: 30px;*/
+    /*padding-right: 30px;*/
+    /*margin: 50px auto 30px;*/
+}
+.ui-form h3 {
+    position: relative;
+    z-index: 5;
+    margin: 0 0 60px;
+    text-align: center;
+    color: white;
+    font-size: 30px;
+    font-weight: normal;
+}
+.ui-form h3:before {
+    content: "";
+    position: absolute;
+    z-index: -1;
+    left: 60px;
+    top: -30px;
+    width: 100px;
+    height: 100px;
+    border-radius: 50%;
+    background: white;
+}
+.ui-form h3:after {
+    content: "";
+    position: absolute;
+    z-index: -1;
+    right: 50px;
+    top: -40px;
+    width: 0;
+    height: 0;
+    border-left: 55px solid transparent;
+    border-right: 55px solid transparent;
+    border-bottom: 90px solid white;
+}
+.form-row {
+    position: relative;
+    margin-bottom: 40px;
+}
+.form-row input {
+    display: block;
+    width: 100%;
+    padding: 0 10px;
+    line-height: 40px;
+    font-family: 'Roboto', sans-serif;
+    background: none;
+    border-width: 0;
+    border-bottom: 2px solid white;
+    transition: all 0.2s ease;
+}
+.form-row label {
+    position: absolute;
+    left: 13px;
+    color: white;
+    font-size: 20px;
+    font-weight: 300;
+    transform: translateY(-35px);
+    transition: all 0.2s ease;
+    bottom: -30px;
+}
+.form-row input:focus {
+    outline: 0;
+    border-color: white;
+}
+.form-row input:focus + label,
+.form-row input:valid + label,
+.form-row input:not(:placeholder-shown) + label {
+    transform: translateY(-60px);
+    margin-left: -14px;
+    font-size: 14px;
+    font-weight: 400;
+    outline: 0;
+    border-color: white;
+    color: white;
+}
+.ui-form input[type="submit"] {
+    width: 100%;
+    padding: 0;
+    line-height: 42px;
+    background: #4a90e2;
+    border-width: 0;
+    color: white;
+    font-size: 20px;
+}
+.ui-form p {
+    margin: 0;
+    padding-top: 10px;
+}
+
+.auth-container-left{
+    background-color: #004182;
+    color: white;
+    width: 50%;
+    padding-left: 50px!important;
+    padding-right: 50px!important;
+}
+
+.auth-container-right{
+    width: 50%;
+    padding-left: 30px;
+    padding-right: 30px;
+}
+
+.auth-container{
+    border-radius: 15px!important;
+    display: flex!important;
+    flex-direction: row!important;
+    border: 1px solid #004182!important;
+}
+
+.auth-button{
+    background-color: white!important;
+    color: #004182!important;
+    border-radius: 10px!important;
+    width: 300px;
+    height: 60px;
+    border: 1px solid #004182!important;
+
+    display: flex!important;
+    align-items: center!important;
+    justify-content: center!important;
+}
+
+.auth-button:hover{
+    color: #4a90e2!important;
+    border: 1px solid #4a90e2!important;
+}
+
+.auth-container-right div button{
+    border-radius: 10px!important;
+    width: 300px;
+    height: 60px;
+    font-size: 18px;
+}
+
+.ui-form div div button{
+    font-size: 18px;
+}
+
+.auth-container-right div span{
+    color: #004182;
+    font-size: 20px;
+}
+
+.card-body{
+    border-top-left-radius: 15px;
+    border-bottom-left-radius: 15px;
+}
+
+.header-hr{
+    border-bottom: 0.8px solid rgba(0, 65, 130, 0.5)
+}
+
+.body-container {
+    min-height: 100vh;
+    display: flex;
+    flex-wrap: wrap;
+    flex-direction: column;
+    justify-content: space-between;
+}
+.body-container>*{
+    width: 100%;
+}
+
+.form-row input::-webkit-input-placeholder {color:rgba(0,0,0,0);}
+.form-row input::-moz-placeholder          {color:rgba(0,0,0,0);}
+.form-row input:-moz-placeholder           {color:rgba(0,0,0,0);}
+.form-row input:-ms-input-placeholder      {color:rgba(0,0,0,0);}
+
+.form-group .input-container .form-row input{
+    color: white;
+}
+
+.ui-form .form-group .auth-button{
+    width: 50%;
+    font-size: 14px;
+}
+
+.btn-forgot-password{
+    background-color: #004182!important;
+    color: white!important;
+}
+
+.btn-forgot-password,
+.btn-forgot-password:hover,
+.btn-forgot-password:focus,
+.btn-forgot-password:active{
+    border: 0!important;
+}
+
+.btn-forgot-password:hover a{
+    color: lightgrey!important;
+    text-decoration: none;
+}
+
+.btn-forgot-password a{
+    color: white!important;
+}
 
 
+.socialite .row .btn-light{
+    border-radius: 50% !important;
+    width: 50px;
+    height: 50px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: #004182!important;
+}
 
+.auth-container-left h1{
+    font-size: 1.7rem;
+    margin-bottom: 20px;
+}
 
+.auth-container-right .container .mt-5 a{
+    margin: auto;
+}
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
+.auth-button-reset-password{
+    width: 100%!important;
+}
 
 
 

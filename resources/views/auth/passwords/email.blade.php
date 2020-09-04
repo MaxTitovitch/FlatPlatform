@@ -1,27 +1,29 @@
 @extends('layouts.app')
 
 @section('content')
-<div class="container">
+<div class="container mb-3 mt-5">
     <div class="row justify-content-center">
         <div class="col-md-8">
-            <div class="card">
-                <div class="card-header">{{ __('Reset Password') }}</div>
+            <div class=" auth-container card">
+                <div class="card-body auth-container-left ">
 
-                <div class="card-body">
+                    <h1>Забыли пароль?</h1>
+                    <div class="mb-5">Инструкция по восстановлению пароля <br> будет отправлена на Ваш e-mail </div>
                     @if (session('status'))
                         <div class="alert alert-success" role="alert">
                             {{ session('status') }}
                         </div>
                     @endif
 
-                    <form method="POST" action="{{ route('password.email') }}">
+                    <form method="POST" class="ui-form w-100" action="{{ route('password.email') }}" >
                         @csrf
 
-                        <div class="form-group row">
-                            <label for="email" class="col-md-4 col-form-label text-md-right">{{ __('E-Mail Address') }}</label>
-
-                            <div class="col-md-6">
-                                <input id="email" type="email" class="form-control @error('email') is-invalid @enderror" name="email" value="{{ old('email') }}" required autocomplete="email" autofocus>
+                        <div class="form-group w-100">
+                            <div class="input-container w-100">
+                                <div class="form-row w-100">
+                                    <input id="email" type="email" class="w-100 @error('email') is-invalid @enderror" name="email" placeholder="email" required autocomplete="email" autofocus>
+                                    <label for="email">Email</label>
+                                </div>
 
                                 @error('email')
                                     <span class="invalid-feedback" role="alert">
@@ -32,14 +34,22 @@
                         </div>
 
                         <div class="form-group row mb-0">
-                            <div class="col-md-6 offset-md-4">
-                                <button type="submit" class="btn btn-primary">
-                                    {{ __('Send Password Reset Link') }}
+                                <button type="submit" class="btn auth-button auth-button-reset-password">
+                                    СБРОСИТЬ ПАРОЛЬ
                                 </button>
-                            </div>
                         </div>
                     </form>
                 </div>
+
+                <div class="card-body auth-container-right mt-2">
+                    <div>
+                        <span>Вспомнили пароль?</span>
+                    </div>
+                    <div class="mt-3">
+                        <a href="{{ route('login') }}" type="button" class="btn  auth-button ">ВОЙТИ</a>
+                    </div>
+                </div>
+
             </div>
         </div>
     </div>

@@ -1,82 +1,101 @@
 @extends('layouts.app')
 
 @section('content')
-<div class="container">
-    <div class="row justify-content-center">
-        <div class="col-md-8">
-            <div class="card">
-                <div class="card-header">{{ __('Авторизация') }}</div>
-                <div class="card-body">
-                    <form method="POST" action="{{ route('login') }}">
-                        @csrf
+    <div class="container">
+        <div class="row justify-content-center">
+            <div class="col-md-10">
 
-                        <div class="form-group row">
-                            <label for="username" class="col-md-4 col-form-label text-md-right">{{ __('E-mail или Телефон') }}</label>
+                <div class=" auth-container card">
+                    <div class="card-body auth-container-left ">
 
-                            <div class="col-md-6">
-                                <input id="username" type="text" class="form-control @error('username') is-invalid @enderror" name="username" value="{{ old('username') }}" required autocomplete="username" autofocus>
+                        <h1>Войдите в личный кабинет</h1>
+                        <div class="mb-5">Получите доступ к диалогам и заказам, а также к редактированию своих
+                            объявлений
+                        </div>
+                        @if (session('status'))
+                            <div class="alert alert-success" role="alert">
+                                {{ session('status') }}
+                            </div>
+                        @endif
 
-                                @error('username')
+                        <form method="POST" class="ui-form w-100" action="{{ route('login') }}">
+                            @csrf
+
+                            <div class="form-group w-100">
+                                <div class="input-container w-100">
+                                    <div class="form-row w-100">
+                                        <input id="email" type="email"
+                                               class="w-100 @error('email') is-invalid @enderror" name="email" required
+                                               autofocus placeholder="email">
+                                        <label for="email">Ваш e-mail или номер телефона</label>
+                                    </div>
+
+                                    @error('email')
                                     <span class="invalid-feedback" role="alert">
                                         <strong>{{ $message }}</strong>
                                     </span>
-                                @enderror
-                            </div>
-                        </div>
+                                    @enderror
 
-                        <div class="form-group row">
-                            <label for="password" class="col-md-4 col-form-label text-md-right">{{ __('Пароль') }}</label>
-
-                            <div class="col-md-6">
-                                <input id="password" type="password" class="form-control @error('password') is-invalid @enderror" name="password" required autocomplete="current-password">
-
-                                @error('password')
-                                    <span class="invalid-feedback" role="alert">
-                                        <strong>{{ $message }}</strong>
-                                    </span>
-                                @enderror
-                            </div>
-                        </div>
-
-                        <div class="form-group row">
-                            <div class="col-md-6 offset-md-4">
-                                <div class="form-check">
-                                    <input class="form-check-input" type="checkbox" name="remember" id="remember" {{ old('remember') ? 'checked' : '' }}>
-
-                                    <label class="form-check-label" for="remember">
-                                        {{ __('Запомнить') }}
-                                    </label>
                                 </div>
                             </div>
-                        </div>
 
-                        <div class="form-group row mb-0">
-                            <div class="col-md-8 offset-md-4">
-                                <button type="submit" class="btn btn-primary">
-                                    {{ __('Войти') }}
+
+                            <div class="form-group w-100">
+                                <div class="input-container w-100">
+                                    <div class="form-row w-100">
+                                        <input id="password" type="password"
+                                               class="w-100 @error('password') is-invalid @enderror" name="password"
+                                               required autocomplete="current-password" placeholder="password">
+                                        <label for="password">Ваш пароль</label>
+                                    </div>
+                                </div>
+                            </div>
+
+
+                            <div class="form-group row mb-0">
+                                <button type="submit" class="btn auth-button">
+                                    ВОЙТИ
                                 </button>
+                                <button type="submit" class="btn auth-button btn-forgot-password">
+                                    <a href="{{ route('password.request') }}">ЗАБЫЛИ ПАРОЛЬ? </a>
+                                </button>
+                            </div>
 
-                                @if (Route::has('password.request'))
-                                    <a class="btn btn-link" href="{{ route('password.request') }}">
-                                        {{ __('Забыли пароль?') }}
+                            <div class="socialite mt-4 ">
+                                <p class=" w-100 text-center mb-3">Или войти через соцсети</p>
+                                <div class="row justify-content-center">
+                                    <a href="" class="mr-5 btn btn-light">
+                                        <i class="fa fa-2x fa-facebook bg-white" aria-hidden="true"></i>
                                     </a>
-                                @endif
+                                    <a href="" class=" btn btn-light">
+                                        <i class="fa fa-2x fa-vk bg-white" aria-hidden="true"></i>
+                                    </a>
+                                    <a href="" class="ml-5 btn btn-light">
+                                        <i class="fa fa-2x fa-instagram bg-white" aria-hidden="true"></i>
+                                    </a>
+                                </div>
+                            </div>
 
-                                <a href="{{ route('socialite.auth', 'facebook') }}" title="Facebook">
-                                    FB
-                                </a>
-                                <a href="{{ route('socialite.auth', 'instagram') }}" title="Facebook">
-                                    Isnta
-                                </a>
-                                <a href="{{ route('socialite.auth', 'vkontakte') }}" title="Facebook">
-                                    VK
-                                </a>
+                        </form>
+                    </div>
+
+                    <div class="card-body auth-container-right mt-2">
+                        <div class="container">
+                            <div>
+                                <p><span>У Вас нет аккаунта?</span></p>
+                                <p><span style="font-size: 16px">Он сделает Вашу работу наного удобнее</span></p>
+                            </div>
+                            <div class="mt-5 btn-block">
+                                <a href="{{ route('register') }}" type="button"
+                                   class="btn auth-button">ЗАРЕГИСТРИРОВАТЬСЯ</a>
                             </div>
                         </div>
-                    </form>
+                    </div>
+
                 </div>
+
+
             </div>
         </div>
     </div>
-</div>
 @endsection
