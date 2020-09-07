@@ -33,6 +33,7 @@
             crossorigin="anonymous"></script>
     @yield('scripts')
     <script src="{{ asset('js/app.js') }}" defer></script>
+    <script src="{{ asset('js/slider.js') }}"></script>
 
 
 </head>
@@ -62,7 +63,7 @@
                         <a class="nav-link" href={{route('index')}}>Объявления</a>
                     </li>
                     <li class="nav-item active">
-                        <a class="nav-link" href={{route('index')}}>О нас</a>
+                        <a class="nav-link" href={{route('about')}}>О нас</a>
                     </li>
                 </ul>
 

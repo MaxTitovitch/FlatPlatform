@@ -11,7 +11,7 @@
                     <div class="mb-5">Инструкция по восстановлению пароля <br> будет отправлена на Ваш e-mail </div>
                     @if (session('status'))
                         <div class="alert alert-success" role="alert">
-                            {{ session('status') }}
+                            Мы отправили вам ссылку для сброса пароля по электронной почте!
                         </div>
                     @endif
 

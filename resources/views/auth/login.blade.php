@@ -12,6 +12,7 @@
                         <div class="mb-5">Получите доступ к диалогам и заказам, а также к редактированию своих
                             объявлений
                         </div>
+
                         @if (session('status'))
                             <div class="alert alert-success" role="alert">
                                 {{ session('status') }}
@@ -24,13 +25,13 @@
                             <div class="form-group w-100">
                                 <div class="input-container w-100">
                                     <div class="form-row w-100">
-                                        <input id="email" type="email"
-                                               class="w-100 @error('email') is-invalid @enderror" name="email" required
-                                               autofocus placeholder="email">
-                                        <label for="email">Ваш e-mail или номер телефона</label>
+                                        <input id="username" type="text"
+                                               class="w-100 @error('username') is-invalid @enderror" name="username" required
+                                               autofocus placeholder="username">
+                                        <label for="username">Ваш e-mail или номер телефона</label>
                                     </div>
 
-                                    @error('email')
+                                    @error('username')
                                     <span class="invalid-feedback" role="alert">
                                         <strong>{{ $message }}</strong>
                                     </span>

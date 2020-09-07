@@ -2,6 +2,6 @@
 
 @section('content')
 <div class="container">
-    @dd($user)
+{{--    @dd($user)--}}
 </div>
 @endsection

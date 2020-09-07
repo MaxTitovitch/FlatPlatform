@@ -332,30 +332,37 @@
     border-bottom: 2px solid white;
     transition: all 0.2s ease;
 }
+.form-row input.is-invalid {
+    border-bottom: 2px solid #f24354;
+}
+.form-row .is-invalid+label {
+    color: #f24354;
+}
+.invalid-feedback {
+    color: #f24354!important;
+    display: block!important;
+    margin-top: -33px!important;
+}
 .form-row label {
     position: absolute;
     left: 13px;
     color: white;
     font-size: 20px;
-    font-weight: 300;
+    font-weight: 400;
     transform: translateY(-35px);
     transition: all 0.2s ease;
     bottom: -30px;
 }
 .form-row input:focus {
     outline: 0;
-    border-color: white;
 }
 .form-row input:focus + label,
-.form-row input:valid + label,
 .form-row input:not(:placeholder-shown) + label {
     transform: translateY(-60px);
     margin-left: -14px;
     font-size: 14px;
     font-weight: 400;
     outline: 0;
-    border-color: white;
-    color: white;
 }
 .ui-form input[type="submit"] {
     width: 100%;
@@ -386,6 +393,8 @@
 }
 
 .auth-container{
+    margin-top: 30px!important;
+    margin-bottom: 30px!important;
     border-radius: 15px!important;
     display: flex!important;
     flex-direction: row!important;
@@ -492,6 +501,16 @@
     color: #004182!important;
 }
 
+.socialite-register .row .btn-light{
+    border-radius: 50% !important;
+    width: 50px;
+    height: 50px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: #004182!important;
+}
+
 .auth-container-left h1{
     font-size: 1.7rem;
     margin-bottom: 20px;
@@ -505,6 +524,49 @@
     width: 100%!important;
 }
 
+.form-check-inline {
+    width: 32%;
+    margin-right: 0!important;
+}
+
+
+.is-invalid {
+
+}
+
+.about-information{
+    color: #004182;
+    font-weight: normal;
+    font-size: 24px;
+    line-height: 28px;
+}
+
+.about-phone{
+    display: flex;
+}
+
+.about-phone div i{
+    border-radius: 50% !important;
+    width: 50px;
+    height: 50px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background-color: #004182!important;
+}
+
+/*.input-container .w-100 label{*/
+/*    color: black!important;*/
+/*}*/
+
+
+/*textarea {*/
+/*    resize: none!important;*/
+/*}*/
+
+/*.about-border-bottom{*/
+/*    border-bottom: 2px solid black!important;*/
+/*}*/
 
 
 
