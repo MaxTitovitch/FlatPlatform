@@ -36,6 +36,7 @@ Route::post('/socialite/{provider}/save', "SocialiteController@save")->name('soc
 // Static pages
 Route::get('/', 'StaticController@index')->name('index');
 Route::get('/about', 'StaticController@about')->name('about');
+Route::post('/about', 'StaticController@aboutSave')->name('about-save');
 Route::get('/rules', 'StaticController@rules')->name('rules');
 
 // Flat pages & routes

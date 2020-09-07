@@ -6,6 +6,8 @@ use Illuminate\Http\Request;
 use App\Flat;
 use App\HouseholdService;
 use App\User;
+use App\Http\Requests\MailRequest;
+use Illuminate\Support\Facades\Session;
 
 class StaticController extends Controller
 {
@@ -20,6 +22,18 @@ class StaticController extends Controller
 
     public function about()
     {
+        return view('about');
+    }
+
+    public function aboutSave()
+    {
+//        mail (
+//            'maxtitovitch@mail.ru' ,
+//            'Новое сообщение: Варендуру' ,
+//            `<b>Поступило сообщение от:</b>{$request->name} ({$request->email})<br><b>Тема:</b>{$request->theme}<br><b>Сообщение:</b><br>{$request->text}`
+//        );
+//        Session::flash('success', 'Сообщение успешно отправлено администрации!');
+//        dump(\session()->all());
         return view('about');
     }
 
