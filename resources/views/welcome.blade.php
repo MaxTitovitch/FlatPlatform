@@ -1,9 +1,5 @@
 @extends('layouts.app')
 
-@section('scripts')
-    <script type="text/javascript" src="//cdn.jsdelivr.net/npm/slick-carousel@1.8.1/slick/slick.min.js"></script>
-    <script src="{{ asset('js/slider.js') }}"></script>
-@endsection
 
 @section('styles')
     <link rel="stylesheet" type="text/css" href="//cdn.jsdelivr.net/npm/slick-carousel@1.8.1/slick/slick.css"/>
@@ -22,19 +18,16 @@
             <div class="carousel-item active w-100 carousel-height-img">
                 <div class="w-100 carousel-height-img d-block"
                      style="background: no-repeat url({{asset('img/apartment-2094701_960_720.jpg')}}); background-size: 100% 100%">
-
                 </div>
             </div>
             <div class="carousel-item w-100 carousel-height-img">
                 <div class="w-100 carousel-height-img d-block"
                      style="background: no-repeat url({{asset('img/apartment-2094701_960_720.jpg')}}); background-size: 100% 100%">
-
                 </div>
             </div>
             <div class="carousel-item w-100 carousel-height-img">
                 <div class="w-100 carousel-height-img d-block"
                      style="background: no-repeat url({{asset('img/apartment-2094701_960_720.jpg')}}); background-size: 100% 100%">
-
                 </div>
             </div>
         </div>
@@ -132,4 +125,9 @@
     </div>
 
 
+@endsection
+
+@section('scripts')
+    <script type="text/javascript" src="//cdn.jsdelivr.net/npm/slick-carousel@1.8.1/slick/slick.min.js"></script>
+    <script src="{{ asset('js/slider.js') }}"></script>
 @endsection

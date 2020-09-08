@@ -210,10 +210,6 @@
     text-align: center;
 }
 
-.carousel-item{
-    background: url("{{asset('img/apartment-2094701_960_720.jpg')}}");
-}
-
 
 
 .main-row{
