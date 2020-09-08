@@ -4,6 +4,10 @@
     color: dodgerblue;
 }
 
+a:focus {
+    outline: none;
+}
+
 .department{
     font-size: 2rem;
     font-weight: 900;
