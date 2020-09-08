@@ -111,7 +111,9 @@
     left: -60px;
 }
 
-
+.navbar-light .navbar-nav .active>.nav-link.naw-current {
+    color: #004182!important;
+}
 
 
 .new-household-main-img img{

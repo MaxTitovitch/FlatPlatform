@@ -52,16 +52,16 @@
             <div class="collapse navbar-collapse" id="navbarSupportedContent">
                 <!-- Left Side Of Navbar -->
                 <ul class="navbar-nav mx-auto nav-item-one">
-                    <li class="nav-item active ">
+                    <li class="nav-item active pathable">
                         <a class="nav-link" href={{route('index')}}>Главная</a>
                     </li>
-                    <li class="nav-item active">
-                        <a class="nav-link" href={{route('index')}}>Квартиры</a>
+                    <li class="nav-item active pathable">
+                        <a class="nav-link" href={{route('flat-search')}}>Квартиры</a>
                     </li>
-                    <li class="nav-item active">
-                        <a class="nav-link" href={{route('index')}}>Объявления</a>
+                    <li class="nav-item active pathable">
+                        <a class="nav-link" href={{route('household-service-search')}}>Объявления</a>
                     </li>
-                    <li class="nav-item active">
+                    <li class="nav-item active pathable">
                         <a class="nav-link" href={{route('about')}}>О нас</a>
                     </li>
                 </ul>
