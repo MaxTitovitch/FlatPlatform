@@ -564,6 +564,14 @@
     background-color: #004182!important;
 }
 
+.alert-success {
+    margin-top: -2em!important;
+    color: #c3e6cb!important;
+    background-color: rgba(0,0,0,0)!important;
+    border-color: #c3e6cb!important;
+    margin-bottom: 2.5em!important;
+}
+
 /*.input-container .w-100 label{*/
 /*    color: black!important;*/
 /*}*/

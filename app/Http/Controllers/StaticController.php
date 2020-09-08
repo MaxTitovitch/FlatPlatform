@@ -8,6 +8,8 @@ use App\HouseholdService;
 use App\User;
 use App\Http\Requests\MailRequest;
 use Illuminate\Support\Facades\Session;
+use Illuminate\Support\Facades\Mail;
+use App\Mail\UserSupport;
 
 class StaticController extends Controller
 {
@@ -27,11 +29,12 @@ class StaticController extends Controller
 
     public function aboutSave(MailRequest $request)
     {
-        mail (
-            'maxtitovitch@mail.ru' ,
-            'Новое сообщение: Варендуру' ,
-            `<b>Поступило сообщение от:</b>{$request->name} ({$request->email})<br><b>Тема:</b>{$request->theme}<br><b>Сообщение:</b><br>{$request->text}`
-        );
+//        Mail::send(
+//            'maxtitovitch@mail.ru' ,
+//            'Новое сообщение: Варендуру' ,
+//            `<b>Поступило сообщение от:</b>{$request->name} ({$request->email})<br><b>Тема:</b>{$request->theme}<br><b>Сообщение:</b><br>{$request->text}`
+//        );
+        Mail::to(User::where('role_id', 1)->first())->send(new UserSupport($request));
         Session::flash('status', 'Сообщение успешно отправлено администрации!');
         return redirect()->route('about');
     }
