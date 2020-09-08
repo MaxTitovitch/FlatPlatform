@@ -13,7 +13,7 @@ class MailRequest extends FormRequest
      */
     public function authorize()
     {
-        return false;
+        return true;
     }
 
     /**
@@ -27,7 +27,7 @@ class MailRequest extends FormRequest
             'name' => 'required|string|max:255',
             'email' => 'required|string|email|max:255',
             'theme' => 'required|string|max:255',
-            'text' => 'required|text|max:5000'
+            'text' => 'required|string|max:5000'
         ];
     }
 }

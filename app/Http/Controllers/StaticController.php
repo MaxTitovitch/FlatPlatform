@@ -25,16 +25,15 @@ class StaticController extends Controller
         return view('about');
     }
 
-    public function aboutSave()
+    public function aboutSave(MailRequest $request)
     {
-//        mail (
-//            'maxtitovitch@mail.ru' ,
-//            'Новое сообщение: Варендуру' ,
-//            `<b>Поступило сообщение от:</b>{$request->name} ({$request->email})<br><b>Тема:</b>{$request->theme}<br><b>Сообщение:</b><br>{$request->text}`
-//        );
-//        Session::flash('success', 'Сообщение успешно отправлено администрации!');
-//        dump(\session()->all());
-        return view('about');
+        mail (
+            'maxtitovitch@mail.ru' ,
+            'Новое сообщение: Варендуру' ,
+            `<b>Поступило сообщение от:</b>{$request->name} ({$request->email})<br><b>Тема:</b>{$request->theme}<br><b>Сообщение:</b><br>{$request->text}`
+        );
+        Session::flash('status', 'Сообщение успешно отправлено администрации!');
+        return redirect()->route('about');
     }
 
     public function rules()

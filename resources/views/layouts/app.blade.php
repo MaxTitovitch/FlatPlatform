@@ -33,7 +33,6 @@
             crossorigin="anonymous"></script>
     @yield('scripts')
     <script src="{{ asset('js/app.js') }}" defer></script>
-    <script src="{{ asset('js/slider.js') }}"></script>
 
 
 </head>

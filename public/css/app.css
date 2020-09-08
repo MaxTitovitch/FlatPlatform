@@ -332,6 +332,11 @@
     border-bottom: 2px solid white;
     transition: all 0.2s ease;
 }
+
+.form-row input.form-dark {
+    border-bottom: 2px solid black;
+}
+
 .form-row input.is-invalid {
     border-bottom: 2px solid #f24354;
 }
@@ -352,6 +357,10 @@
     transform: translateY(-35px);
     transition: all 0.2s ease;
     bottom: -30px;
+}
+.form-row label.label-dark,label.label-dark {
+    color: black;
+    font-weight: 500;
 }
 .form-row input:focus {
     outline: 0;

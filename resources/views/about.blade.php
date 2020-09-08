@@ -79,17 +79,16 @@
                         </div>
                     @endif
 
-
-                    <form method="POST" action="">
-
+                    <form method="POST" action="{{ route('about-save') }}">
+                        @csrf
                         <div class="form-group w-100 ">
                             <div>
                                 <div class="input-container w-100">
                                     <div class="form-row w-100">
                                         <input id="name" type="text"
-                                               class="w-100 text-dark about-border-bottom" name="name"
+                                               class="w-100 text-dark about-border-bottom form-dark" name="name"
                                                required autocomplete="current-password" placeholder="Ваше имя">
-                                        <label for="name">Ваше имя</label>
+                                        <label class="label-dark" for="name">Ваше имя</label>
                                     </div>
                                 </div>
                             </div>
@@ -99,9 +98,9 @@
                             <div class="input-container w-100">
                                 <div class="form-row w-100">
                                     <input id="email" type="email"
-                                           class="w-100 text-dark about-border-bottom" name="email"
+                                           class="w-100 text-dark about-border-bottom form-dark" name="email"
                                            required autocomplete="current-password" placeholder="Ваше email">
-                                    <label for="email">Ваш email</label>
+                                    <label class="label-dark" for="email">Ваш email</label>
                                 </div>
                             </div>
                         </div>
@@ -110,15 +109,15 @@
                             <div class="input-container w-100">
                                 <div class="form-row w-100">
                                     <input id="theme" type="text"
-                                           class="w-100 text-dark about-border-bottom" name="theme"
+                                           class="w-100 text-dark about-border-bottom form-dark" name="theme"
                                            required autocomplete="" placeholder="Тема">
-                                    <label for="theme">Тема</label>
+                                    <label class="label-dark" for="theme">Тема</label>
                                 </div>
                             </div>
                         </div>
 
                         <div>
-                            <label for="text" style="font-size: 18px">Сообщение</label>
+                            <label class="label-dark" for="text" style="font-size: 18px">Сообщение</label>
                         </div>
 
                         <div class="form-group w-100">
@@ -131,7 +130,7 @@
                             </div>
                         </div>
 
-                        <button type="button" class="btn btn-outline-dark">Отправить</button>
+                        <button type="submit" class="btn btn-outline-dark">Отправить</button>
 
                     </form>
                 </div>
