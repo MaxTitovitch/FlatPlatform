@@ -64,6 +64,13 @@
                         </div>
                     </div>
 
+
+                    @if (session('status'))
+                        <div class="alert alert-success" role="alert">
+                            {{ session('status') }}
+                        </div>
+                    @endif
+
                     <div class="about-contact-us mt-5">
                         <div class="row justify-content-center">
                             <span class="">
@@ -71,13 +78,6 @@
                             </span>
                         </div>
                     </div>
-
-
-                    @if (session('status'))
-                        <div class="alert alert-success" role="alert">
-                            {{ session('status') }}
-                        </div>
-                    @endif
 
                     <form method="POST" action="{{ route('about-save') }}">
                         @csrf
