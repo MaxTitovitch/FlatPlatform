@@ -124,7 +124,7 @@
                             <div class="input-container w-100">
                                 <div class="w-100">
                                     <textarea id="text" type="text"
-                                              class="w-100" name="text" rows="5"
+                                              class="form-area w-100" name="text" rows="5"
                                               required autocomplete="" placeholder="Сообщение"></textarea>
                                 </div>
                             </div>
@@ -138,7 +138,7 @@
 
                 <div class="col-md-8">
                     <iframe
-                        src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d75251.037423225!2d27.523305695264433!3d53.88562914528901!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x46dbcfbc08fc7133%3A0x6c1ad4b7d5444b49!2z0J_Qu9C-0YnQsNC00Ywg0J_QvtCx0LXQtNGLLCDQnNC40L3RgdC6!5e0!3m2!1sru!2sby!4v1599426512201!5m2!1sru!2sby"
+                        src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d9054.34066600321!2d37.559094025041325!3d55.43502800747611!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x414aa843a884dc87%3A0x39c9a51fa6fba0f0!2z0J7Qs9C-0YDQvtC00L3QsNGPINGD0LsuLCA1LzIsINCf0L7QtNC-0LvRjNGB0LosINCc0L7RgdC60L7QstGB0LrQsNGPINC-0LHQuy4sINCg0L7RgdGB0LjRjywgMTQyMTE2!5e0!3m2!1sru!2sby!4v1599564256818!5m2!1sru!2sby"
                         width="100%" height="450" frameborder="0" style="border:0;" allowfullscreen=""
                         aria-hidden="false" tabindex="0"></iframe>
                 </div>
