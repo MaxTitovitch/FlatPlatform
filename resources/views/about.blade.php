@@ -41,7 +41,7 @@
                             <strong>
                                 Телефон:
                             </strong><br>
-                            +7(911)000-00-00
+                            <a class="link-black" href="tel:+79771014767">+7(977)101-47-67</a>
                         </div>
                     </div>
                     <div class="about-phone mt-2">
@@ -50,7 +50,7 @@
                             <strong>
                                 Электронная почта:
                             </strong> <br>
-                            support@varenduru.ru
+                            <a class="link-black" href="mailto://support@varenduru.ru">support@varenduru.ru</a>
                         </div>
                     </div>
                     <div class="about-phone mt-2">

@@ -210,7 +210,12 @@
     text-align: center;
 }
 
-
+.link-black {
+    color: black;
+}
+.link-black:hover {
+    color: black;
+}
 
 .main-row{
     background-color: #183E62;
