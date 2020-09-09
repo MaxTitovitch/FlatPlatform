@@ -31,8 +31,8 @@ return [
     ],
 
     'facebook' => [
-        'client_id' => 'идентификатор клиента (1)',
-        'client_secret' => 'Секретный ключ (2)',
+        'client_id' => '1361194600938448',
+        'client_secret' => '9266574847fb9160acf7f1bdc82e53ec',
         'redirect' => 'http://flatproject/socialite/facebook/callback',
     ],
 

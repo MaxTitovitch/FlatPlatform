@@ -9,6 +9,7 @@ use App\FlatServiceOrder;
 use App\Http\Requests\DateRequest;
 use App\Dialog;
 use App\Http\Requests\FlatRequest;
+use Symfony\Component\Console\Input\Input;
 
 class FlatController extends Controller
 {
@@ -24,6 +25,7 @@ class FlatController extends Controller
 
     public function search(Request $request) {
         $flats = Flat::filtrateFlat($request, 20);
+        $flats->append($request->except('page'));
         return view('flat.search', ['flats' => $flats]);
     }
 
