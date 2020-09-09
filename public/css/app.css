@@ -575,18 +575,131 @@
     margin-bottom: 2.5em!important;
 }
 
-/*.input-container .w-100 label{*/
-/*    color: black!important;*/
-/*}*/
+textarea {
+    resize: none!important;
+}
+
+.flat-search-text{
+    font-size: 25px;
+}
+
+.search-div-size-half{
+    width: 50% !important;
+}
+
+.flex{
+    display: flex!important;
+    flex-wrap: nowrap!important;
+}
+
+.number-of-rooms{
+    display: flex;
+    /*justify-content: center;*/
+    flex-wrap: nowrap;
+}
+
+.flat-search-border{
+    border: 1px solid rgba(0, 65, 130, 0.5);
+}
+
+.flat-sort div{
+    border: 1px solid rgba(0, 65, 130, 0.5);
+    font-size: 18px;
+    color: #004182;
+}
+
+.selected-sort{
+    background-color: #118DF0;
+    color: white!important;
+}
+
+.selected-sort a{
+    color: white!important;
+}
+
+.selected-sort:hover a{
+    text-decoration: underline;
+}
+
+.flat-sort div:hover {
+    text-decoration: underline;
+}
+
+.flat-sort .text-center{
+    cursor: pointer;
+}
+
+.one-flat img{
+    width: 100%;
+    height: 253px;
+}
+
+.search-flat-name{
+    color: #004182;
+    font-size: 18px;
+}
+
+.flat-search-flats-param{
+    font-size: 16px;
+}
+
+.flat-search-flats-param .font-weight-bold{
+    font-size: 18px!important;
+}
+
+.flat-search-flats-param>div {
+    padding: 0!important;
+    font-size: 0.9em!important;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.flat-search-flats-param {
+    margin: 0!important;
+}
+
+.search-flats>div {
+    padding-right:  0.5rem!important;
+    padding-left: 0.5rem!important;
+}
+
+.padding-side-5 {
+    padding: 0 10px;
+}
+
+.m-0-10 {
+  margin: auto 10px;
+}
+
+.page-item {
+    margin: auto 5px;
+    font-weight: 500;
+}
+.page-item a{
+    color: #118DF0;
+    border: 1.5px solid #118DF0;
+}
+
+.page-item.active .page-link{
+    color: #004182!important;
+    border: 1.5px solid #004182 !important;
+    background-color: white!important;
+}
+.page-item .page-link:hover{
+    color: #004182!important;
+    border: 1.5px solid #004182 !important;
+    background-color: white!important;
+}
 
 
-/*textarea {*/
-/*    resize: none!important;*/
-/*}*/
 
-/*.about-border-bottom{*/
-/*    border-bottom: 2px solid black!important;*/
-/*}*/
+
+
+
+
+
+
 
 
 

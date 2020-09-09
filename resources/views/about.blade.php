@@ -6,7 +6,7 @@
 
 @section('content')
     <div class="container mt-3 mb-4">
-        <span class="new-flats-row department ">О нас</span>
+        <h1 class="new-flats-row department ">О нас</h1>
 
         <div class="row justify-content-center">
             <span class="about-information">ИНФОРМАЦИЯ О КОМПАНИИ</span>
