@@ -32,7 +32,7 @@ class HouseholdService extends Model
         $query = self::addSearchQuery($request);
         $query = self::addSortQuery($request, $query);
         $householdServices = $query->paginate($itemPerPage);
-        $householdServices->withPath($request->except('page'));
+        $householdServices->withPath(route('household-service-search', $request->except('page')));
         return $householdServices;
     }
 

@@ -1,15 +1,15 @@
 @extends('layouts.app')
 
 @section('content')
-{{--        <div>--}}
-{{--            @dd($flats, $flats->links())--}}
-{{--        </div>--}}
+    {{--        <div>--}}
+    {{--            @dd($flats, $flats->links())--}}
+    {{--        </div>--}}
 
 
-    <div class="container">
+    <div class="container mt-4">
         <h1 class="row new-flats-row">Аренда недвижимости</h1>
 
-        <div class="row">
+        <div class="row mt-4">
             <div class="col-md-4 p-0">
                 <form action="{{ route('flat-search') }}" class="flat-search-border px-2 py-4 m-0-10">
 
@@ -123,22 +123,36 @@
 
                 <div class="row search-flats mt-3">
                     @for($i=0; $i<2; $i++)
-                    @break(!$flats[$i])
-                    <div class="col-md-6 one-flat p-0">
-                        <img src="{{ asset('/storage/' .  explode("\"", $flats[$i]->photos)[1]) }}" alt="">
-                        <div class="search-flat-name px-4">
-                            <span>Квартира, ул. Притыцкого, 152а, Минск, сдача помесячно</span>
+                        @break(!$flats[$i])
+                        <div class="col-md-6 one-flat p-0">
+                            <a href="{{ route('flat-page', ['id' => $flats[$i]->id]) }}">
+                            <img src="{{ asset('/storage/' .  explode("\"", $flats[$i]->photos)[1]) }}" alt="">
+                                <div class="search-flat-name px-4">
+                                    <span>{{ $flats[$i]->type_of_premises }}, ул. {{ $flats[$i]->street }}, {{ $flats[$i]->house_number }}, {{ $flats[$i]->city }}, сдача {{ $flats[$i]->rental_period }}</span>
+                                </div>
+                            </a>
+                            <div class="row flat-search-flats-param">
+                                <div
+                                    class="col-md-2 border-right border-secondary text-center">{{ $flats[$i]->number_of_rooms }}
+                                    <br> комн.
+                                </div>
+                                <div
+                                    class="col-md-3 border-right border-secondary text-center">{{ $flats[$i]->living_area }}
+                                    <br> кв. м.
+                                </div>
+                                <div class="col-md-3 border-right border-secondary text-center">{{ $flats[$i]->floor }}
+                                    <br> этаж
+                                </div>
+                                <div
+                                    class="col-md-4 border-right border-secondary text-center font-weight-bold align-middle">
+                                    <span class="align-middle">{{ $flats[$i]->price }} ₽</span></div>
+                            </div>
                         </div>
-                        <div class="row flat-search-flats-param">
-                            <div class="col-md-2 border-right border-secondary text-center">2 <br> комн.</div>
-                            <div class="col-md-3 border-right border-secondary text-center">90 <br> кв. м.</div>
-                            <div class="col-md-3 border-right border-secondary text-center">6 <br> этаж</div>
-                            <div class="col-md-4 border-right border-secondary text-center font-weight-bold align-middle">
-                                <span class="align-middle">16 000 ₽</span></div>
-                        </div>
-                    </div>
                     @endfor
                 </div>
+                @if(!count($flats))
+                    <h1 class="mt-5 text-secondary text-center">НИЧЕГО НЕ НАЙДЕНО</h1>
+                @endif
 
             </div>
 
@@ -147,16 +161,25 @@
         <div class="row mt-5 search-flats mb-2">
             @for($i=2; $i< count($flats); $i++)
                 <div class="col-md-4 one-flat p-0 mb-2">
-                    <img src="{{ asset('/storage/' .  explode("\"", $flats[$i]->photos)[1]) }}" alt="">
-                    <div class="search-flat-name px-4">
-                        <span>Квартира, ул. Притыцкого, 152а, Минск, сдача помесячно</span>
-                    </div>
+                    <a href="{{ route('flat-page', ['id' => $flats[$i]->id]) }}">
+                        <img src="{{ asset('/storage/' .  explode("\"", $flats[$i]->photos)[1]) }}" alt="">
+                        <div class="search-flat-name px-4">
+                            <span>{{ $flats[$i]->type_of_premises }}, ул. {{ $flats[$i]->street }}, {{ $flats[$i]->house_number }}, {{ $flats[$i]->city }}, сдача {{ $flats[$i]->rental_period }}</span>
+                        </div>
+                    </a>
                     <div class="row flat-search-flats-param">
-                        <div class="col-md-2 border-right border-secondary text-center">2 <br> комн.</div>
-                        <div class="col-md-3 border-right border-secondary text-center">90 <br> кв. м.</div>
-                        <div class="col-md-3 border-right border-secondary text-center">6 <br> этаж</div>
+                        <div
+                            class="col-md-2 border-right border-secondary text-center">{{ $flats[$i]->number_of_rooms }}
+                            <br> комн.
+                        </div>
+                        <div class="col-md-3 border-right border-secondary text-center">{{ $flats[$i]->living_area }}
+                            <br> кв. м.
+                        </div>
+                        <div class="col-md-3 border-right border-secondary text-center">{{ $flats[$i]->floor }} <br>
+                            этаж
+                        </div>
                         <div class="col-md-4 border-right border-secondary text-center font-weight-bold align-middle">
-                            <span class="align-middle">16 000 ₽</span></div>
+                            <span class="align-middle">{{ $flats[$i]->price }} ₽</span></div>
                     </div>
                 </div>
             @endfor

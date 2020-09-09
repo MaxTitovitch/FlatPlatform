@@ -76,27 +76,31 @@
 
         <div class="new-households-main household-slider mb-5">
             @foreach($services as $service)
-                <div class="new-household-main-one col-lg-4 col-xl-4 col-12 col-sm-12">
-                    <a href="{{ route('household-service-page', [$service->id]) }}">
-                        <div class="row">
-                            <div class="new-household-main-img mt-3">
+                <div class="new-household-main-one col-md-4">
+                    <div class="row">
+                        <div class="new-household-main-img mt-3 col-md-5">
+                            <a href="{{ route('household-service-page', [$service->id]) }}">
                                 <img src="{{asset('/storage/' . $service->user->avatar)}}" alt="">
-                            </div>
-                            <div class="personal-info my-auto">
-                                <div class="new-household-main-type mb-1">
+                            </a>
+                        </div>
+                        <div class="pl-4 my-auto col-md-7">
+                            <div class="new-household-main-type mb-1">
+                                <a href="{{ route('household-service-page', [$service->id]) }}">
                                     <span>{{$service->title}}</span>
-                                </div>
-                                <div class="new-household-main-name mb-1 font-weight-bold">
-                                    <span>{{ $service->user->name}}</span>
-                                </div>
-                                <div class="new-household-main-price">
-                                    <span>3 000 $</span>
-                                </div>
+                                </a>
+                            </div>
+                            <div class="new-household-main-name mb-1 font-weight-bold">
+                                <span>{{ $service->user->name}}</span>
+                            </div>
+                            <div class="new-household-main-price">
+                                <span>{{ $service->price}} $</span>
                             </div>
                         </div>
-                    </a>
-                    <div class="new-household-main-description mt-3">
-                        <span>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Aperiam debitis, quaerat. A dolore dolorum earum exercitationem id maxime mollitia nisi pariatur tenetur veritatis. Nihil, officia, tenetur. Accusamus deserunt quidem voluptas?</span>
+                    </div>
+                    <div class="row">
+                        <div class="new-household-main-description mt-3 col-md-12">
+                            <span>{{ $service->description}}</span>
+                        </div>
                     </div>
                 </div>
             @endforeach

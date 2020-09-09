@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\HouseholdService;
+use App\HouseholdServiceCategory;
 use Illuminate\Http\Request;
 use App\Http\Requests\DateRequest;
 use Illuminate\Support\Facades\Auth;
@@ -27,8 +28,8 @@ class HouseholdServiceController extends Controller
 
     public function search(Request $request)
     {
-        $householdServices = HouseholdService::filtrateHouseholdService($request);
-        return view('household-service.search', ['householdServices' => $householdServices]);
+        $householdServices = HouseholdService::filtrateHouseholdService($request, 20);
+        return view('household-service.search', ['householdServices' => $householdServices, 'categories' => HouseholdServiceCategory::all()]);
     }
 
     public function addRequest(DateIssueRequest $request, $id) {

@@ -1,7 +1,7 @@
 
 .new-flats-row{
 
-    color: dodgerblue;
+    color: #004182!important;
 }
 
 a:focus {
@@ -121,8 +121,8 @@ a:focus {
 
 
 .new-household-main-img img{
-    max-height: 15vh;
-    min-height: 15vh;
+    height: 150px;
+    width: 150px;
     border-radius: 50%;
 }
 

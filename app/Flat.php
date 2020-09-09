@@ -65,7 +65,7 @@ class Flat extends Model
         $query = self::addSearchQuery($request, self::where('id', '<>', 0));
         $query = self::addSortQuery($request, $query);
         $flats = $query->paginate($itemPerPage);
-        $flats->withPath(preg_replace('/\&*page=\d+/i', '', $request->getRequestUri()));
+        $flats->withPath(route('flat-search', $request->except('page')));
         return $flats;
     }
 
