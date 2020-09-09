@@ -86,7 +86,7 @@ class Flat extends Model
             $query = $query->where('rental_period', $request->rental_period );
         }
         if($request->number_of_rooms) {
-            if($request->number_of_rooms !== '4+') {
+            if($request->number_of_rooms === '4+') {
                 $query = $query->where('number_of_rooms', '>=', 4);
             }else  {
                 $query = $query->where('number_of_rooms', $request->number_of_rooms);

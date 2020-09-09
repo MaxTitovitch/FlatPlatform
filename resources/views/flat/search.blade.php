@@ -15,48 +15,51 @@
 
                     <span class="flat-search-text">Найти</span>
 
+                    @if($request->order)
+                        <input type="hidden" name="order" value="{{ $request->order }}">
+                    @endif
                     <div class="w-100 mt-2">
                         <div class="form-check form-check-inline">
-                            <input class="form-check-input" type="radio" name="type_of_premises"
-                                   id="inlineRadio2" value="Комната">
+                            <input class="form-check-input to-check" type="radio" name="type_of_premises"
+                                   id="inlineRadio2" value="Комната" checked>
                             <label class="form-check-label" for="inlineRadio2">Комната</label>
                         </div>
                         <div class="form-check form-check-inline">
-                            <input class="form-check-input" type="radio" name="type_of_premises"
-                                   id="inlineRadio3" value="Квартира">
+                            <input class="form-check-input to-check" type="radio" name="type_of_premises"
+                                   id="inlineRadio3" value="Квартира" >
                             <label class="form-check-label" for="inlineRadio3">Квартира</label>
                         </div>
                         <div class="form-check form-check-inline">
-                            <input class="form-check-input" type="radio" name="type_of_premises"
-                                   id="inlineRadio1" value="Частный дом" checked>
+                            <input class="form-check-input to-check" type="radio" name="type_of_premises"
+                                   id="inlineRadio1" value="Частный дом">
                             <label class="form-check-label" for="inlineRadio1">Дом</label>
                         </div>
                     </div>
 
                     <div class="form-group my-4">
-                        <input type="text" class="form-control" name="city" placeholder="Город">
+                        <input type="text" class="form-control to-check" name="city" placeholder="Город">
                     </div>
 
                     <div class="form-group mt-2 flex">
                         <div class="search-div-size-half">
-                            <input type="text" class="form-control" name="price_start" placeholder="Цена от">
+                            <input type="text" class="form-control to-check" name="price_start" placeholder="Цена от">
                         </div>
                         <span class="mx-2 my-auto">-</span>
                         <div class="search-div-size-half">
-                            <input type="text" class="form-control" name="price_end" placeholder="до">
+                            <input type="text" class="form-control to-check" name="price_end" placeholder="до">
                         </div>
                         <span class="ml-2 my-auto">P</span>
                     </div>
 
                     <div class="w-100 mt-4 mb-4">
                         <div class="form-check form-check-inline">
-                            <input class="form-check-input" type="radio" name="rental_period"
-                                   id="rental-period1" value="Частный дом" checked>
+                            <input class="form-check-input to-check" type="radio" name="rental_period"
+                                   id="rental-period1" value="Посуточно" checked>
                             <label class="form-check-label" for="rental-period1">Посуточно</label>
                         </div>
                         <div class="form-check form-check-inline">
-                            <input class="form-check-input" type="radio" name="rental_period"
-                                   id="rental-period2" value="Квартира">
+                            <input class="form-check-input to-check" type="radio" name="rental_period"
+                                   id="rental-period2" value="Помесячно">
                             <label class="form-check-label" for="rental-period2">Помесячно</label>
                         </div>
                     </div>
@@ -65,23 +68,23 @@
 
                     <div class="w-100 mt-2 number-of-rooms">
                         <div class="form-check form-check-inline">
-                            <input class="form-check-input" type="radio" name="number_of_rooms"
-                                   id="number-of-rooms1" value="Частный дом" checked>
+                            <input class="form-check-input to-check" type="radio" name="number_of_rooms"
+                                   id="number-of-rooms1" value="1" checked>
                             <label class="form-check-label" for="number-of-rooms1">1</label>
                         </div>
                         <div class="form-check form-check-inline">
-                            <input class="form-check-input" type="radio" name="number_of_rooms"
-                                   id="number-of-rooms2" value="Квартира">
+                            <input class="form-check-input to-check" type="radio" name="number_of_rooms"
+                                   id="number-of-rooms2" value="2">
                             <label class="form-check-label" for="number-of-rooms2">2</label>
                         </div>
                         <div class="form-check form-check-inline">
-                            <input class="form-check-input" type="radio" name="number_of_rooms"
-                                   id="number-of-rooms3" value="Комната">
+                            <input class="form-check-input to-check" type="radio" name="number_of_rooms"
+                                   id="number-of-rooms3" value="3">
                             <label class="form-check-label" for="number-of-rooms3">3</label>
                         </div>
                         <div class="form-check form-check-inline">
-                            <input class="form-check-input" type="radio" name="number_of_rooms"
-                                   id="number-of-rooms4" value="Комната">
+                            <input class="form-check-input to-check" type="radio" name="number_of_rooms"
+                                   id="number-of-rooms4" value="4+">
                             <label class="form-check-label" for="number-of-rooms4">4+</label>
                         </div>
                     </div>
@@ -90,9 +93,9 @@
                         <button type="submit" class="mr-1 btn auth-button btn-forgot-password">
                             НАЙТИ
                         </button>
-                        <button type="submit" class="ml-1 btn auth-button ">
+                        <a href="{{ route('flat-search') }}" class="ml-1 btn auth-button ">
                             ОЧИСТИТЬ
-                        </button>
+                        </a>
                     </div>
 
 
@@ -101,23 +104,39 @@
             <div class="col-md-8 ">
 
                 <div class="row flat-sort padding-side-5">
-                    <div class="col-md-4 pt-2 pb-2 selected-sort text-center">
-                        <a href="{{ route('flat-search') . "?order=new" }}">Новые предложения</a>
+                    @php
+                        $filter = [
+                            'city' => $request->city,
+                            'price_start' => $request->price_start,
+                            'price_end' => $request->price_end,
+                            'type_of_premises' => $request->type_of_premises,
+                            'rental_period' => $request->rental_period,
+                            'number_of_rooms' => $request->number_of_rooms,
+                        ]
+                    @endphp
+                    <div class="col-md-4 pt-2 pb-2 pathable-search text-center">
+                        @php($filter['order'] = 'new')
+                        <a href="{{ route('flat-search', $filter) }}">Новые предложения</a>
                     </div>
-                    <div class="col-md-4 pt-2 pb-2 text-center">
-                        <a href="{{ route('flat-search') . "?order=price_asc" }}">Цена (от самой низкой)</a>
+                    <div class="col-md-4 pt-2 pb-2 pathable-search text-center">
+                        @php($filter['order'] = 'price_asc')
+                        <a href="{{ route('flat-search', $filter) }}">Цена (от самой низкой)</a>
                     </div>
-                    <div class="col-md-4 pt-2 pb-2 text-center">
-                        <a href="{{ route('flat-search') . "?order=popular_desc" }}">Самые популярные</a>
+                    <div class="col-md-4 pt-2 pb-2 pathable-search text-center">
+                        @php($filter['order'] = 'popular_desc')
+                        <a href="{{ route('flat-search', $filter) }}">Самые популярные</a>
                     </div>
-                    <div class="col-md-4 pt-2 pb-2 text-center">
-                        <a href="{{ route('flat-search') . "?order=last" }}">Старые предложения</a>
+                    <div class="col-md-4 pt-2 pb-2 pathable-search text-center">
+                        @php($filter['order'] = 'last')
+                        <a href="{{ route('flat-search', $filter) }}">Старые предложения</a>
                     </div>
-                    <div class="col-md-4 pt-2 pb-2 text-center">
-                        <a href="{{ route('flat-search') . "?order=price_desc" }}">Цена (от самой высокой)</a>
+                    <div class="col-md-4 pt-2 pb-2 pathable-search text-center">
+                        @php($filter['order'] = 'price_desc')
+                        <a href="{{ route('flat-search', $filter) }}">Цена (от самой высокой)</a>
                     </div>
-                    <div class="col-md-4 pt-2 pb-2 text-center">
-                        <a href="{{ route('flat-search') . "?order=popular_asc" }}">Наименее популярные</a>
+                    <div class="col-md-4 pt-2 pb-2 pathable-search text-center">
+                        @php($filter['order'] = 'popular_asc')
+                        <a href="{{ route('flat-search', $filter) }}">Наименее популярные</a>
                     </div>
                 </div>
 
@@ -168,4 +187,8 @@
 
     </div>
 
+@endsection
+
+@section('scripts')
+    <script src="{{ asset('js/search.js') }}"></script>
 @endsection
