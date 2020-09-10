@@ -137,20 +137,24 @@
                     </div>
                 </div>
                 <div class="col-md-4">
-                    <div class="connect-owner bg-primary container-fluid">
-                        <span>СВЯЗАТЬСЯ С ВЛАДЕЛЦЕМ</span>
+                    <div class="connect-owner container-fluid text-center">
+                        <span class="text-white">СВЯЗАТЬСЯ С ВЛАДЕЛЦЕМ</span>
                         <div class="row">
                             <div class="my-md-3 w-25">
-                                <img class="w-100" src="{{ asset('/storage/' . $flat->user->avatar) }}" alt="">
+                                <img class="w-100 ml-md-2" src="{{ asset('/storage/' . $flat->user->avatar) }}" alt="">
                             </div>
                             <div class="w-50">
-                                <div>
-                                    {{ $flat->user->name }} <br>
-                                    {{ $flat->user->last_name }}
+                                <div class="text-md-left ml-md-4 h-100">
+                                    <span class="align-middle h-100 text-white ml-md-5 font-18-px">
+                                        <p>{{ $flat->user->name }}</p>
+                                        <p>{{ $flat->user->last_name }}</p>
+                                    </span>
                                 </div>
                             </div>
                             <div class="w-25 text-center align-middle my-auto">
-                                <i class="fa fa-3x fa-envelope-o text-white" aria-hidden="true"></i>
+                                <a href="{{ route('dialog-create', ['id' => $flat->user->id]) }}">
+                                    <i class="fa fa-3x fa-envelope-o text-white" aria-hidden="true"></i>
+                                </a>
                             </div>
                         </div>
                     </div>

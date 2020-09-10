@@ -784,9 +784,13 @@ textarea {
     src: url(/fonts/icons_mobiscroll.woff);
 }
 
+.connect-owner>span{
+    font-size: 22px;
+}
 
-
-
+.connect-owner{
+    background-color: #004182;
+}
 
 
 
