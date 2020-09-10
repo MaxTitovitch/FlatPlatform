@@ -107,8 +107,12 @@
                     <div class="col-9 link-style my-auto">
                         <a href="{{ route('index') }}">Главная</a> • <a href="{{ route('about') }}">О нас</a> • <a
                             href="{{ route('flat-search') }}">Сдача жилья</a> • <a
-                            href="{{ route('household-service-search') }}">Поиск хозработника</a> • <a
-                            href="{{ route('login') }}">Вход</a> • <a href="{{ route('register') }}">Регистре</a>
+                            href="{{ route('household-service-search') }}">Поиск хозработника</a> •
+                        @guest
+                            <a href="{{ route('login') }}">Вход</a> • <a href="{{ route('register') }}">Регистрация</a>
+                        @else
+                            <a href="{{ route('home') }}">Личный кабинет</a>
+                        @endguest
                     </div>
                     <div class="col-3 text-white">
                         <div class="mb-1 mt-1">Техническая поддержка:</div>
