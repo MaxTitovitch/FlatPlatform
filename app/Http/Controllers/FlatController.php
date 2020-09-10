@@ -24,7 +24,7 @@ class FlatController extends Controller
     }
 
     public function search(Request $request) {
-        $flats = Flat::filtrateFlat($request, 2);
+        $flats = Flat::filtrateFlat($request, 20);
         $flats->append($request->except('page'));
         return view('flat.search', ['flats' => $flats, 'request' => $request]);
     }

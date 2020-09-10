@@ -7,3 +7,4 @@ $('.pathable a').toArray().forEach((element) => {
     $(element).addClass('naw-current')
   }
 });
+
