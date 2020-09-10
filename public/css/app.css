@@ -135,14 +135,26 @@ a:focus {
     top: 35% !important;
 }
 
-.slick-slide {
+.slick-slide-break {
     padding: 0!important;
+}
+
+.slick-list.draggable>.slick-track {
+    display: flex;
+    justify-content: center;
+}
+
+.slick-arrow+.slick-list.draggable>.slick-track {
+    display: block!important;
 }
 
 .navbar-light .navbar-nav .active>.nav-link.naw-current {
     color: #004182!important;
 }
 
+.text-grey {
+    color: gray;
+}
 
 .new-household-main-img img{
     height: 150px;
@@ -315,7 +327,9 @@ a:focus {
 
 
 
-
+.display-none {
+    display: none;
+}
 .ui-form {
     /*padding-left: 30px;*/
     /*padding-right: 30px;*/

@@ -12,6 +12,10 @@
             <div class="col-md-4 p-0">
                 <form action="{{ route('household-service-search') }}" class="flat-search-border px-2 py-4 m-0-10">
 
+                    @if($request->order)
+                        <input type="hidden" name="order" value="{{ $request->order }}">
+                    @endif
+
                     <span class="flat-search-text">Найти</span>
 
                     <div class="form-group my-4">
@@ -47,34 +51,49 @@
                         <button type="submit" class="mr-1 btn auth-button btn-forgot-password">
                             НАЙТИ
                         </button>
-                        <button type="submit" class="ml-1 btn auth-button ">
+                        <a href="{{ route('household-service-search') }}" class="ml-1 btn auth-button ">
                             ОЧИСТИТЬ
-                        </button>
+                        </a>
                     </div>
 
 
                 </form>
             </div>
             <div class="col-md-8 ">
-
                 <div class="row flat-sort padding-side-5">
-                    <div class="col-md-4 pt-2 pb-2 selected-sort text-center">
-                        <a href="{{ route('household-service-search') . "?order=new" }}">Новые предложения</a>
+                    @php
+                        $filter = [
+                            'city' => $request->city,
+                            'price_start' => $request->price_start,
+                            'price_end' => $request->price_end,
+                            'type_of_premises' => $request->type_of_premises,
+                            'rental_period' => $request->rental_period,
+                            'number_of_rooms' => $request->number_of_rooms,
+                        ]
+                    @endphp
+                    <div class="col-md-4 pt-2 pb-2 pathable-search text-center">
+                        @php($filter['order'] = 'new')
+                        <a href="{{ route('household-service-search', $filter) }}">Новые предложения</a>
                     </div>
-                    <div class="col-md-4 pt-2 pb-2 text-center">
-                        <a href="{{ route('household-service-search') . "?order=price_asc" }}">Цена (от самой низкой)</a>
+                    <div class="col-md-4 pt-2 pb-2 pathable-search text-center">
+                        @php($filter['order'] = 'price_asc')
+                        <a href="{{ route('household-service-search', $filter) }}">Цена (от самой низкой)</a>
                     </div>
-                    <div class="col-md-4 pt-2 pb-2 text-center">
-                        <a href="{{ route('household-service-search') . "?order=popular_desc" }}">Самые популярные</a>
+                    <div class="col-md-4 pt-2 pb-2 pathable-search text-center">
+                        @php($filter['order'] = 'popular_desc')
+                        <a href="{{ route('household-service-search', $filter) }}">Самые популярные</a>
                     </div>
-                    <div class="col-md-4 pt-2 pb-2 text-center">
-                        <a href="{{ route('household-service-search') . "?order=last" }}">Старые предложения</a>
+                    <div class="col-md-4 pt-2 pb-2 pathable-search text-center">
+                        @php($filter['order'] = 'last')
+                        <a href="{{ route('household-service-search', $filter) }}">Старые предложения</a>
                     </div>
-                    <div class="col-md-4 pt-2 pb-2 text-center">
-                        <a href="{{ route('household-service-search') . "?order=price_desc" }}">Цена (от самой высокой)</a>
+                    <div class="col-md-4 pt-2 pb-2 pathable-search text-center">
+                        @php($filter['order'] = 'price_desc')
+                        <a href="{{ route('household-service-search', $filter) }}">Цена (от самой высокой)</a>
                     </div>
-                    <div class="col-md-4 pt-2 pb-2 text-center">
-                        <a href="{{ route('household-service-search') . "?order=popular_asc" }}">Наименее популярные</a>
+                    <div class="col-md-4 pt-2 pb-2 pathable-search text-center">
+                        @php($filter['order'] = 'popular_asc')
+                        <a href="{{ route('household-service-search', $filter) }}">Наименее популярные</a>
                     </div>
                 </div>
 
@@ -88,7 +107,7 @@
                                         <img src="{{asset('/storage/' . $householdServices[$i]->user->avatar)}}" alt="">
                                     </a>
                                 </div>
-                                <div class="personal-info my-auto col-md-7">
+                                <div class="col-md-7">
                                     <div class="new-household-main-type mb-1">
                                         <a href="{{ route('household-service-page', [$householdServices[$i]->id]) }}">
                                             <span>{{$householdServices[$i]->title}}</span>
@@ -96,6 +115,9 @@
                                     </div>
                                     <div class="new-household-main-name mb-1 font-weight-bold">
                                         <span>{{ $householdServices[$i]->user->name}}</span>
+                                    </div>
+                                    <div class="new-household-main-name mb-1 text-grey">
+                                        <span>{{ $householdServices[$i]->category->name}}</span>
                                     </div>
                                     <div class="new-household-main-price">
                                         <span>{{ $householdServices[$i]->price}} $</span>
@@ -110,6 +132,9 @@
                         </div>
                     @endfor
                 </div>
+                @if(!count($householdServices))
+                    <h2 class="mt-5 text-secondary text-center">НИЧЕГО НЕ НАЙДЕНО</h2>
+                @endif
 
             </div>
 
@@ -123,7 +148,7 @@
                                     <img src="{{asset('/storage/' . $householdServices[$i]->user->avatar)}}" alt="">
                                 </a>
                             </div>
-                            <div class="my-auto col-md-7">
+                            <div class="col-md-7">
                                 <div class="new-household-main-type mb-1">
                                     <a href="{{ route('household-service-page', [$householdServices[$i]->id]) }}">
                                         <span>{{$householdServices[$i]->title}}</span>
@@ -131,6 +156,9 @@
                                 </div>
                                 <div class="new-household-main-name mb-1 font-weight-bold">
                                     <span>{{ $householdServices[$i]->user->name}}</span>
+                                </div>
+                                <div class="new-household-main-name mb-1 text-grey">
+                                    <span>{{ $householdServices[$i]->category->name}}</span>
                                 </div>
                                 <div class="new-household-main-price">
                                     <span>{{ $householdServices[$i]->price}} $</span>
@@ -150,4 +178,9 @@
             {{ $householdServices->links() }}
         </div>
     </div>
+@endsection
+
+
+@section('scripts')
+    <script src="{{ asset('js/search.js') }}"></script>
 @endsection

@@ -169,7 +169,7 @@
                     @endfor
                 </div>
                 @if(!count($flats))
-                    <h1 class="mt-5 text-secondary text-center">НИЧЕГО НЕ НАЙДЕНО</h1>
+                    <h2 class="mt-5 text-secondary text-center">НИЧЕГО НЕ НАЙДЕНО</h2>
                 @endif
 
             </div>

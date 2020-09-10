@@ -1,23 +1,32 @@
 
 mobiscroll.settings = {
-    lang: 'ru',                          // Specify language like: lang: 'pl' or omit setting to use default
-    theme: 'ios',                        // Specify theme like: theme: 'ios' or omit setting to use default
-    themeVariant: 'light'            // More info about themeVariant: https://docs.mobiscroll.com/4-10-6/calendar#opt-themeVariant
+    lang: 'ru',
+    theme: 'ios',
+    themeVariant: 'light'
 };
 
 $(function () {
+    function getDates () {
+        return JSON.parse($('.dates').eq(0).text());
+    }
 
-    // Mobiscroll Calendar initialization
-    $('#demo-multi-day').mobiscroll().calendar({
-        display: 'inline',               // Specify display mode like: display: 'bottom' or omit setting to use default
-        select: 'multiple'               // More info about select: https://docs.mobiscroll.com/4-10-6/calendar#opt-select
+    let dates = getDates();
+    $('#multi-day').mobiscroll().calendar({
+        display: 'inline',
+        select: 'none',
+        colors: [
+            ...dates.serviceDates.map(el => {
+                return {background: '#e87d07', d: new Date(el)}
+            }),
+          ...dates.flatDates.map(el => {
+              return {background: '#e20516', d: new Date(el)}
+          })
+        ]
     });
 
     setTimeout(deleteSecurity, 100);
     setTimeout(() => $('.mbsc-ic').click(deleteSecurity), 100);
     setTimeout(() => $('.mbsc-cal-cell').click(deleteSecurity), 100);
-
-
 });
 
 let deleteSecurity = () => {

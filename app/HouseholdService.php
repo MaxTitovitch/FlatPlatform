@@ -7,7 +7,6 @@ use Illuminate\Http\Request;
 
 class HouseholdService extends Model
 {
-
     protected $fillable = [
         'title', 'city', 'description', 'price', 'user_id', 'household_service_category_id',
     ];
@@ -52,7 +51,7 @@ class HouseholdService extends Model
                 ->where('household_service_categories.name', '=', $request->category);
         }
         if ($request->query_string){
-            $query = $query->where('household_services.title', 'like', "%{$request->query_string}%")->where('household_services.description', 'like', "%{$request->query_string}%");
+            $query = $query->whereRaw("household_services.title like '%{$request->query_string}%'")->orWhereRaw("household_services.description like '%{$request->query_string}%'");
         }
         return $query;
     }
@@ -63,8 +62,8 @@ class HouseholdService extends Model
             case 'last': return $query->orderBy('household_services.id', 'asc');
             case 'price_asc': return $query->orderBy('household_services.price', 'asc');
             case 'price_desc': return $query->orderBy('household_services.price', 'desc');
-            case 'popular_asc': return $query->withCount('orders')->orderBy('household_services.orders_count', 'asc');
-            case 'popular_desc': return $query->withCount('orders')->orderBy('household_services.orders_count', 'desc');
+            case 'popular_asc': return $query->withCount('orders')->orderBy('orders_count', 'asc');
+            case 'popular_desc': return $query->withCount('orders')->orderBy('orders_count', 'desc');
         }
     }
 }

@@ -29,7 +29,7 @@ class HouseholdServiceController extends Controller
     public function search(Request $request)
     {
         $householdServices = HouseholdService::filtrateHouseholdService($request, 20);
-        return view('household-service.search', ['householdServices' => $householdServices, 'categories' => HouseholdServiceCategory::all()]);
+        return view('household-service.search', ['householdServices' => $householdServices, 'categories' => HouseholdServiceCategory::all(), 'request' => $request]);
     }
 
     public function addRequest(DateIssueRequest $request, $id) {
