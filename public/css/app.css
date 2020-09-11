@@ -372,6 +372,10 @@ a:focus {
     margin-bottom: 40px;
 }
 
+input:focus {
+    outline: none!important;
+}
+
 .form-row input {
     display: block;
     width: 100%;
@@ -806,26 +810,58 @@ textarea {
     background-color: #004182;
 }
 
+.datepicker-days {
+    border: 1px solid #004182;
+}
 
+.personal-area-account>div>input{
+    font-size: 18px;
+}
 
+.personal-area-account>p{
+    font-size: 14px;
+}
 
+.avatar-text>span{
+    font-size: 22px;
+}
 
+.avatar-img i{
+    font-size: 10rem;
+}
 
+.color-dark-blue{
+    color: #004182;
+}
 
+.color-bg-dark-blue{
+    background-color: #004182;
+}
 
+.upload-avatar:hover{
+    cursor: pointer;
+}
 
+.dialog-list-one:not(:last-child){
+    border-bottom: 1px solid grey;
+}
 
+.dialog-list-one{
+    height: 13vh;
+}
 
+.dialog-list-connect-support .text-primary:hover {
+    color: white!important;
+}
 
+.dialog-list-connect-support:hover a{
+    color: white!important;
 
+}
 
-
-
-
-
-
-
-
+.dialog-list-connect-support{
+    height: 6vh;
+}
 
 
 

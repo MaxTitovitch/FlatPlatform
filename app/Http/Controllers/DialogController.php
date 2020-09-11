@@ -13,14 +13,14 @@ class DialogController extends Controller
 {
     public function index(Request $request) {
         $viewName = $request->route()->getName() == "admin-dialog-list" ? 'dialog.admin-list' : 'dialog.user-list';
-        $dialogs = Dialog::with('messages')->withCount('messages')->having('messages_count', '>', 0);
+        $dialogs = Dialog::withCount('messages');
         if($viewName === 'dialog.admin-list') {
             $dialogs = $dialogs->where('type', 'Поддержка');
         } else {
-            $dialogs = $dialogs->whereRaw("first_user_id", Auth::id())->orWhereRaw("second_user_id", Auth::id());
+            $dialogs = $dialogs->where("first_user_id", Auth::id())->orWhere("second_user_id", Auth::id());
         }
 
-        $dialogs = $dialogs->get();
+        $dialogs = $dialogs->having('messages_count', '>', 0)->paginate(20);
         return view($viewName, ['dialogs' => $dialogs]);
     }
 

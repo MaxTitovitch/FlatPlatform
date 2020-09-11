@@ -28,16 +28,15 @@
                         <div class="modal-dialog" role="document">
                             <div class="modal-content">
                                 <div class="modal-header">
-                                    <h5 class="modal-title" id="exampleModalLabel">Modal title</h5>
+                                    <h5 class="modal-title" id="exampleModalLabel">Заезд-Отъезд</h5>
                                     <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                                         <span aria-hidden="true">&times;</span>
                                     </button>
                                 </div>
                                 <div class="modal-body">
-                                    ...
+                                    <div id="multi-day1"></div>
                                 </div>
                                 <div class="modal-footer">
-                                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
                                     <button type="button" class="btn btn-primary">Save changes</button>
                                 </div>
                             </div>
@@ -92,11 +91,7 @@
                             Описание
                         </div>
                         <div class="col-md-9 font-18-px">
-                            Сдаю светлую и уютную однокомнатную квартиру на длительный срок от собственника.
-                            Квартира 36 кв.м. Третий этаж. Санузел раздельный. Окна выходят на улицу есть балкон.
-                            Квартира находится на улице Ленина дом 15, в 5 минутах от метро площадь Ленина.
-                            В квартире есть всё для комфортного проживания: новая 2–х спальная кровать, шкаф–купе, комод
-                            с зеркалом, плазменный ТВ.
+                            {{ $flat->description }}
                         </div>
                     </div>
                     <div class="row my-md-3">

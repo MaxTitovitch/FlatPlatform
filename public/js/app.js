@@ -8,3 +8,8 @@ $('.pathable a').toArray().forEach((element) => {
   }
 });
 
+let sidebar = $('#super-height');
+if(sidebar.length > 0) {
+    $('main').eq(0).css({'flex': '2'});
+    sidebar.eq(0).css({'min-height': $('main').eq(0).height()});
+}
