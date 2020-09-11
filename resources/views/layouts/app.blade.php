@@ -21,7 +21,7 @@
 
     <!-- Icon -->
     <link rel="shortcut icon" href="{{ asset('img/icon.png') }}" type="image/png">
-
+    <script async src="https://telegram.org/js/telegram-widget.js?11" data-telegram-login="VarenduruBot" data-size="large" data-auth-url="https://3f19ed6410ce.ngrok.io/socialite/telegram" data-request-access="write"></script>
 </head>
 <body>
 <div id="app" class="body-container">

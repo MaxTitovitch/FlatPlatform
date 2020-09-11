@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "b8ec81d8c69c66559d5609202c0a2b53",
+    "content-hash": "16e4e73cf7721ebdbb262be499a8c41c",
     "packages": [
         {
             "name": "arrilot/laravel-widgets",
@@ -3597,6 +3597,50 @@
             ],
             "description": "Easily add new or override built-in providers in Laravel Socialite.",
             "time": "2020-03-08T16:54:44+00:00"
+        },
+        {
+            "name": "socialiteproviders/telegram",
+            "version": "v3.0.0",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/SocialiteProviders/Telegram.git",
+                "reference": "b8b102e960504123d2ef048c5a43a9855d2477e4"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/SocialiteProviders/Telegram/zipball/b8b102e960504123d2ef048c5a43a9855d2477e4",
+                "reference": "b8b102e960504123d2ef048c5a43a9855d2477e4",
+                "shasum": ""
+            },
+            "require": {
+                "php": "^7.2",
+                "socialiteproviders/manager": "~3.0"
+            },
+            "type": "library",
+            "extra": {
+                "laravel": {
+                    "aliases": {
+                        "Socialite": "Laravel\\Socialite\\Facades\\Socialite"
+                    }
+                }
+            },
+            "autoload": {
+                "psr-4": {
+                    "SocialiteProviders\\Telegram\\": ""
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "Adnan RIHAN",
+                    "email": "adnan@rihan.fr"
+                }
+            ],
+            "description": "Telegram Authentication Provider for Laravel Socialite",
+            "time": "2020-08-11T10:12:51+00:00"
         },
         {
             "name": "socialiteproviders/vkontakte",
