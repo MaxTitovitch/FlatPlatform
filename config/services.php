@@ -42,9 +42,16 @@ return [
         'redirect' => 'http://flatproject.loc/socialite/instagram/callback'
     ],
 
-    'vkontakte' => [
+    'google' => [
         'client_id' => env('INSTAGRAM_CLIENT_ID'),
         'client_secret' => env('INSTAGRAM_CLIENT_SECRET'),
-        'redirect' => 'http://flatproject.loc/socialite/vkontakte/callback'
+        'redirect' => 'http://flatproject.loc/socialite/google/callback'
+    ],
+
+    'telegram' => [
+        'bot' => '@VarenduruBot',  // The bot's username
+        'client_id' => null,
+        'client_secret' => '1208726240:AAE8uEqKvMopN6_Qnf48dR68ju0AWBPmWIU',
+        'redirect' => 'http://flatproject.loc/socialite/telegram/callback'
     ],
 ];

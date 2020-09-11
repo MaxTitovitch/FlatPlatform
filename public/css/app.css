@@ -762,7 +762,7 @@ textarea {
 }
 
 .col-md-8 .flex{
-    justify-content: space-around!important;
+    justify-content: flex-end!important;
     height: 65%;
 }
 
@@ -804,6 +804,10 @@ textarea {
 
 .connect-owner{
     background-color: #004182;
+}
+
+.br-50 {
+    border-radius: 50%;
 }
 
 

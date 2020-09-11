@@ -51,7 +51,7 @@
         <div class="container-fluid ">
             <div class="row-self">
                 <div class="new-flats-main mb-5 flat-id-slider mt-2">
-                    @php($photos = explode("\"", $flat->photos))
+                    @php($photos = explode("\"", #exampleModal->photos))
                     @for($i = 0; $i < count($photos); $i++)
                         @if($i % 2 == 1)
                             <div class="new-flat-main-one col-lg-4 col-xl-4 col-12 col-sm-12 slick-slide-break">
@@ -109,7 +109,7 @@
                         <span class="text-white">СВЯЗАТЬСЯ С ВЛАДЕЛЦЕМ</span>
                         <div class="row">
                             <div class="my-md-3 w-25">
-                                <img class="w-100 ml-md-2" src="{{ asset('/storage/' . $flat->user->avatar) }}" alt="">
+                                <img class="w-100 ml-md-2 br-50" src="{{ asset('/storage/' . $flat->user->avatar) }}" alt="">
                             </div>
                             <div class="w-50">
                                 <div class="text-md-left ml-md-4 h-100">
@@ -119,42 +119,56 @@
                                     </span>
                                 </div>
                             </div>
-                            <div class="w-25 text-center align-middle my-auto">
-                                <a href="{{ route('dialog-create', ['id' => $flat->user->id]) }}">
-                                    <i class="fa fa-3x fa-envelope-o text-white" aria-hidden="true"></i>
-                                </a>
-                            </div>
+                            @guest
+                            @else
+                                @if(Auth::id() !== $flat->user->id)
+                                    <div class="w-25 text-center align-middle my-auto">
+                                        <a href="{{ route('dialog-create', ['id' => $flat->user->id]) }}">
+                                            <i class="fa fa-3x fa-envelope-o text-white" aria-hidden="true"></i>
+                                        </a>
+                                    </div>
+                                @endif
+                            @endguest
                         </div>
                     </div>
                     <div id="multi-day"></div>
                 </div>
             </div>
-            @foreach($flat->orders as $order)
-                <div class="row flat-id-renter border-top border-info py-md-3">
-                    <div class="col-md-1 flat-id-renter">
-                        <img src="{{asset('/storage/' . $order->tenant->avatar)}}" alt="">
-                    </div>
-                    <div class="col-md-2 my-auto">
-                        <span class="flat-id-renter-name">
-                            <strong>{{ $order->tenant->name . ' ' . $order->tenant->last_name }}</strong>
-                            <p class="text-secondary">{{ date('d.m.Y', strtotime($order->date_start)) }} - {{ date('d.m.Y', strtotime($order->date_end)) }}</p>
-                        </span>
-                    </div>
-                    <div class="col-md-1 my-auto ">
-                        <span class="flat-id-renter-price">{{ $order->price }}P</span>
-                    </div>
-                    <div class="col-md-8 my-auto">
-                        <div class="flex">
-                            <div class="border border-dark rounded text-center"><a href=""
-                                                                                   class="text-dark">Написать</a></div>
-                            <div class="border border-primary rounded text-center"><a href="" class="text-primary">Принять</a>
+            @guest
+                <h2 class="mt-5 mb-5 text-secondary text-center">Доступно только авторизованным пользователям</h2>
+            @else
+                @foreach($flat->orders as $order)
+                    <div class="row flat-id-renter border-top border-info py-md-3">
+                        <div class="col-md-1 flat-id-renter">
+                            <img src="{{asset('/storage/' . $order->tenant->avatar)}}" alt="">
+                        </div>
+                        <div class="col-md-2 my-auto">
+                            <span class="flat-id-renter-name">
+                                <strong>{{ $order->tenant->name . ' ' . $order->tenant->last_name }}</strong>
+                                <p class="text-secondary">{{ date('d.m.Y', strtotime($order->date_start)) }} - {{ date('d.m.Y', strtotime($order->date_end)) }}</p>
+                            </span>
+                        </div>
+                        <div class="col-md-1 my-auto ">
+                            <span class="flat-id-renter-price">{{ $order->price }}P</span>
+                        </div>
+                        <div class="col-md-8 my-auto">
+                            <div class="flex">
+                                @if(Auth::id() !== $order->tenant->id)
+                                    <div class="border border-dark rounded text-center"><a href="" class="text-dark">Написать</a></div>
+                                @else
+                                    <div class="border border-dark rounded text-danger"><a href="" class="text-dark">Отозвать</a></div>
+                                @endif
+                                @if(Auth::id() === $flat->user->id)
+                                    @if($order->status === 'Создан')
+                                        <div class="border border-primary rounded text-center"><a href="" class="text-primary">Принять</a></div>
+                                        <div class="border border-info rounded text-danger"><a href="" class="text-info">Отклонить</a></div>
+                                    @endif
+                                @endif
                             </div>
-                            <div class="border border-info rounded text-center"><a href=""
-                                                                                   class="text-info">Отклонить</a></div>
                         </div>
                     </div>
-                </div>
-            @endforeach
+                @endforeach
+            @endguest
         </div>
     </div>
 

@@ -1,0 +1,43 @@
+main {
+    flex: 2;
+    background-image: url(/img/apartment-2094701_960_720.jpg);
+    background-size: 100% 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.error-main {
+    background: rgba(0,0,0,0.6);
+    width: 70%;
+    height: 600px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-wrap: wrap;
+    flex-direction: column;
+    padding: 0 10%;
+}
+
+.error-main h1, p {
+    color: white;
+    width: 100%;
+    text-align: center;
+    margin-bottom: 20px;
+    font-weight: 300;
+}
+.error-main h1 {
+    font-size: 55px;
+}
+
+.error-main p {
+    font-size: 25px;
+}
+
+.error-main a {
+    margin-top: 20px;
+    color: white;
+    background: #004182;
+    padding: 20px 50px;
+    font-weight: 700;
+}

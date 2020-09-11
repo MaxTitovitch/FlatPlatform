@@ -23,6 +23,7 @@
         "socialiteproviders/facebook": "^1.0",
         "socialiteproviders/google": "^3.1",
         "socialiteproviders/instagram": "^3.0",
+        "socialiteproviders/telegram": "^3.0",
         "socialiteproviders/vkontakte": "^4.1",
         "tcg/voyager": "^1.4",
         "voyager-relation-selector": "dev-master"

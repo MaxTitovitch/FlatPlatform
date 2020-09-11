@@ -68,11 +68,14 @@
                                     <a href="{{ route('socialite.auth', ['provider' => 'facebook']) }}" class="mr-5 btn btn-light">
                                         <i class="fa fa-2x fa-facebook bg-white" aria-hidden="true"></i>
                                     </a>
-                                    <a href="{{ route('socialite.auth', ['provider' => 'vkontakte']) }}" class=" btn btn-light">
-                                        <i class="fa fa-2x fa-vk bg-white" aria-hidden="true"></i>
+                                    <a href="{{ route('socialite.auth', ['provider' => 'google']) }}" class=" btn btn-light">
+                                        <i class="fa fa-2x fa-google bg-white" aria-hidden="true"></i>
                                     </a>
                                     <a href="{{ route('socialite.auth', ['provider' => 'instagram']) }}" class="ml-5 btn btn-light">
                                         <i class="fa fa-2x fa-instagram bg-white" aria-hidden="true"></i>
+                                    </a>
+                                    <a href="{{ route('socialite.auth', ['provider' => 'telegram']) }}" class="ml-5 btn btn-light">
+                                        <i class="fa fa-2x fa-telegram bg-white" aria-hidden="true"></i>
                                     </a>
                                 </div>
                             </div>
