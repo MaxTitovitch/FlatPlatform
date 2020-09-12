@@ -834,7 +834,7 @@ textarea {
 }
 
 .color-dark-blue{
-    color: #004182;
+    color: #004182!important;
 }
 
 .color-bg-dark-blue{
@@ -866,8 +866,14 @@ textarea {
     height: 6vh;
 }
 
+.modal-content{
+    background: linear-gradient(180deg, #118DF0 0%, #118DF0 0%, #004182 0.01%, #118DF0 100%), #FFFFFF;
+    box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.25);
+}
 
-
+.modal-header h5{
+    font-size: 33px;
+}
 
 
 
