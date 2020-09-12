@@ -4,8 +4,12 @@
     color: #004182!important;
 }
 
-a:focus {
-    outline: none;
+*:focus {
+    outline: none!important;
+}
+
+.btn-nobtn {
+    border: 0;
 }
 
 .department{
@@ -864,6 +868,10 @@ textarea {
 
 .dialog-list-connect-support{
     height: 6vh;
+}
+
+.opacity-50 {
+    opacity: 50%;
 }
 
 

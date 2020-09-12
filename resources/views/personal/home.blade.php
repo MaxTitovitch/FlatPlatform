@@ -18,8 +18,15 @@
                     <h1>Персональная информация</h1>
                 </div>
 
-                <form method="POST" action="{{ route('home') }}">
 
+
+
+                <form method="POST" action="{{ route('home') }}">
+                    @if (session('status-error'))
+                        <div class="alert alert-danger" role="alert">
+                            {{ session('status-error') }}
+                        </div>
+                    @endif
                     <div class="row mt-md-5 mx-md-5">
                         <div class="col-md-3 personal-area-account pl-md-4">
                             <div class="form-group border-bottom">

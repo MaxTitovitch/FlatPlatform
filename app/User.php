@@ -78,4 +78,14 @@ class User extends \TCG\Voyager\Models\User implements MustVerifyEmail
     public function isEnteredPassportData() {
         return $this->passport_number && $this->date_of_issue && $this->date_of_birth;
     }
+
+    public function canMakeOrder ($flatId) {
+        $orders = Flat::find($flatId)->orders;
+        foreach ($orders as $order){
+            if($this->id === $order->tenant_id && $order->status !== 'Выполнен'){
+                return false;
+            }
+        }
+        return true;
+    }
 }

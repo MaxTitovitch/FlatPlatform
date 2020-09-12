@@ -18,9 +18,13 @@
                 <div class="col-md-7 flat-id-up-title">Аренда</div>
                 <div class="col-md-3 flat-id-up-price font-weight-bold">{{ $flat->price }} P/мес.</div>
                 <div class="col-md-2">
-                    <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#exampleModal">
-                        ОТКЛИКНУТЬСЯ
-                    </button>
+                    @guest@else
+                        @if(Auth::user()->role->name === 'tenant' && !Auth::user()->canMakeOrder($flat->id))
+                        <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#exampleModal">
+                            ОТКЛИКНУТЬСЯ
+                        </button>
+                        @endif
+                    @endguest
 
                     <!-- Modal -->
                     <div class="modal fade" id="exampleModal" tabindex="-1" role="dialog"
@@ -50,7 +54,7 @@
         <div class="container-fluid ">
             <div class="row-self">
                 <div class="new-flats-main mb-5 flat-id-slider mt-2">
-                    @php($photos = explode("\"", #exampleModal->photos))
+                    @php($photos = explode("\"", $flat->photos))
                     @for($i = 0; $i < count($photos); $i++)
                         @if($i % 2 == 1)
                             <div class="new-flat-main-one col-lg-4 col-xl-4 col-12 col-sm-12 slick-slide-break">
@@ -118,7 +122,7 @@
                             @else
                                 @if(Auth::id() !== $flat->user->id)
                                     <div class="w-25 text-center align-middle my-auto">
-                                        <a href="{{ route('dialog-create', ['id' => $flat->user->id]) }}">
+                                        <a href="{{ route('dialog-flat-create', ['id' => $flat->id]) }}">
                                             <i class="fa fa-3x fa-envelope-o text-white" aria-hidden="true"></i>
                                         </a>
                                     </div>
@@ -133,7 +137,7 @@
                 <h2 class="mt-5 mb-5 text-secondary text-center">Доступно только авторизованным пользователям</h2>
             @else
                 @foreach($flat->orders as $order)
-                    <div class="row flat-id-renter border-top border-info py-md-3">
+                    <div class="row flat-id-renter border-top border-info py-md-3 {{ $flat->status == 'Свободна' ? '' : ($flat->lastOrder()->id == $order->id ? '' : 'opacity-50' )}}">
                         <div class="col-md-1 flat-id-renter">
                             <img src="{{asset('/storage/' . $order->tenant->avatar)}}" alt="">
                         </div>
@@ -148,15 +152,46 @@
                         </div>
                         <div class="col-md-8 my-auto">
                             <div class="flex">
-                                @if(Auth::id() !== $order->tenant->id)
-                                    <div class="border border-dark rounded text-center"><a href="" class="text-dark">Написать</a></div>
-                                @else
-                                    <div class="border border-dark rounded text-danger"><a href="" class="text-dark">Отозвать</a></div>
-                                @endif
-                                @if(Auth::id() === $flat->user->id)
-                                    @if($order->status === 'Создан')
-                                        <div class="border border-primary rounded text-center"><a href="" class="text-primary">Принять</a></div>
-                                        <div class="border border-info rounded text-danger"><a href="" class="text-info">Отклонить</a></div>
+                                @if($order->status == 'Отменён' || $order->status == 'Отозван')
+                                    <div class="rounded text-danger">{{ $order->status }}</div>
+                                @elseif($order->status == 'Принят' || $order->status == 'Утверждён' || $order->status == 'Выполнен')
+                                    <div class="rounded text-success">{{ $order->status }}</div>
+                                @elseif($flat->status == 'Свободна')
+                                    @if(Auth::id() !== $order->tenant_id)
+                                        @if(Auth::id() === $flat->user_id)
+                                            <div class="border border-primary rounded text-center"><a href="{{ route('dialog-flat-create', ['id' => $flat->id]) }}" class="text-primary">Написать</a></div>
+                                        @else
+                                            <div class="border border-primary rounded text-center"><a href="{{ route('dialog-create', ['id' => $order->tenant_id]) }}" class="text-primary">Написать</a></div>
+                                        @endif
+                                    @else
+                                        <div class="border border-danger rounded text-center">
+                                            <form action="{{ route('flat-reject-request', ['id' => $order->id], '_method=path') }}" method="post">
+                                                @csrf
+                                                <input type="hidden" name="_method" value="PATCH">
+                                                <button type="submit" class="text-danger btn-nobtn">Отозвать</button>
+                                            </form>
+                                        </div>
+                                    @endif
+                                    @if(Auth::id() === $flat->user_id)
+                                        @if($order->status === 'Создан')
+
+                                            <div class="border border-success rounded text-center">
+                                                <form action="{{ route('flat-accept-request', ['id' => $order->id, '_method=path']) }}" method="post">
+                                                    @csrf
+                                                    <input type="hidden" name="_method" value="PATCH">
+                                                    <button type="submit" class="text-success btn-nobtn">Принять</button>
+                                                </form>
+{{--                                                <a href="{{ route('flat-accept-request', ['id' => $order->id, '_method=path']) }}" class="text-success">Принять</a>--}}
+                                            </div>
+                                            <div class="border border-danger rounded text-center">
+                                                <form action="{{ route('flat-reject-request', ['id' => $order->id, '_method=path']) }}" method="post">
+                                                    @csrf
+                                                    <input type="hidden" name="_method" value="PATCH">
+                                                    <button type="submit" class="text-danger btn-nobtn">Отклонить</button>
+                                                </form>
+{{--                                                <a href="{{ route('flat-reject-request', ['id' => $order->id, '_method=path']) }}" class="text-danger">Отклонить</a>--}}
+                                            </div>
+                                        @endif
                                     @endif
                                 @endif
                             </div>

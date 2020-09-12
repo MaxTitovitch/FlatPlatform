@@ -61,6 +61,9 @@ class FlatController extends Controller
             'Заявка на квартиру принята!',
             'landlord',
             function ($flatOrder, $request, $messageError) {
+                $flat = $flatOrder->flat;
+                $flat->status = 'Сдаётся';
+                $flat->save();
                 $dialog = Dialog::create([
                     'first_user_id' => $flatOrder->landlord->id,
                     'second_user_id' => $flatOrder->tenant->id,
@@ -80,9 +83,9 @@ class FlatController extends Controller
             'Принят',
             'Вы не участник сделки!',
             'Условия приняты!',
-            Auth::user()->role,
+            Auth::user()->role->name,
             function ($flatOrder, $request, $messageError) {
-                if(Auth::user()->role === 'tenant') {
+                if(Auth::user()->role->name === 'tenant') {
                     $flatOrder->tenant_confirmation = 1;
                 } else {
                     $flatOrder->landlord_confirmation = 1;
@@ -105,6 +108,9 @@ class FlatController extends Controller
             'Сделка выполнена!',
             'landlord',
             function ($flatOrder, $request, $messageError) {
+                $flat = $flatOrder->flat;
+                $flat->status = 'Свободна';
+                $flat->save();
                 if($flatOrder->tenant_confirmation && $flatOrder->landlord_confirmation && $flatOrder->status == 'Утверждён') {
                     $flatOrder->status = 'Выполнен';
                     $flatOrder->save();
@@ -118,7 +124,7 @@ class FlatController extends Controller
     }
 
     public function rejectRequest(Request $request, $id) {
-        if(Auth::user()->role === 'tenant') {
+        if(Auth::user()->role->name === 'tenant') {
             return $this->patchStatus($request, $id, 'Отозван', 'Вы не владелец заявки!', 'Заявка на квартиру отозвана!', 'tenant');
         } else {
             return $this->patchStatus($request, $id, 'Отменён', 'Вы не владелец квартиры!', 'Заявка на квартиру отклонена!', 'landlord');

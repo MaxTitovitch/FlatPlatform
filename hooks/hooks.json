@@ -11,7 +11,7 @@
             "name": "model-log",
             "description": "Voyager Model Log",
             "version": "v1.0.2",
-            "enabled": true
+            "enabled": false
         }
     }
 }

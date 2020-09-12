@@ -8,6 +8,10 @@ use App\User;
 use Illuminate\Support\Facades\Auth;
 use App\Message;
 use App\Http\Requests\MessageRequest;
+use App\FlatServiceOrder;
+use App\HouseholdServiceOrder;
+use App\HouseholdService;
+use App\Flat;
 
 class DialogController extends Controller
 {
@@ -43,8 +47,8 @@ class DialogController extends Controller
         if($user != null) {
             $authId = Auth::id(); $id = $user->id;
             $type = Auth::user()->role->name == 'admin' ? 'Поддержка' : 'Обычный';
-            $dialog = Dialog::whereRaw("first_user_id in ($authId, $id)")->orWhereRaw("second_user_id in ($authId, $id)")->where('type', $type)->get();
-            if($user == null) {
+            $dialog = Dialog::whereRaw("first_user_id in ($authId, $id)")->orWhereRaw("second_user_id in ($authId, $id)")->where('type', $type)->first();
+            if(!$dialog) {
                 $dialog = Dialog::create(['first_user_id' => $authId, 'second_user_id' => $id, 'type' => $type]);
                 $dialog->save();
             }
@@ -52,6 +56,28 @@ class DialogController extends Controller
         } else {
             return redirect()->route('index');
         }
+    }
+
+    public function createFlat(Request $request, $id) {
+        $flat = Flat::find($id);
+        $authId = Auth::id(); $id = $flat->user_id;
+        $dialog = Dialog::whereRaw("first_user_id in ($authId, $id)")->orWhereRaw("second_user_id in ($authId, $id)")->where('type', 'Квартира')->get();
+        if(!$dialog) {
+            $dialog = Dialog::create(['first_user_id' => $authId, 'second_user_id' => $id, 'type' => 'Квартира']);
+            $dialog->save();
+        }
+        return redirect()->route('dialog-show', ['id' => $dialog->id]);
+    }
+
+    public function createService(Request $request, $id) {
+        $service = HouseholdService::find($id);
+        $authId = Auth::id(); $id = $service->user_id;
+        $dialog = Dialog::whereRaw("first_user_id in ($authId, $id)")->orWhereRaw("second_user_id in ($authId, $id)")->where('type', 'Робота')->get();
+        if(!$dialog) {
+            $dialog = Dialog::create(['first_user_id' => $authId, 'second_user_id' => $id, 'type' => 'Робота']);
+            $dialog->save();
+        }
+        return redirect()->route('dialog-show', ['id' => $dialog->id]);
     }
 
     public function support(Request $request) {
