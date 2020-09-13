@@ -7,27 +7,48 @@
 
 
 @section('content')
-
     <div id="carouselExampleIndicators" class="carousel slide" data-ride="carousel">
+{{--        carousel--}}
         <ol class="carousel-indicators">
             <li data-target="#carouselExampleIndicators" data-slide-to="0" class="active"></li>
             <li data-target="#carouselExampleIndicators" data-slide-to="1"></li>
             <li data-target="#carouselExampleIndicators" data-slide-to="2"></li>
         </ol>
-        <div class="carousel-inner">
-            <div class="carousel-item active w-100 carousel-height-img">
-                <div class="w-100 carousel-height-img d-block"
-                     style="background: no-repeat url({{asset('img/apartment-2094701_960_720.jpg')}}); background-size: 100% 100%">
+        <div class="carousel-inner ">
+            <div class="carousel-item active w-100 carousel-height-img ">
+                <div class="w-100 carousel-height-img d-block p-md-5" style="background: no-repeat url({{asset('img/apartment-2094701_960_720.jpg')}}); background-size: 100% 100%">
+                    <div>
+                        <div class="w-100 text-center main-carousel-text">
+                            <span class="text-white w-100 ">Хотите быстро и недорого найти жилье?</span>
+                        </div>
+                        <div class="main-carousel-btn ">
+                            <a href="{{ route('flat-search') }}" class="btn color-bg-dark-blue w-25  text-white">Найти жильё</a>
+                        </div>
+                    </div>
                 </div>
             </div>
-            <div class="carousel-item w-100 carousel-height-img">
-                <div class="w-100 carousel-height-img d-block"
-                     style="background: no-repeat url({{asset('img/apartment-2094701_960_720.jpg')}}); background-size: 100% 100%">
+            <div class="carousel-item w-100 carousel-height-img ">
+                <div class="w-100 carousel-height-img d-block p-md-5" style="background: no-repeat url({{asset('img/entrepreneur-2326419_1921.jpg')}}); background-size: 100% 100%">
+                    <div>
+                        <div class="w-100 text-center main-carousel-text">
+                            <span class="text-white w-100 ">Нужен высококвалифицированный специалист?</span>
+                        </div>
+                        <div class="main-carousel-btn ">
+                            <a href="{{ route('household-service-search') }}" class="btn color-bg-dark-blue w-25  text-white">Найти работника</a>
+                        </div>
+                    </div>
                 </div>
             </div>
-            <div class="carousel-item w-100 carousel-height-img">
-                <div class="w-100 carousel-height-img d-block"
-                     style="background: no-repeat url({{asset('img/apartment-2094701_960_720.jpg')}}); background-size: 100% 100%">
+            <div class="carousel-item w-100 carousel-height-img ">
+                <div class="w-100 carousel-height-img d-block p-md-5" style="background: no-repeat url({{asset('img/computer-768696_19201.jpg')}}); background-size: 100% 100%">
+                    <div>
+                        <div class="w-100 text-center main-carousel-text">
+                            <span class="text-white w-100 ">Хотите больше узнать о нашей компании?</span>
+                        </div>
+                        <div class="main-carousel-btn ">
+                            <a href="{{ route('about') }}" class="btn color-bg-dark-blue w-25  text-white">О компании</a>
+                        </div>
+                    </div>
                 </div>
             </div>
         </div>
