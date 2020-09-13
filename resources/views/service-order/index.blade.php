@@ -1,6 +1,6 @@
-@extends('layouts.app')
+@extends('layouts.personal')
 
-@section('content')
+@section('personal-content')
     <div>
         @dd($order)
     </div>

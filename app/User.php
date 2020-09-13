@@ -60,12 +60,14 @@ class User extends \TCG\Voyager\Models\User implements MustVerifyEmail
 
     public function uploadAvatar($request) {
         $file = $request->file('avatar');
-        $path = Storage::disk('public')->putFile("users/{${date('FY')}}", Str::random(20) . '.' . $file->extension());
+        $date = date('FY');
+        $path = Storage::disk('public')->putFileAs("users/$date", $file,Str::random(20) . '.' . $file->extension());
         $this->avatar = str_replace('public', '', $path);
     }
 
     public function deleteAvatar() {
-        Storage::delete("{${env('APP_URL')}}/storage/public/flats/{${$this->avatar}}");
+        $avatar = $this->avatar;
+        Storage::disk('public')->delete($avatar);
     }
 
     public function updateAvatar($request) {
