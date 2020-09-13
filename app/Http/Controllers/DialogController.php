@@ -91,10 +91,10 @@ class DialogController extends Controller
     }
 
     public function support(Request $request) {
-        $id = Auth::id();
-        $dialog = Dialog::create(['first_user_id' => $id, 'second_user_id' => $id, 'type' => 'Поддержка']);
-        $dialog->save();
-        return redirect()->route('dialog-show', ['id' => $dialog->id]);
+//        $id = Auth::id();
+//        $dialog = Dialog::create(['first_user_id' => $id, 'second_user_id' => $id, 'type' => 'Поддержка']);
+//        $dialog->save();
+//        return redirect()->route('dialog-show', ['id' => $dialog->id]);
     }
 
     public function createMessage(MessageRequest $request, $id) {

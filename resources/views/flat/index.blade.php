@@ -30,18 +30,26 @@
                     <div class="modal fade" id="exampleModal" tabindex="-1" role="dialog"
                          aria-labelledby="exampleModalLabel" aria-hidden="true">
                         <div class="modal-dialog" role="document">
-                            <div class="modal-content">
-                                <div class="modal-header">
-                                    <h5 class="modal-title" id="exampleModalLabel">Заезд-Отъезд</h5>
+                            <div class="modal-content w-100 justify-content-center text-center mx-auto px-md-5">
+                                <div class="modal-header text-center text-white border-0">
+                                    <h5 class="modal-title text-center w-100" id="exampleModalLabel">Заявка на квартиру</h5>
                                     <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                                        <span aria-hidden="true">&times;</span>
+                                        <span aria-hidden="true" class="text-white">&times;</span>
                                     </button>
                                 </div>
-                                <div class="modal-body">
+                                <div class="modal-body py-md-0">
                                     <div id="multi-day1"></div>
+                                    <form action="" class="mt-md-4">
+                                        <div class="form-group">
+                                            <input type="number" name="amount_month" class="form-control" placeholder="Количество месяцев">
+                                        </div>
+                                        <div class="form-group mt-md-4">
+                                            <input type="number" name="price" class="form-control" placeholder="Цена">
+                                        </div>
+                                    </form>
                                 </div>
-                                <div class="modal-footer">
-                                    <button type="button" class="btn btn-primary">Save changes</button>
+                                <div class="modal-footer border-0 text-center justify-content-center pt-md-1">
+                                    <button type="submit" class="btn btn-block bg-white color-dark-blue font-weight-bold" style="border-radius: 20px; font-size: 1.2rem">ОТПРАВИТЬ ЗАЯВКУ</button>
                                 </div>
                             </div>
                         </div>
@@ -211,6 +219,8 @@
     <script src="{{ asset('js/flat-slider.js') }}"></script>
     <script src="{{ asset('js/mobiscroll.jquery.min.js') }}"></script>
     <script src="{{ asset('js/calendar/calendar.js') }}"></script>
+    <script src="{{ asset('js/calendar/calendar-date-range.js') }}"></script>
+
 @endsection
 
 

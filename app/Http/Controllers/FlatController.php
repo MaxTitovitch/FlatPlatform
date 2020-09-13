@@ -64,12 +64,10 @@ class FlatController extends Controller
                 $flat = $flatOrder->flat;
                 $flat->status = 'Сдаётся';
                 $flat->save();
-                $dialog = Dialog::create([
-                    'first_user_id' => $flatOrder->landlord->id,
-                    'second_user_id' => $flatOrder->tenant->id,
-                    'type' => 'Квартира',
-                    'flat_order_id' => $flatOrder->id
-                ]);
+                $dialog = Dialog::where("flat_order_id", $flatOrder->id)->first();
+                if(!$dialog) {
+                    $dialog = Dialog::create(['first_user_id' => $flatOrder->landlord->id, 'second_user_id' => $flatOrder->tenant->id, 'type' => 'Квартира', 'flat_order_id' => $flatOrder->id]);
+                }
                 $dialog->save();
                 return redirect()->route('dialog-show', ['id' => $dialog->id]);
             }

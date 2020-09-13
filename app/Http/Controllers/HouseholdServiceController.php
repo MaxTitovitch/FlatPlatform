@@ -71,12 +71,10 @@ class HouseholdServiceController extends Controller
             'Заявка на роботу принята!',
             'employee',
             function ($serviceOrder, $request, $messageError) {
-                $dialog = Dialog::create([
-                    'first_user_id' => $serviceOrder->employee->id,
-                    'second_user_id' => $serviceOrder->landlord->id,
-                    'type' => 'Робота',
-                    'household_service_order_id' => $serviceOrder->id
-                ]);
+                $dialog = Dialog::where("household_service_order_id", $serviceOrder->id)->first();
+                if(!$dialog) {
+                    $dialog = Dialog::create(['first_user_id' => $serviceOrder->employee->id, 'second_user_id' => $serviceOrder->landlord->id, 'type' => 'Робота', 'household_service_order_id' => $serviceOrder->id]);
+                }
                 $dialog->save();
                 return redirect()->route('dialog-show', ['id' => $dialog->id]);
             }
