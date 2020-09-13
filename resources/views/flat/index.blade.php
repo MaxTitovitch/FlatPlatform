@@ -15,10 +15,11 @@
         <div class="container">
             {{--            кол-во комнат, дом/квартира, улица, номер дома, город--}}
             <div class="row my-4">
-                <div class="col-md-7 flat-id-up-title">Аренда</div>
+                <div class="col-md-6 flat-id-up-title">Аренда</div>
                 <div class="col-md-3 flat-id-up-price font-weight-bold">{{ $flat->price }} P/мес.</div>
-                <div class="col-md-2">
-                    @guest@else
+                <div class="col-md-3">
+                    @guest
+                    @else
                         @if(Auth::user()->role->name === 'tenant' && !Auth::user()->canMakeOrder($flat->id))
                         <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#exampleModal">
                             ОТКЛИКНУТЬСЯ

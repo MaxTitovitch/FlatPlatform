@@ -5,11 +5,7 @@
 @endsection
 
 @section('content')
-    {{--        <div>--}}
-    {{--            @dd($householdService, $dates)--}}
-    {{--        </div>--}}
-
-    <div class="">
+    <div>
         <div class="container">
             <div class="row my-4">
                 <div class="col-md-6 flat-id-up-title">
@@ -18,9 +14,14 @@
                 </div>
                 <div class="col-md-3 flat-id-up-price font-weight-bold">{{ $householdService->price }} P</div>
                 <div class="col-md-3">
-                    <button type="button" class="btn btn-primary h-75 btn-block" data-toggle="modal" data-target="#exampleModal">
-                        ОТКЛИКНУТЬСЯ
-                    </button>
+                    @guest
+                    @else
+                        @if(Auth::user()->role->name === 'landlord')
+                            <button type="button" class="btn btn-primary h-75 btn-block" data-toggle="modal" data-target="#exampleModal">
+                                ОТКЛИКНУТЬСЯ
+                            </button>
+                        @endif
+                    @endguest
 
                     <!-- Modal -->
                     <div class="modal fade" id="exampleModal" tabindex="-1" role="dialog"
@@ -54,7 +55,6 @@
                             </div>
                         </div>
                     </div>
-                </div>
 
             </div>
         </div>
@@ -119,38 +119,39 @@
                                 <div class="rounded text-danger">{{ $order->status }}</div>
                             @elseif($order->status == 'Принят' || $order->status == 'Утверждён' || $order->status == 'Выполнен')
                                 <div class="rounded text-success">{{ $order->status }}</div>
-                            @endif
-                            @if(Auth::id() !== $order->landlord_id)
-                                @if(Auth::id() === $householdService->user_id)
-                                    <div class="border border-primary rounded text-center"><a href="{{ route('dialog-service-create', ['id' => $householdService->id]) }}" class="text-primary">Написать</a></div>
-                                @else
-                                    <div class="border border-primary rounded text-center"><a href="{{ route('dialog-create', ['id' => $order->landlord_id]) }}" class="text-primary">Написать</a></div>
-                                @endif
                             @else
-                                <div class="border border-danger rounded text-center">
-                                    <form action="{{ route('service-reject-request', ['id' => $order->id], '_method=path') }}" method="post">
-                                        @csrf
-                                        <input type="hidden" name="_method" value="PATCH">
-                                        <button type="submit" class="text-danger btn-nobtn">Отозвать</button>
-                                    </form>
-                                </div>
-                            @endif
-                            @if(Auth::id() === $householdService->user_id)
-                                @if($order->status === 'Создан')
-                                    <div class="border border-success rounded text-center">
-                                        <form action="{{ route('service-accept-request', ['id' => $order->id, '_method=path']) }}" method="post">
-                                            @csrf
-                                            <input type="hidden" name="_method" value="PATCH">
-                                            <button type="submit" class="text-success btn-nobtn">Принять</button>
-                                        </form>
-                                    </div>
+                                @if(Auth::id() !== $order->landlord_id)
+                                    @if(Auth::id() === $householdService->user_id)
+                                        <div class="border border-primary rounded text-center"><a href="{{ route('dialog-service-create', ['id' => $householdService->id]) }}" class="text-primary">Написать</a></div>
+                                    @else
+                                        <div class="border border-primary rounded text-center"><a href="{{ route('dialog-create', ['id' => $order->landlord_id]) }}" class="text-primary">Написать</a></div>
+                                    @endif
+                                @else
                                     <div class="border border-danger rounded text-center">
-                                        <form action="{{ route('service-reject-request', ['id' => $order->id, '_method=path']) }}" method="post">
+                                        <form action="{{ route('service-reject-request', ['id' => $order->id], '_method=path') }}" method="post">
                                             @csrf
                                             <input type="hidden" name="_method" value="PATCH">
-                                            <button type="submit" class="text-danger btn-nobtn">Отклонить</button>
+                                            <button type="submit" class="text-danger btn-nobtn">Отозвать</button>
                                         </form>
                                     </div>
+                                @endif
+                                @if(Auth::id() === $householdService->user_id)
+                                    @if($order->status === 'Создан')
+                                        <div class="border border-success rounded text-center">
+                                            <form action="{{ route('service-accept-request', ['id' => $order->id, '_method=path']) }}" method="post">
+                                                @csrf
+                                                <input type="hidden" name="_method" value="PATCH">
+                                                <button type="submit" class="text-success btn-nobtn">Принять</button>
+                                            </form>
+                                        </div>
+                                        <div class="border border-danger rounded text-center">
+                                            <form action="{{ route('service-reject-request', ['id' => $order->id, '_method=path']) }}" method="post">
+                                                @csrf
+                                                <input type="hidden" name="_method" value="PATCH">
+                                                <button type="submit" class="text-danger btn-nobtn">Отклонить</button>
+                                            </form>
+                                        </div>
+                                    @endif
                                 @endif
                             @endif
                         </div>
