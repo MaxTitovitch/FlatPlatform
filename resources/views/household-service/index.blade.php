@@ -27,7 +27,7 @@
                     @guest
                     @else
                         @if(Auth::user()->role->name === 'landlord')
-                            <button type="button" class="btn btn-primary h-75 btn-block" data-toggle="modal" data-target="#exampleModal">
+                            <button type="button" class="dialog-support mt-3" data-toggle="modal" data-target="#exampleModal">
                                 ОТКЛИКНУТЬСЯ
                             </button>
                         @endif

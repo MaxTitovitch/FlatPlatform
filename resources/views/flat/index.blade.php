@@ -21,7 +21,7 @@
                     @guest
                     @else
                         @if(Auth::user()->role->name === 'tenant' && Auth::user()->canMakeOrder($flat->id))
-                        <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#exampleModal">
+                        <button type="button" class="dialog-support mt-3" data-toggle="modal" data-target="#exampleModal">
                             ОТКЛИКНУТЬСЯ
                         </button>
                         @endif
