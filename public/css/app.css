@@ -944,18 +944,75 @@ textarea {
 }
 
 .personal-area-flats-plus{
-    font-size: 50px;
+    font-size: 16px;
 }
 
-.qwerty {
-    fill: green;
-    color: green;
+.icons-sidebar {
+    color: #004182;
+    fill: #004182;
+    display: flex;
+    align-items: center;
+    width: 100%;
 }
 
-.qwerty:hover {
-    fill: black;
-    color: black;
+.icons-sidebar svg {
+    height: 25px;
+    width: 25px;
+    margin-right: 8px;
 }
+
+.icons-sidebar:hover {
+    color: #118DF0;
+    fill: #118DF0;
+}
+
+.personal-area-flats-table-img{
+    width: 200px!important;
+}
+
+.personal-area-flats-table-img img{
+    width: 170px!important;
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 

@@ -29,19 +29,19 @@ class FlatCRUDController extends Controller
         $flat->uploadImages($request);
         $flat->save();
         Session::flash('status-success', 'Объявление создано!');
-        return redirect()->route('flats.edit', ['flat', $flat->id]);
+        return redirect()->route('flats.edit', ['flat' => $flat->id]);
     }
 
 
     public function show(Flat $flat)
     {
-        return redirect()->route('flat-page', ['id', $flat->id]);
+        return redirect()->route('flat-page', ['id' =>  $flat->id]);
     }
 
 
     public function edit(Flat $flat)
     {
-        return view('flat-crud.create', ['flat', $flat]);
+        return view('flat-crud.create', ['flat' => $flat]);
     }
 
 
@@ -52,7 +52,7 @@ class FlatCRUDController extends Controller
         $flat->user_id = Auth::id();
         $flat->save();
         Session::flash('status-success', 'Объявление изменено!');
-        return redirect()->route('flats.edit', ['flat', $flat->id]);
+        return redirect()->route('flats.edit', ['flat' =>  $flat->id]);
     }
 
 

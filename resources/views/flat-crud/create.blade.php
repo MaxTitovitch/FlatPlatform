@@ -1,33 +1,28 @@
 @extends('layouts.personal')
 
 @section('personal-content')
-    <div class="container-fluid">
-        <div class="row">
-            <div class="col-md-2">
-                @include('layouts.sidebar')
-            </div>
-            <div class="col-md-10">
+    @dump($flat)
+    <div class="container">
+        <div class="text-left mt-md-3 ">
+            <h1>Редактирование объявления</h1>
+        </div>
 
-                <div class="text-center mt-md-3">
-                    <h1>Редактирование объявления</h1>
+        <div class="personal-area-flats">
+            <div class="row mt-md-4">
+                <div class="col-md-6 ">
+                    <select name="type_of_premises" id="" class="w-100 form-control ">
+                        <option {{ $flat->type_of_premises=='Квартира' ? 'selected' : '' }}>Квартира</option>
+                        <option {{ $flat->type_of_premises=='Частный дом' ? 'selected' : '' }}>Частный дом</option>
+                        <option {{ $flat->type_of_premises=='Комната' ? 'selected' : '' }}>Комната</option>
+                    </select>
                 </div>
-
-                <div class="personal-area-flats">
-                    <div class="row">
-                        <div class="col-md-6">
-                            <select name="type_of_premises" id="">
-                                @foreach($flats as $flat)
-                                    <option value="{{ $flat->type_of_premises }}">{{ $flat->type_of_premises }}</option>
-                                @endforeach
-                            </select>
-                        </div>
-                        <div class="col-md-6">
-                            <select name="" id="">
-                                <option value=""></option>
-                            </select>
-                        </div>
-                    </div>
+                <div class="col-md-6">
+                    <select name="rental_period" id="" class="w-100  form-control">
+                        <option value="">Помесячно</option>
+                        <option value="">Посуточно</option>
+                    </select>
                 </div>
             </div>
         </div>
+    </div>
 @endsection
