@@ -32,7 +32,7 @@ class HouseholdServiceController extends Controller
         return view('household-service.search', ['householdServices' => $householdServices, 'categories' => HouseholdServiceCategory::all(), 'request' => $request]);
     }
 
-    public function addRequest(DateIssueRequest $request, $id) {
+    public function addRequest(HouseholdServiceRequest $request, $id) {
         $user = Auth::user(); $service = HouseholdService::find($id);
         if(!$service) {
             return redirect()->route('index');
@@ -40,17 +40,17 @@ class HouseholdServiceController extends Controller
             $request->session()->flash('status-error', 'Вы не арендатор!');
         } else {
             HouseholdServiceOrder::create([
-                'price' => $service->price,
+                'price' =>$request->price,
                 'employee_confirmation' => 0,
                 'landlord_confirmation' => 0,
                 'date_of_completion' => $request->date_of_completion,
                 'status' => 'Создан',
                 'landlord_id' => $user->id,
                 'household_service_id' => $id,
+                'flat_id' => $request->flat_id
             ]);
             $request->session()->flash('status-success', 'Заявка на роботу добавлена!');
         }
-
         return redirect()->route('household-service-page', ['id' => $id]);
     }
 

@@ -92,14 +92,4 @@ class User extends \TCG\Voyager\Models\User implements MustVerifyEmail
         }
         return true;
     }
-
-    public function canMakeServiceOrder ($serviceId) {
-        $orders = HouseholdService::find($serviceId)->orders;
-        foreach ($orders as $order){
-            if($this->id === $order->landlord_id && $order->status !== 'Выполнен'){
-                return false;
-            }
-        }
-        return true;
-    }
 }

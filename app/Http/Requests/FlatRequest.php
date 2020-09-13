@@ -13,7 +13,7 @@ class FlatRequest extends FormRequest
      */
     public function authorize()
     {
-        return false;
+        return true;
     }
 
     /**
@@ -25,8 +25,8 @@ class FlatRequest extends FormRequest
     {
         return [
             'price' => 'integer|min:1|max:10000000',
-            'date_start' => 'date|after_or_equal:today',
-            'date_end' => 'date|after:date_start'
+            'date_start' => 'date|after_or_equal:today|date_format:Y-m-d',
+            'date_end' => 'date|after:date_start|date_format:Y-m-d'
         ];
     }
 }

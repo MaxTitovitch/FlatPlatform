@@ -8,6 +8,16 @@
     <div>
         <div class="container">
             <div class="row my-4">
+                @if (session('status-error'))
+                    <div class="alert alert-danger" role="alert">
+                        {{ session('status-error') }}
+                    </div>
+                @endif
+                @if (session('status-success'))
+                    <div class="alert alert-success" role="alert">
+                        {{ session('status-success') }}
+                    </div>
+                @endif
                 <div class="col-md-6 flat-id-up-title">
                     {{ $householdService->title . ", " . $householdService->city }}
                     <p class="font-18-px text-secondary">{{ $householdService->category->name }}</p>
@@ -17,7 +27,7 @@
                     @guest
                     @else
                         @if(Auth::user()->role->name === 'landlord')
-                            <button type="button" class="btn btn-primary h-75 btn-block" data-toggle="modal" data-target="#exampleModal">
+                            <button type="button" class="dialog-support mt-3" data-toggle="modal" data-target="#exampleModal">
                                 ОТКЛИКНУТЬСЯ
                             </button>
                         @endif
@@ -36,7 +46,9 @@
                                 </div>
                                 <div class="modal-body py-md-0">
                                     <div id="multi-day1"></div>
-                                    <form action="" class="mt-md-4">
+                                    <form action="{{ route('service-add-request', ['id' => $householdService->id]) }}" class="mt-md-4 service-create-form" method="POST">
+                                        @csrf
+                                        <input type="hidden" id="dateStart" name="date_of_completion">
                                         <div class="form-group">
                                             <select class="form-control" name="flat_id" id="exampleFormControlSelect1">
                                                 @foreach(Auth::user()->flats as $flat)
@@ -45,12 +57,12 @@
                                             </select>
                                         </div>
                                         <div class="form-group mt-md-4">
-                                            <input type="number" name="price" class="form-control" placeholder="Цена">
+                                            <input type="number" name="price" class="form-control" value="{{ $householdService->price }}" placeholder="Цена" required>
+                                        </div>
+                                        <div class="border-0 text-center justify-content-center mb-3">
+                                            <button type="submit" class="btn btn-block bg-white color-dark-blue font-weight-bold" style="border-radius: 20px; font-size: 1.2rem">ОТПРАВИТЬ ЗАЯВКУ</button>
                                         </div>
                                     </form>
-                                </div>
-                                <div class="modal-footer border-0 text-center justify-content-center pt-md-1">
-                                    <button type="submit" class="btn btn-block bg-white color-dark-blue font-weight-bold" style="border-radius: 20px; font-size: 1.2rem">ОТПРАВИТЬ ЗАЯВКУ</button>
                                 </div>
                             </div>
                         </div>
@@ -79,7 +91,7 @@
                         <span class="text-white">СВЯЗАТЬСЯ С ВЛАДЕЛЦЕМ</span>
                         <div class="row">
                             <div class="my-md-3 w-25">
-                                <img class="w-100 ml-md-2 rounded-circle" src="{{ asset('/storage/' . $householdService->user->avatar) }}" alt="">
+                                <img class="br-50 w-100 ml-md-2 rounded-circle" src="{{ asset('/storage/' . $householdService->user->avatar) }}" alt="">
                             </div>
                             <div class="w-50">
                                 <div class="text-md-left ml-md-4 h-100">
@@ -102,7 +114,7 @@
             @foreach($householdService->orders as $order)
                 <div class="row flat-id-renter border-top border-info py-md-3">
                     <div class="col-md-1 flat-id-renter">
-                        <img src="{{asset('/storage/' . $order->landlord->avatar)}}" alt="">
+                        <img class="br-50" src="{{asset('/storage/' . $order->landlord->avatar)}}" alt="">
                     </div>
                     <div class="col-md-2 my-auto">
                         <span class="flat-id-renter-name">

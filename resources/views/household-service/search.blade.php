@@ -1,10 +1,6 @@
 @extends('layouts.app')
 
 @section('content')
-    {{--        <div>--}}
-    {{--            @dd($householdServices,$categories)--}}
-    {{--        </div>--}}
-
     <div class="container mt-4 mb-3">
         <h1 class="row new-flats-row">Поиск хозработника</h1>
 
@@ -179,7 +175,6 @@
         </div>
     </div>
 @endsection
-
 
 @section('scripts')
     <script src="{{ asset('js/search.js') }}"></script>

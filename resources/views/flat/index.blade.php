@@ -20,8 +20,8 @@
                 <div class="col-md-3">
                     @guest
                     @else
-                        @if(Auth::user()->role->name === 'tenant' && !Auth::user()->canMakeOrder($flat->id))
-                        <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#exampleModal">
+                        @if(Auth::user()->role->name === 'tenant' && Auth::user()->canMakeOrder($flat->id))
+                        <button type="button" class="dialog-support mt-3" data-toggle="modal" data-target="#exampleModal">
                             ОТКЛИКНУТЬСЯ
                         </button>
                         @endif
@@ -40,17 +40,20 @@
                                 </div>
                                 <div class="modal-body py-md-0">
                                     <div id="multi-day1"></div>
-                                    <form action="" class="mt-md-4">
+                                    <form action="{{ route('flat-add-request', ['id' => $flat->id]) }}" class="mt-md-4" method="POST">
+                                        @csrf
+                                        <input type="hidden" id="dateStart" name="date_start">
+                                        <input type="hidden" id="dateEnd" name="date_end">
                                         <div class="form-group">
-                                            <input type="number" name="amount_month" class="form-control" placeholder="Количество месяцев">
+                                            <input type="number" min="1" class="form-control amount-date" placeholder="Количество {{ $flat->rental_period ? 'месяцев' : 'дней'  }}" required value="1">
                                         </div>
                                         <div class="form-group mt-md-4">
-                                            <input type="number" name="price" class="form-control" placeholder="Цена">
+                                            <input type="number" name="price" class="form-control" placeholder="Цена" required value="{{ $flat->price }}">
+                                        </div>
+                                        <div class="border-0 text-center justify-content-center pt-md-1 mb-3">
+                                            <button type="submit" class="btn btn-block bg-white color-dark-blue font-weight-bold" style="border-radius: 20px; font-size: 1.2rem">ОТПРАВИТЬ ЗАЯВКУ</button>
                                         </div>
                                     </form>
-                                </div>
-                                <div class="modal-footer border-0 text-center justify-content-center pt-md-1">
-                                    <button type="submit" class="btn btn-block bg-white color-dark-blue font-weight-bold" style="border-radius: 20px; font-size: 1.2rem">ОТПРАВИТЬ ЗАЯВКУ</button>
                                 </div>
                             </div>
                         </div>
@@ -85,7 +88,7 @@
                         <div class="col-md-4">Тип помещения</div>
                         <div class="col-md-2 flat-id-param">{{ $flat->type_of_premises }}</div>
                         <div class="col-md-3">Тип аренды</div>
-                        <div class="col-md-3 flat-id-param">{{ $flat->rental_period }}</div>
+                        <div class="col-md-3 flat-id-param type-rental">{{ $flat->rental_period }}</div>
                     </div>
                     <div class="row mt-2">
                         <div class="col-md-4">Улица</div>
