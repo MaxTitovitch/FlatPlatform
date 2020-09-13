@@ -99,7 +99,7 @@
 {{--                                    <br>--}}
 {{--                                    <small>{{ 'Пароль' }}</small>--}}
                                 @endif
-                                <input type="password" class="form-control" id="password" name="password" value="" required autocomplete="new-password">
+                                <input type="password" class="form-control" id="password" name="password" value="" autocomplete="new-password">
                             </div>
 
                             @can('editRoles', $dataTypeContent)

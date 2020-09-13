@@ -22,7 +22,7 @@ class HouseholdServiceOrder extends Model
 
     public function employee()
     {
-        return $this->hasOneThrough('App\User', 'App\HouseholdService');
+        return $this->household_service->user();
     }
 
     public function dialogs()

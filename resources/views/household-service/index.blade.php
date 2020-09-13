@@ -104,12 +104,44 @@
                     </div>
                     <div class="col-md-8 my-auto">
                         <div class="flex">
-                            <div class="border border-dark rounded text-center"><a href=""
-                                                                                   class="text-dark">Написать</a></div>
-                            <div class="border border-primary rounded text-center"><a href="" class="text-primary">Принять</a>
-                            </div>
-                            <div class="border border-info rounded text-center"><a href=""
-                                                                                   class="text-info">Отклонить</a></div>
+                            @if($order->status == 'Отменён' || $order->status == 'Отозван')
+                                <div class="rounded text-danger">{{ $order->status }}</div>
+                            @elseif($order->status == 'Принят' || $order->status == 'Утверждён' || $order->status == 'Выполнен')
+                                <div class="rounded text-success">{{ $order->status }}</div>
+                            @endif
+                            @if(Auth::id() !== $order->landlord_id)
+                                @if(Auth::id() === $householdService->user_id)
+                                    <div class="border border-primary rounded text-center"><a href="{{ route('dialog-service-create', ['id' => $householdService->id]) }}" class="text-primary">Написать</a></div>
+                                @else
+                                    <div class="border border-primary rounded text-center"><a href="{{ route('dialog-create', ['id' => $order->landlord_id]) }}" class="text-primary">Написать</a></div>
+                                @endif
+                            @else
+                                <div class="border border-danger rounded text-center">
+                                    <form action="{{ route('service-reject-request', ['id' => $order->id], '_method=path') }}" method="post">
+                                        @csrf
+                                        <input type="hidden" name="_method" value="PATCH">
+                                        <button type="submit" class="text-danger btn-nobtn">Отозвать</button>
+                                    </form>
+                                </div>
+                            @endif
+                            @if(Auth::id() === $householdService->user_id)
+                                @if($order->status === 'Создан')
+                                    <div class="border border-success rounded text-center">
+                                        <form action="{{ route('service-accept-request', ['id' => $order->id, '_method=path']) }}" method="post">
+                                            @csrf
+                                            <input type="hidden" name="_method" value="PATCH">
+                                            <button type="submit" class="text-success btn-nobtn">Принять</button>
+                                        </form>
+                                    </div>
+                                    <div class="border border-danger rounded text-center">
+                                        <form action="{{ route('service-reject-request', ['id' => $order->id, '_method=path']) }}" method="post">
+                                            @csrf
+                                            <input type="hidden" name="_method" value="PATCH">
+                                            <button type="submit" class="text-danger btn-nobtn">Отклонить</button>
+                                        </form>
+                                    </div>
+                                @endif
+                            @endif
                         </div>
                     </div>
                 </div>

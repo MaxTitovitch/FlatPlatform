@@ -59,22 +59,32 @@ class DialogController extends Controller
     }
 
     public function createFlat(Request $request, $id) {
-        $flat = Flat::find($id);
-        $authId = Auth::id(); $id = $flat->user_id;
-        $dialog = Dialog::whereRaw("first_user_id in ($authId, $id)")->orWhereRaw("second_user_id in ($authId, $id)")->where('type', 'Квартира')->get();
+        $flatService = FlatServiceOrder::find($id);
+        $authId = Auth::id();
+        if(Auth::user()->role->name === 'tenant') {
+            $id = $flatService->flat->user_id;
+        } else {
+            $id = $flatService->tenant_id;
+        }
+        $dialog = Dialog::where("flat_order_id", $flatService->id)->first();
         if(!$dialog) {
-            $dialog = Dialog::create(['first_user_id' => $authId, 'second_user_id' => $id, 'type' => 'Квартира']);
+            $dialog = Dialog::create(['first_user_id' => $authId, 'second_user_id' => $id, 'type' => 'Квартира', 'flat_order_id' => $flatService->id]);
             $dialog->save();
         }
         return redirect()->route('dialog-show', ['id' => $dialog->id]);
     }
 
     public function createService(Request $request, $id) {
-        $service = HouseholdService::find($id);
-        $authId = Auth::id(); $id = $service->user_id;
-        $dialog = Dialog::whereRaw("first_user_id in ($authId, $id)")->orWhereRaw("second_user_id in ($authId, $id)")->where('type', 'Робота')->get();
+        $serviceOrder = HouseholdServiceOrder::find($id);
+        $authId = Auth::id();
+        if(Auth::user()->role->name === 'landlord') {
+            $id = $serviceOrder->household_service->user_id;
+        } else {
+            $id = $serviceOrder->landlord_id;
+        }
+        $dialog = Dialog::where("household_service_order_id", $serviceOrder->id)->first();
         if(!$dialog) {
-            $dialog = Dialog::create(['first_user_id' => $authId, 'second_user_id' => $id, 'type' => 'Робота']);
+            $dialog = Dialog::create(['first_user_id' => $authId, 'second_user_id' => $id, 'type' => 'Работа', 'household_service_order_id' =>$serviceOrder->id]);
             $dialog->save();
         }
         return redirect()->route('dialog-show', ['id' => $dialog->id]);
