@@ -29,7 +29,7 @@ class FlatController extends Controller
         return view('flat.search', ['flats' => $flats, 'request' => $request]);
     }
 
-    public function addRequest(DateRequest $request, $id) {
+    public function addRequest(FlatRequest $request, $id) {
         $user = Auth::user(); $flat = Flat::find($id);
         if(!$flat) {
             return redirect()->route('index');
@@ -37,7 +37,7 @@ class FlatController extends Controller
             $request->session()->flash('status-error', 'Вы не арендатор!');
         } else {
             FlatServiceOrder::create([
-                'price' => $flat->price,
+                'price' => $request->price,
                 'landlord_confirmation' => 0,
                 'tenant_confirmation' => 0,
                 'date_start' => $request->date_start,

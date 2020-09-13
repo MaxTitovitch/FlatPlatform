@@ -13,7 +13,7 @@ class HouseholdServiceRequest extends FormRequest
      */
     public function authorize()
     {
-        return false;
+        return true;
     }
 
     /**
@@ -25,7 +25,8 @@ class HouseholdServiceRequest extends FormRequest
     {
         return [
             'price' => 'integer|min:1|max:10000000',
-            'date_of_completion' => 'date|after_or_equal:today',
+            'date_of_completion' => 'date|after_or_equal:today|date_format:Y-m-d',
+            'flat_id' => 'exists:flats,id',
         ];
     }
 }
