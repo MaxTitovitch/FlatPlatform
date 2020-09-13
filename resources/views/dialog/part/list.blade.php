@@ -1,23 +1,35 @@
 @extends('layouts.app')
 
-@section('content')
+@section($section)
     <div class="text-center mt-md-3">
         <h1>Диалоги</h1>
     </div>
 
     @foreach($dialogs as $dialog)
-        <div class="row dialog-list-one my-md-4">
-            <div class="col-md-2">
+        <div class="row dialog-list-one my-md-4 href-dialog" data-href="{{ route('dialog-show', ['id' => $dialog->id]) }}">
+            <div class="col-md-2 h-100">
                 @if($dialog->first_user_id === Auth::id())
                     @php($otherUser = $dialog->second_user)
                 @else
                     @php($otherUser = $dialog->first_user)
                 @endif
-                <img src="{{ asset('/storage/' . $otherUser->avatar ) }}" alt="" class="rounded-circle w-50 ml-md-5">
+                <a href="{{ route('dialog-show', ['id' => $dialog->id]) }}">
+                    @if($dialog->type === 'Поддержка')
+                        <img src="{{ asset('img/avatar.png') }}" alt="" class="rounded-circle w-100 h-100">
+                    @else
+                        <img src="{{ asset('/storage/' . $otherUser->avatar ) }}" alt="" class="rounded-circle w-100 h-100">
+                    @endif
+                </a>
             </div>
             <div class="col-md-9">
                 <p>
-                    <span class="color-dark-blue font-18-px font-weight-bold">{{ $otherUser->name . " " . $otherUser->last_name }}</span>
+                    <a href="{{ route('dialog-show', ['id' => $dialog->id]) }}" class="color-dark-blue font-18-px font-weight-bold">
+                        @if($dialog->type === 'Поддержка')
+                            Варендуру - Техподдержка
+                        @else
+                            {{ $otherUser->name . " " . $otherUser->last_name }}
+                        @endif
+                    </a>
                     <br>
                     <a href="{{ route('dialog-show', ['id' => $dialog->id]) }}" class="text-decoration-none text-dark">{{ $dialog->messages->last()->message }}</a>
                 </p>

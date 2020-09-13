@@ -67,7 +67,9 @@ class User extends \TCG\Voyager\Models\User implements MustVerifyEmail
 
     public function deleteAvatar() {
         $avatar = $this->avatar;
-        Storage::disk('public')->delete($avatar);
+        if($avatar !== 'users/default.png') {
+            Storage::disk('public')->delete($avatar);
+        }
     }
 
     public function updateAvatar($request) {

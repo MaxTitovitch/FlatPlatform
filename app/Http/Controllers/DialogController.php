@@ -21,7 +21,7 @@ class DialogController extends Controller
         if($viewName === 'dialog.admin-list') {
             $dialogs = $dialogs->where('type', 'Поддержка');
         } else {
-            $dialogs = $dialogs->where("first_user_id", Auth::id())->orWhere("second_user_id", Auth::id());
+            $dialogs = $dialogs->where("first_user_id", Auth::id())->where("second_user_id", Auth::id());
         }
 
         $dialogs = $dialogs->having('messages_count', '>', 0)->paginate(20);
@@ -91,10 +91,10 @@ class DialogController extends Controller
     }
 
     public function support(Request $request) {
-//        $id = Auth::id();
-//        $dialog = Dialog::create(['first_user_id' => $id, 'second_user_id' => $id, 'type' => 'Поддержка']);
-//        $dialog->save();
-//        return redirect()->route('dialog-show', ['id' => $dialog->id]);
+        $id = Auth::id();
+        $dialog = Dialog::create(['first_user_id' => $id, 'second_user_id' => $id, 'type' => 'Поддержка']);
+        $dialog->save();
+        return redirect()->route('dialog-show', ['id' => $dialog->id]);
     }
 
     public function createMessage(MessageRequest $request, $id) {

@@ -13,3 +13,7 @@ if(sidebar.length > 0) {
     $('main').eq(0).css({'flex': '2'});
     sidebar.eq(0).css({'min-height': $('main').eq(0).height()});
 }
+
+$('.br-50').toArray().forEach(el => {
+  $(el).css({'height': $(el).css('width')});
+});
