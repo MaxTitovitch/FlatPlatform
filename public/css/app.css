@@ -4,8 +4,12 @@
     color: #004182!important;
 }
 
-a:focus {
-    outline: none;
+*:focus {
+    outline: none!important;
+}
+
+.btn-nobtn {
+    border: 0;
 }
 
 .department{
@@ -412,6 +416,11 @@ input:focus {
     display: block!important;
     margin-top: -33px!important;
 }
+.invalid-feedback-home {
+    color: #f24354!important;
+    display: block!important;
+    margin-top: -20px!important;
+}
 .form-row label {
     position: absolute;
     left: 13px;
@@ -634,6 +643,13 @@ input:focus {
     background-color: rgba(0,0,0,0)!important;
     border-color: #c3e6cb!important;
     margin-bottom: 2.5em!important;
+}
+
+.style-reset .alert-success {
+    margin-top: 0!important;
+    color: #155724!important;
+    background-color: #d4edda!important;
+    border-color: #c3e6cb!important;
 }
 
 textarea {
@@ -874,6 +890,10 @@ textarea {
 
 .dialog-list-connect-support{
     height: 6vh;
+}
+
+.opacity-50 {
+    opacity: 50%;
 }
 
 .modal-content{

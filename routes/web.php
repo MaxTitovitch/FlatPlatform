@@ -67,9 +67,11 @@ Route::middleware(['auth', 'verified', 'passport'])->group(function () {
 // Dialog and messages pages & routes
 Route::middleware(['auth', 'verified'])->group(function () {
     Route::get('/dialog', 'DialogController@index')->name('dialog-list');
+    Route::get('/dialog/user/{id}', 'DialogController@create')->name('dialog-create');
+    Route::get('/dialog/flat/{id}', 'DialogController@createFlat')->name('dialog-flat-create');
+    Route::get('/dialog/service/{id}', 'DialogController@createService')->name('dialog-service-create');
+    Route::get('/dialog/support', 'DialogController@support')->name('dialog-support');
     Route::get('/dialog/{id}', 'DialogController@show')->name('dialog-show');
-    Route::post('/dialog/user/{id}', 'DialogController@create')->name('dialog-create');
-    Route::post('/dialog/support', 'DialogController@support')->name('dialog-support');
     Route::post('/send-message/{id}', 'DialogController@createMessage')->name('send-message');
     Route::post('/remove-message/{id}', 'DialogController@removeMessage')->name('remove-message');
 });

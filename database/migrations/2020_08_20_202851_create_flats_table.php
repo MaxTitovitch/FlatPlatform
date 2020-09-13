@@ -27,6 +27,7 @@ class CreateFlatsTable extends Migration
             $table->enum('rental_period', ['Посуточно', 'Помесячно']);
             $table->double('price', 15, 2);
             $table->text('photos')->default('["flats\\default.png"]');
+            $table->enum('status', ['Свободна', 'Сдаётся'])->default('Свободна');
             $table->foreignId('user_id')->unsigned();
             $table->timestamps();
 

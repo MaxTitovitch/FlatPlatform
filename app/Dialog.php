@@ -7,7 +7,7 @@ use Illuminate\Database\Eloquent\Model;
 class Dialog extends Model
 {
     protected $fillable = [
-        'type', 'first_user_id', 'second_user_id', 'flat_id', 'household_service_id'
+        'type', 'first_user_id', 'second_user_id', 'flat_order_id', 'household_service_order_id'
     ];
 
     public function first_user()

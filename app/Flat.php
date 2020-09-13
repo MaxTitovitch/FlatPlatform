@@ -10,7 +10,8 @@ use Illuminate\Support\Str;
 class Flat extends Model
 {
     protected $fillable = [
-        'street', 'house_number', 'description', 'floor', 'area', 'living_area', 'number_of_rooms', 'city', 'type_of_premises', 'rental_period', 'price', 'photos', 'user_id',
+        'street', 'house_number', 'description', 'floor', 'area', 'living_area', 'number_of_rooms', 'city',
+            'type_of_premises', 'rental_period', 'price', 'photos', 'status','user_id',
     ];
 
     public function user()
@@ -127,5 +128,19 @@ class Flat extends Model
         foreach ($files as $file) {
             Storage::delete("{${env('APP_URL')}}/storage/public/flats/$file");
         }
+    }
+
+    public function lastOrder() {
+        $order = FlatServiceOrder::where('flat_id', $this->id)->where('status', 'Выполнен')->orderBy('id', 'desc')->first();
+        if(!$order){
+            $order = FlatServiceOrder::where('flat_id', $this->id)->where('status', 'Утверждён')->orderBy('id', 'desc')->first();
+        }
+        if(!$order){
+            $order = FlatServiceOrder::where('flat_id', $this->id)->where('status', 'Принят')->orderBy('id', 'desc')->first();
+        }
+        if(!$order){
+            $order = new FlatServiceOrder();
+        }
+        return $order;
     }
 }

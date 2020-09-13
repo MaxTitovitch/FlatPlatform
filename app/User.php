@@ -60,12 +60,14 @@ class User extends \TCG\Voyager\Models\User implements MustVerifyEmail
 
     public function uploadAvatar($request) {
         $file = $request->file('avatar');
-        $path = Storage::disk('public')->putFile("users/{${date('FY')}}", Str::random(20) . '.' . $file->extension());
+        $date = date('FY');
+        $path = Storage::disk('public')->putFileAs("users/$date", $file,Str::random(20) . '.' . $file->extension());
         $this->avatar = str_replace('public', '', $path);
     }
 
     public function deleteAvatar() {
-        Storage::delete("{${env('APP_URL')}}/storage/public/flats/{${$this->avatar}}");
+        $avatar = $this->avatar;
+        Storage::disk('public')->delete($avatar);
     }
 
     public function updateAvatar($request) {
@@ -77,5 +79,25 @@ class User extends \TCG\Voyager\Models\User implements MustVerifyEmail
 
     public function isEnteredPassportData() {
         return $this->passport_number && $this->date_of_issue && $this->date_of_birth;
+    }
+
+    public function canMakeOrder ($flatId) {
+        $orders = Flat::find($flatId)->orders;
+        foreach ($orders as $order){
+            if($this->id === $order->tenant_id && $order->status !== 'Выполнен'){
+                return false;
+            }
+        }
+        return true;
+    }
+
+    public function canMakeServiceOrder ($serviceId) {
+        $orders = HouseholdService::find($serviceId)->orders;
+        foreach ($orders as $order){
+            if($this->id === $order->landlord_id && $order->status !== 'Выполнен'){
+                return false;
+            }
+        }
+        return true;
     }
 }

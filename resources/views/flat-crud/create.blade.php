@@ -1,10 +1,6 @@
-@extends('layouts.app')
+@extends('layouts.personal')
 
-@section('content')
-{{--    <div>--}}
-{{--        @dd($flat)--}}
-{{--    </div>--}}
-
+@section('personal-content')
     <div class="container-fluid">
         <div class="row">
             <div class="col-md-2">
@@ -34,9 +30,4 @@
                 </div>
             </div>
         </div>
-
-
-
-
-    </div>
 @endsection

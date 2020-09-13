@@ -55,7 +55,7 @@ class HouseholdServiceController extends Controller
     }
 
     public function rejectRequest(Request $request, $id) {
-        if(Auth::user()->role === 'landlord') {
+        if(Auth::user()->role->name === 'landlord') {
             return $this->patchStatus($request, $id, 'Отозван', 'Вы не владелец заявки!', 'Заявка на роботу отозвана!', 'landlord');
         } else {
             return $this->patchStatus($request, $id, 'Отменён', 'Вы не владелец объявления!', 'Заявка на роботу отклонена!', 'employee');
@@ -71,12 +71,10 @@ class HouseholdServiceController extends Controller
             'Заявка на роботу принята!',
             'employee',
             function ($serviceOrder, $request, $messageError) {
-                $dialog = Dialog::create([
-                    'first_user_id' => $serviceOrder->employee->id,
-                    'second_user_id' => $serviceOrder->landlord->id,
-                    'type' => 'Робота',
-                    'household_service_order_id' => $serviceOrder->id
-                ]);
+                $dialog = Dialog::where("household_service_order_id", $serviceOrder->id)->first();
+                if(!$dialog) {
+                    $dialog = Dialog::create(['first_user_id' => $serviceOrder->employee->id, 'second_user_id' => $serviceOrder->landlord->id, 'type' => 'Робота', 'household_service_order_id' => $serviceOrder->id]);
+                }
                 $dialog->save();
                 return redirect()->route('dialog-show', ['id' => $dialog->id]);
             }
@@ -90,9 +88,9 @@ class HouseholdServiceController extends Controller
             'Принят',
             'Вы не участник сделки!',
             'Условия приняты!',
-            Auth::user()->role,
+            Auth::user()->role->name,
             function ($serviceOrder, $request, $messageError) {
-                if(Auth::user()->role === 'employee') {
+                if(Auth::user()->role->name === 'employee') {
                     $serviceOrder->employee_confirmation = 1;
                 } else {
                     $serviceOrder->landlord_confirmation = 1;

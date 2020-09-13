@@ -24,7 +24,7 @@ class FlatServiceOrder extends Model
 
     public function landlord()
     {
-        return $this->hasOneThrough('App\User', 'App\Flat');
+        return $this->flat->user();
     }
 
     public function dialogs()
