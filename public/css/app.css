@@ -386,7 +386,24 @@
     margin-bottom: 40px;
 }
 
+.cross {
+    position: absolute;
+    color: white;
+    right: 20px;
+    top: 0;
+    font-weight: 600;
+    font-size: 2rem;
+}
+
+.cross:hover {
+    cursor: pointer;
+    opacity: 0.8;
+}
+
 input:focus {
+    outline: none!important;
+}
+input.fco:focus {
     outline: none!important;
 }
 
@@ -974,7 +991,9 @@ textarea {
     width: 170px!important;
 }
 
-
+.personal-area-flat-save-order:hover{
+    opacity: 0.7;
+}
 
 
 
