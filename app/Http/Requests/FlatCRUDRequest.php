@@ -13,7 +13,7 @@ class FlatCRUDRequest extends FormRequest
      */
     public function authorize()
     {
-        return false;
+        return true;
     }
 
     /**
@@ -27,7 +27,7 @@ class FlatCRUDRequest extends FormRequest
             'street' => 'required|string|min:3|max:255',
             'city' => 'required|string|min:3|max:255',
             'house_number' => 'required|string|min:1|max:10',
-            'description' => 'required|text|min:10|max:5000',
+            'description' => 'required|string|min:3|max:5000',
             'price' => 'required|numeric|min:1|max:10000000',
             'floor' => 'required|integer|min:1|max:1000',
             'area' => 'required|integer|min:1|max:10000',
@@ -35,7 +35,7 @@ class FlatCRUDRequest extends FormRequest
             'number_of_rooms' => 'required|integer|min:1|max:1000',
             'type_of_premises' => 'required|in:Частный дом,Квартира,Комната',
             'rental_period' => 'required|in:Посуточно,Помесячно',
-            'photos.*' => 'required|image',
+            'photos.*' => 'image',
         ];
     }
 }

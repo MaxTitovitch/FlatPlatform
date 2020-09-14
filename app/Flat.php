@@ -107,11 +107,12 @@ class Flat extends Model
         }
     }
 
-    public function uploadImages($request, $isDelete = true) {
+    public function uploadImages(Request $request, $isDelete = true) {
         $files = $request->file('photos'); $arrayPhotos = [];
         if($request->hasFile('photos')) {
             foreach ($files as $file) {
-                $path = Storage::disk('public')->putFileAs("flats/{${date('FY')}}", $file,Str::random(20) . '.' . $file->extension());
+                $date = date('FY');
+                $path = Storage::disk('public')->putFileAs("flats/$date", $file,Str::random(20) . '.' . $file->extension());
                 $arrayPhotos[] = str_replace('public', '', $path);
             }
         }
@@ -125,15 +126,30 @@ class Flat extends Model
     }
 
     public function updateImages($request) {
-        $this->deleteImages();
         $this->uploadImages($request, false);
     }
 
-    public function deleteImages() {
+    public function deleteImages($id = null) {
         if($this->photos != '["flats\\\\default.png"]') {
             $files = json_decode($this->photos);
+            $i = 1;
             foreach ($files as $file) {
-                Storage::disk('public')->delete($file);
+                if($id === $i || $id === null) {
+                    if($id !== null) {
+                        array_splice ($files, $id-1, 1);
+                    }
+                    if($file !== 'flats\\\\default.png')
+                    Storage::disk('public')->delete($file);
+                }
+                $i++;
+            }
+            if($id !== null) {
+                $this->photos = json_encode($files);
+                $this->save();
+            }
+            if(count($files) === 0) {
+                $this->photos = json_encode(["flats\\\\default.png"]);
+                $this->save();
             }
         }
     }
