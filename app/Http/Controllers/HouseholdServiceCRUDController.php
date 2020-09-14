@@ -18,16 +18,18 @@ class HouseholdServiceCRUDController extends Controller
 
     public function create()
     {
-        return view('service-crud.create');
+        return view('service-crud.create', ['service' => null]);
     }
 
     public function store(HouseholdServiceCRUDRequest $request)
     {
-        $service = HouseholdService::create($request->all());
+        $data = $request->all();
+        $data['user_id'] = Auth::id();
+        $service = HouseholdService::create($data);
         $service->user_id = Auth::id();
         $service->save();
         Session::flash('status-success', 'Объявление создано!');
-        return redirect()->route('household_service.edit', ['service' => $service->id]);
+        return redirect()->route('household_services.edit', ['household_service' => $service->id]);
     }
 
     public function show(HouseholdService $householdService)
@@ -42,11 +44,13 @@ class HouseholdServiceCRUDController extends Controller
 
     public function update(HouseholdServiceCRUDRequest $request, HouseholdService $householdService)
     {
-        $householdService->update($request->all());
+        $data = $request->all();
+        $data['user_id'] = Auth::id();
+        $householdService->update($data);
         $householdService->user_id = Auth::id();
         $householdService->save();
         Session::flash('status-success', 'Объявление изменено!');
-        return redirect()->route('household_service.edit', ['service' => $householdService->id]);
+        return redirect()->route('household_services.edit', ['household_service' => $householdService->id]);
     }
 
     public function destroy(HouseholdService $householdService)
@@ -54,6 +58,6 @@ class HouseholdServiceCRUDController extends Controller
         dump($householdService);
         $householdService->delete();
         Session::flash('status-success', 'Объявление удалено!');
-        return redirect()->route('household_service.index');
+        return redirect()->route('household_services.index');
     }
 }

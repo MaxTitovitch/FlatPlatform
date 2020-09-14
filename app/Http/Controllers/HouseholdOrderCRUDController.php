@@ -23,9 +23,4 @@ class HouseholdOrderCRUDController extends Controller
         }
         return view('service-order.index', ['orders' => $orders]);
     }
-
-    public function show(HouseholdServiceOrder $householdServiceOrder)
-    {
-        return view('service-order.show', ['orders' => $householdServiceOrder]);
-    }
 }

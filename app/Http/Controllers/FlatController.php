@@ -148,7 +148,11 @@ class FlatController extends Controller
         } elseif($user->id !== $flatOrder->$userType->id) {
             $request->session()->flash('status-error', $messageError);
         } else {
-            $flatOrder->status = $status;
+            if($status == $flatOrder->status && ($status == 'Отклонён' || $status == 'Отозван')) {
+                $flatOrder->status = 'Создан';
+            } else {
+                $flatOrder->status = $status;
+            }
             $flatOrder->save();
             $request->session()->flash('status-success', $messageSuccess);
         }

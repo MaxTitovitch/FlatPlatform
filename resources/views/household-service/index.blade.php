@@ -8,16 +8,6 @@
     <div>
         <div class="container">
             <div class="row my-4">
-                @if (session('status-error'))
-                    <div class="alert alert-danger" role="alert">
-                        {{ session('status-error') }}
-                    </div>
-                @endif
-                @if (session('status-success'))
-                    <div class="alert alert-success" role="alert">
-                        {{ session('status-success') }}
-                    </div>
-                @endif
                 <div class="col-md-6 flat-id-up-title">
                     {{ $householdService->title . ", " . $householdService->city }}
                     <p class="font-18-px text-secondary">{{ $householdService->category->name }}</p>
@@ -69,6 +59,18 @@
                     </div>
 
             </div>
+                <div class="col-md-12 flat-id-up-title style-reset">
+                    @if (session('status-error'))
+                        <div class="alert alert-danger" role="alert">
+                            {{ session('status-error') }}
+                        </div>
+                    @endif
+                    @if (session('status-success'))
+                        <div class="alert alert-success" role="alert">
+                            {{ session('status-success') }}
+                        </div>
+                    @endif
+                </div>
         </div>
 
 
@@ -96,8 +98,7 @@
                             <div class="w-50">
                                 <div class="text-md-left ml-md-4 h-100">
                                     <span class="align-middle h-100 text-white ml-md-5 font-18-px">
-                                        <p>{{ $householdService->user->name }}</p>
-                                        <p>{{ $householdService->user->last_name }}</p>
+                                        <p>{{ $householdService->user->name }}<br>{{ $householdService->user->last_name }}</p>
                                     </span>
                                 </div>
                             </div>

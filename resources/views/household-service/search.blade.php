@@ -59,12 +59,11 @@
                 <div class="row flat-sort padding-side-5">
                     @php
                         $filter = [
+                            'query_string' => $request->query_string,
                             'city' => $request->city,
                             'price_start' => $request->price_start,
                             'price_end' => $request->price_end,
-                            'type_of_premises' => $request->type_of_premises,
-                            'rental_period' => $request->rental_period,
-                            'number_of_rooms' => $request->number_of_rooms,
+                            'category' => $request->category,
                         ]
                     @endphp
                     <div class="col-md-4 pt-2 pb-2 pathable-search text-center">

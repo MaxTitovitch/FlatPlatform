@@ -116,8 +116,8 @@
                     </div>
                     <div class="col-3 text-white">
                         <div class="mb-1 mt-1">Техническая поддержка:</div>
-                        <div class="mb-1"><i class="fa fa-phone" aria-hidden="true"></i> +7 (911) 000-00-00 </div>
-                        <div class="mb-1"><i class="fa fa-envelope-o" aria-hidden="true"></i> support@varenduru.ru</div>
+                        <div class="mb-1"><a class="text-white"  href="tel:+79771014767"><i class="fa fa-phone" aria-hidden="true"></i> +7(977)101-47-67 </a></div>
+                        <div class="mb-1"><a class="text-white"  href="mailto://varenduru@google.com"><i class="fa fa-envelope-o" aria-hidden="true"></i>varenduru@google.com</a></div>
                     </div>
                 </div>
             </div>
@@ -126,7 +126,7 @@
             <div class="container">
                 <div class="row">
                     <div class="text-white col-9">© «ВАРЕНДУРУ», 2020. Все права защищены</div>
-                    <div class="text-white col-3 link-style"><a href="{{ route('rules') }}">Правила использования сервиса</a></div>
+                    <div class="text-white col-3 link-style"><a href="{{ route('rules') }}">Правила сервиса</a></div>
                 </div>
             </div>
         </div>

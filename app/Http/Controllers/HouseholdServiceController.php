@@ -144,7 +144,11 @@ class HouseholdServiceController extends Controller
         } elseif($user->id !== $serviceOrder->$userType->id) {
             $request->session()->flash('status-error', $messageError);
         } else {
-            $serviceOrder->status = $status;
+            if($status == $serviceOrder->status && ($status == 'Отклонён' || $status == 'Отозван')) {
+                $serviceOrder->status = 'Создан';
+            } else {
+                $serviceOrder->status = $status;
+            }
             $serviceOrder->save();
             $request->session()->flash('status-success', $messageSuccess);
         }

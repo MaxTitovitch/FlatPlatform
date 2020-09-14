@@ -65,26 +65,72 @@
                 {{ $order->tenant->name . " " . $order->tenant->last_name}}
             </td>
             <td>
-                <form method="post" class="mt-md-1" action="{{ route('household_services.edit', ['household_service' => $order->id]) }}">
-                    @csrf
-                    <input type="hidden" name="_method" value="PATCH">
-                    <button class="py-md-1 text-decoration-none border border-success text-center btn-block text-success">
-                        Принять
-                    </button>
-                </form>
+                @if($order->status == 'Отменён' || $order->status == 'Отозван')
+                    <div class="rounded text-danger">{{ $order->status }}</div>
+                @elseif($order->status == 'Принят' || $order->status == 'Утверждён' || $order->status == 'Выполнен')
+                    <div class="rounded text-success">{{ $order->status }}</div>
+                @elseif($order->flat->status == 'Свободна')
+                    @if(Auth::id() !== $order->tenant_id)
+                        @if(Auth::id() === $order->flat->user_id)
+                            <div class="border border-primary rounded text-center"><a href="{{ route('dialog-flat-create', ['id' => $order->flat->id]) }}" class="text-primary">Написать</a></div>
+                        @else
+                            <div class="border border-primary rounded text-center"><a href="{{ route('dialog-create', ['id' => $order->tenant_id]) }}" class="text-primary">Написать</a></div>
+                        @endif
+                    @else
+                        <div class="border border-danger rounded text-center">
+                            <form action="{{ route('flat-reject-request', ['id' => $order->id], '_method=path') }}" method="post">
+                                @csrf
+                                <input type="hidden" name="_method" value="PATCH">
+                                <button type="submit" class="text-danger btn-nobtn">Отозвать</button>
+                            </form>
+                        </div>
+                    @endif
+                    @if(Auth::id() === $order->flat->user_id)
+                        @if($order->status === 'Создан')
 
-                <form method="post" class="mt-md-1" action="{{ route('household_services.edit', ['household_service' => $order->id]) }}">
-                    @csrf
-                    <input type="hidden" name="_method" value="PATCH">
-                    <button class="py-md-1 text-decoration-none border border-danger text-center btn-block text-danger">
-                        Отклонить
-                    </button>
-                </form>
+                            <div class="border border-success rounded text-center">
+                                <form action="{{ route('flat-accept-request', ['id' => $order->id, '_method=path']) }}" method="post">
+                                    @csrf
+                                    <input type="hidden" name="_method" value="PATCH">
+                                    <button type="submit" class="text-success btn-nobtn">Принять</button>
+                                </form>
+                                {{--                                                <a href="{{ route('flat-accept-request', ['id' => $order->id, '_method=path']) }}" class="text-success">Принять</a>--}}
+                            </div>
+                            <div class="border border-danger rounded text-center">
+                                <form action="{{ route('flat-reject-request', ['id' => $order->id, '_method=path']) }}" method="post">
+                                    @csrf
+                                    <input type="hidden" name="_method" value="PATCH">
+                                    <button type="submit" class="text-danger btn-nobtn">Отклонить</button>
+                                </form>
+                                {{--                                                <a href="{{ route('flat-reject-request', ['id' => $order->id, '_method=path']) }}" class="text-danger">Отклонить</a>--}}
+                            </div>
+                        @endif
+                    @endif
+                @endif
 
-                <a class="mt-md-1 py-md-1 text-decoration-none border border-primary text-center btn-block text-primary"
-                   href="{{ route('household_services.edit', ['household_service' => $order->id]) }}">
-                    Диалог
-                </a>
+
+
+
+{{--                <form method="post" class="mt-md-1" action="{{ route('household_services.edit', ['household_service' => $order->id]) }}">--}}
+{{--                    @csrf--}}
+{{--                    <input type="hidden" name="_method" value="PATCH">--}}
+{{--                    <button class="py-md-1 text-decoration-none border border-success text-center btn-block text-success">--}}
+{{--                        Принять--}}
+{{--                    </button>--}}
+{{--                </form>--}}
+
+{{--                <form method="post" class="mt-md-1" action="{{ route('household_services.edit', ['household_service' => $order->id]) }}">--}}
+{{--                    @csrf--}}
+{{--                    <input type="hidden" name="_method" value="PATCH">--}}
+{{--                    <button class="py-md-1 text-decoration-none border border-danger text-center btn-block text-danger">--}}
+{{--                        Отклонить--}}
+{{--                    </button>--}}
+{{--                </form>--}}
+
+{{--                <a class="mt-md-1 py-md-1 text-decoration-none border border-primary text-center btn-block text-primary"--}}
+{{--                   href="{{ route('household_services.edit', ['household_service' => $order->id]) }}">--}}
+{{--                    Диалог--}}
+{{--                </a>--}}
             </td>
         </tr>
     @endforeach
