@@ -1102,6 +1102,14 @@ textarea {
     width: 4px;
 }
 
+.summary {
+    text-align: center;
+    color: #004182;
+}
+.summary:hover {
+    cursor: pointer;
+}
+
 .message-time{
     font-size: 11px!important;
     margin-top: 5px;
