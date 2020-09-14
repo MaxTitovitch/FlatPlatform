@@ -24,8 +24,9 @@ class FlatCRUDController extends Controller
 
     public function store(FlatCRUDRequest $request)
     {
-        $flat = Flat::create($request->all());
-        $flat->user_id = Auth::id();
+        $data = $request->except('photos');
+        $data['user_id'] = Auth::id();
+        $flat = Flat::create($data);
         $flat->uploadImages($request);
         $flat->save();
         Session::flash('status-success', 'Объявление создано!');
@@ -47,7 +48,9 @@ class FlatCRUDController extends Controller
 
     public function update(FlatCRUDRequest $request, Flat $flat)
     {
-        $flat->update($request->all());
+        $data = $request->except('photos');
+        $data['user_id'] = Auth::id();
+        $flat->update($data);
         $flat->updateImages($request);
         $flat->user_id = Auth::id();
         $flat->save();
