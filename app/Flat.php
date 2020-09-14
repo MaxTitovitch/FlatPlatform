@@ -129,11 +129,22 @@ class Flat extends Model
         $this->uploadImages($request, false);
     }
 
-    public function deleteImages() {
+    public function deleteImages($id = null) {
         if($this->photos != '["flats\\\\default.png"]') {
             $files = json_decode($this->photos);
+            $i = 1;
             foreach ($files as $file) {
-                Storage::disk('public')->delete($file);
+                if($id === $i || $id === null) {
+                    if($id !== null) {
+                        array_splice ($files, $id-1, 1);
+                    }
+                    Storage::disk('public')->delete($file);
+                }
+                $i++;
+            }
+            if($id !== null) {
+                $this->photos = json_encode($files);
+                $this->save();
             }
         }
     }

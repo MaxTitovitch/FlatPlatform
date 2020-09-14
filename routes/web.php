@@ -82,6 +82,7 @@ Route::middleware(['auth', 'verified'])->group(function () {
     Route::put('/home', 'HomeController@updateUser')->name('home-update');
     Route::middleware(['passport'])->group(function () {
         Route::resource('/home/flats', 'FlatCRUDController')->middleware('authorization:landlord');
+        Route::delete('/home/flats/{id}/photo/{photo}', 'FlatCRUDController@deletePhoto')->middleware('authorization:landlord')->name('flats.photo-delete');
         Route::resource('/home/household_services', 'HouseholdServiceCRUDController')->middleware('authorization:employee');
         Route::resource('/home/orders', 'FlatOrderCRUDController')->only(['index', 'show'])->middleware('authorization:tenant,landlord');
         Route::resource('/home/service-orders', 'HouseholdOrderCRUDController')->only(['index', 'show'])->middleware('authorization:landlord,employee');

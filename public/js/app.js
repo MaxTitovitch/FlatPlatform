@@ -17,3 +17,4 @@ if(sidebar.length > 0) {
 $('.br-50').toArray().forEach(el => {
   $(el).css({'height': $(el).css('width')});
 });
+

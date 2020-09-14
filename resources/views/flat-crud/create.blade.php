@@ -3,12 +3,24 @@
 @section('personal-content')
     <div class="container">
         <div class="text-left mt-md-3 ">
-            <h1>Редактирование объявления</h1>
+            <h1>
+                @if($flat === null)
+                    Создать объявление
+                @else
+                    Редактирование объявления
+                @endif
+            </h1>
         </div>
 
         <div class="personal-area-flats">
-            <form action="">
-
+            <form enctype="multipart/form-data"  action="{{ $flat === null ? route('flats.store') : route('flats.update', ['flat' => $flat->id]) }}" method="POST">
+                @csrf
+                @if($flat !== null)
+                    <input type="hidden" name="_method" value="PUT">
+                @endif
+                @if($flat === null)
+                    @php($flat = new \App\Flat())
+                @endif
                 <div class="row mt-md-5">
                     <div class="col-md-6 ">
                         <select name="type_of_premises" id="" class="w-100 form-control ">
@@ -110,22 +122,33 @@
                         </span>
                 @enderror
 
-                <div class="row">
+                <div class="row img-row">
                     @php($photos = explode("\"", $flat->photos))
                     @for($i = 0; $i < count($photos); $i++)
                         @if($i % 2 == 1)
                             <div class="new-flat-main-one col-lg-4 col-xl-4 col-12 col-sm-12 slick-slide-break">
-                                <div class="flat-main-img p-2">
+                                <div class="flat-main-img p-2 cross-click">
+                                    <section data-action="{{ route('flats.photo-delete', ['id' => $flat->id, 'photo' => ($i+1) / 2]) }}">
+                                        @csrf
+                                        <input type="hidden" name="_method" value="DELETE">
+                                    </section>
                                     <span class="cross">x</span>
                                     <img src="{{asset("/storage/".$photos[$i])}}" alt="">
                                 </div>
                             </div>
                         @endif
                     @endfor
+                    <div class="display-none template-div new-flat-main-one col-lg-4 col-xl-4 col-12 col-sm-12 slick-slide-break">
+                        <div class="flat-main-img p-2 cross-click">
+                            <section class="none-section"></section>
+                            <span class="cross">x</span>
+                            <img src="" alt="">
+                        </div>
+                    </div>
                 </div>
 
                 <div class="row justify-content-md-between my-md-4">
-                    <button type="button" class=" btn btn-outline-secondary">Загрузить фото</button>
+                    <button type="button" class="multiple-btn btn btn-outline-secondary">Загрузить фото</button>
                     <div class="" style="display: flex">
                         <span class="align-middle h-100 mt-md-1 mr-md-2">Р </span>
                           <input name="price" class="form-control w-100  @error('price') is-invalid @enderror"
@@ -138,10 +161,11 @@
                         </span>
                 @enderror
 
+                <input type="file" class="display-none multiple-files" multiple accept=".jpg, .jpeg, .png, .gif">
+
                 <div class="row justify-content-center my-md-4 personal-area-flat-save-order">
                     <div class="color-bg-dark-blue">
-                        <button  class="form-control color-bg-dark-blue text-white w-100  px-md-5"
-                               type="submit" >Сохранить объявление
+                        <button class="form-control color-bg-dark-blue text-white w-100  px-md-5" type="submit" >Сохранить объявление
                         </button>
                     </div>
                 </div>
@@ -149,4 +173,8 @@
             </form>
         </div>
     </div>
+@endsection
+
+@section('scripts')
+    <script src="{{ asset('js/cruder.js') }}"></script>
 @endsection

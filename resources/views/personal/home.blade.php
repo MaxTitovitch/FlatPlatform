@@ -117,8 +117,8 @@
                 </div>
                 @error('password_confirmation')
                 <span class="invalid-feedback-home" role="alert">
-                            <strong>{{ $message }}</strong>
-                        </span>
+                    <strong>{{ $message }}</strong>
+                </span>
                 @enderror
                 <button type="submit" class="color-bg-dark-blue w-100">
                     <span class="btn text-white btn-block">СОХРАНИТЬ</span>

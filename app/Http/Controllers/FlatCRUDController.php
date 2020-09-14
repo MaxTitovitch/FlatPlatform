@@ -18,7 +18,7 @@ class FlatCRUDController extends Controller
 
     public function create()
     {
-        return view('flat-crud.create');
+        return view('flat-crud.create', ['flat' => null]);
     }
 
 
@@ -62,5 +62,15 @@ class FlatCRUDController extends Controller
         $flat->delete();
         Session::flash('status-success', 'Объявление удалено!');
         return redirect()->route('flats.index');
+    }
+
+    public function deletePhoto($id, $photo) {
+        $flat = Flat::find($id);
+        if($flat->user_id == Auth::id()) {
+            Flat::find($id)->deleteImages((int)$photo);
+            return 'success';
+        } else {
+            return 'error';
+        }
     }
 }
