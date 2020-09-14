@@ -1114,6 +1114,10 @@ textarea {
     word-wrap:  break-word;
 }
 
+.dialog-p {
+    max-height: 10vh;
+    overflow: hidden;
+}
 
 
 

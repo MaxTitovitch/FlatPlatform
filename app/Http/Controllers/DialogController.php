@@ -19,7 +19,7 @@ class DialogController extends Controller
         if($viewName === 'dialog.admin-list') {
             $dialogs = $dialogs->where('type', 'Поддержка');
         } else {
-            $dialogs = $dialogs->where("first_user_id", Auth::id())->where("second_user_id", Auth::id());
+            $dialogs = $dialogs->where("first_user_id", Auth::id())->orWhere("second_user_id", Auth::id());
         }
 
         $dialogs = $dialogs->having('messages_count', '>', 0)->paginate(20);
