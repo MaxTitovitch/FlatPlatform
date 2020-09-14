@@ -248,8 +248,8 @@
 
 .new-advantage-main-img img{
 
-    max-height: 7vh;
-    min-height: 7vh;
+    max-height: 6vh;
+    min-height: 6vh;
 }
 
 .new-advantage-main-img{
@@ -260,15 +260,15 @@
 
 .count span{
     width: 100%;
-    font-size: 28px;
+    font-size: 26px;
     color: #004182;
     font-weight: bold;
 }
 
 .advantage-description span{
     font-weight: 500;
-    font-size: 15px;
-    line-height: 28px;
+    font-size: 18px;
+    line-height: 22px;
     display: flex;
     align-items: center;
     text-align: center;
@@ -881,11 +881,15 @@ textarea {
 }
 
 .connect-owner>span{
-    font-size: 22px;
+    font-size: 20px;
+}
+.connect-owner img{
+    border: 1px solid;
 }
 
 .connect-owner{
-    background-color: #004182;
+    box-shadow: 0 4px 8px rgba(0, 0, 0);
+    background: linear-gradient(180deg, #118DF0 0%, #118DF0 0%, #004182 0.01%, #118DF0 100%), #FFFFFF;
 }
 
 .datepicker-days {

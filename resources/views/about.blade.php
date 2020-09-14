@@ -50,7 +50,7 @@
                             <strong>
                                 Электронная почта:
                             </strong> <br>
-                            <a class="link-black" href="mailto://support@varenduru.ru">support@varenduru.ru</a>
+                            <a class="link-black" href="mailto://varenduru@google.com">varenduru@google.com</a>
                         </div>
                     </div>
                     <div class="about-phone mt-2">
@@ -144,9 +144,5 @@
                 </div>
             </div>
         </div>
-
     </div>
-
-
-
 @endsection

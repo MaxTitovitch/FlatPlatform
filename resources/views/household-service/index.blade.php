@@ -98,8 +98,7 @@
                             <div class="w-50">
                                 <div class="text-md-left ml-md-4 h-100">
                                     <span class="align-middle h-100 text-white ml-md-5 font-18-px">
-                                        <p>{{ $householdService->user->name }}</p>
-                                        <p>{{ $householdService->user->last_name }}</p>
+                                        <p>{{ $householdService->user->name }}<br>{{ $householdService->user->last_name }}</p>
                                     </span>
                                 </div>
                             </div>

@@ -25,15 +25,15 @@
             </div>
             <div class="messages">
                 <div class="first-user-message row mt-md-2  text-white">
-                        <span class="bg-primary px-md-2 border rounded">
-                            {{ $dialog->messages->last()->message }}
-                        </span>
+{{--                        <span class="bg-primary px-md-2 border rounded">--}}
+{{--                            {{ $dialog->messages->last()->message }}--}}
+{{--                        </span>--}}
                     {{--                        {{ Auth::id() == $message->user_id }}--}}
                 </div>
                 <div class="second-user-message row mt-md-2  text-white float-right" style="margin-right: 15px;">
-                        <span class="color-bg-dark-blue px-md-2 border rounded">
-                            {{ $dialog->messages->last()->message }}
-                        </span>
+{{--                        <span class="color-bg-dark-blue px-md-2 border rounded">--}}
+{{--                            {{ $dialog->messages->last()->message }}--}}
+{{--                        </span>--}}
                 </div>
             </div>
         </div>
