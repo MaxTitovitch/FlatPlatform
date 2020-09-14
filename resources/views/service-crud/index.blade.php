@@ -1,19 +1,28 @@
 @extends('layouts.personal')
 
 @section('personal-content')
-{{--    <div>--}}
-{{--        @dd($services)--}}
-{{--    </div>--}}
-
-
     <div class="mt-md-3">
         <h1>Хозпредложения</h1>
     </div>
 
     <div class="mt-md-4">
-        <a href="{{ route('services.create') }}" class="personal-area-flats-plus color-bg-dark-blue text-white px-md-5 py-md-1">
+        <a href="{{ route('household_services.create') }}" class="personal-area-flats-plus color-bg-dark-blue text-white px-md-5 py-md-1">
             Добавить объявление
         </a>
+    </div>
+
+    <div class="mt-md-4 style-reset">
+
+        @if (session('status-error'))
+            <div class="alert alert-danger" role="alert">
+                {{ session('status-error') }}
+            </div>
+        @endif
+        @if (session('status-success'))
+            <div class="alert alert-success" role="alert">
+                {{ session('status-success') }}
+            </div>
+        @endif
     </div>
 
     <table class="table mt-md-3">
@@ -37,12 +46,12 @@
                 <td>{{ $service->price }} P</td>
                 <td style="max-width: 300px">{{ $service->description }}</td>
                 <td>
-                    <a href="{{ route('services.edit', ['service' => $service->id]) }}" class="py-md-1 text-decoration-none border border-warning text-center btn-block text-warning">
+                    <a href="{{ route('household_services.edit', ['household_service' => $service->id]) }}" class="py-md-1 text-decoration-none border border-warning text-center btn-block text-warning">
                         <i class="fa fa-pencil" aria-hidden="true"></i> Редактировать
                     </a>
-                    <form action="{{ route('services.destroy', ['service' => $service->id], '_method=path') }}" method="post" class="py-md-1 border border-danger text-center btn-block">
+                    <form action="{{ route('household_services.destroy', ['household_service' => $service->id]) }}" method="post" class="py-md-1 border border-danger text-center btn-block">
                         @csrf
-                        <input type="hidden" name="_method" value="PATCH">
+                        <input type="hidden" name="_method" value="DELETE">
                         <button type="submit" class="text-danger btn-nobtn "><i class="fa fa-trash" aria-hidden="true"></i> Удалить</button>
                     </form>
                 </td>

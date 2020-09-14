@@ -107,12 +107,18 @@ class Flat extends Model
         }
     }
 
-    public function uploadImages($request) {
+    public function uploadImages($request, $isDelete = true) {
         $files = $request->file('photos'); $arrayPhotos = [];
         if($request->hasFile('photos')) {
             foreach ($files as $file) {
-                $path = Storage::disk('public')->putFile("flats/{${date('FY')}}", Str::random(20) . '.' . $file->extension());
+                $path = Storage::disk('public')->putFileAs("flats/{${date('FY')}}", $file,Str::random(20) . '.' . $file->extension());
                 $arrayPhotos[] = str_replace('public', '', $path);
+            }
+        }
+        if(!$isDelete) {
+            if($this->photos != '["flats\\\\default.png"]') {
+                $photosLast = json_decode($this->photos);
+                $arrayPhotos = array_merge($photosLast, $arrayPhotos);
             }
         }
         $this->photos = json_encode($arrayPhotos);
@@ -120,13 +126,15 @@ class Flat extends Model
 
     public function updateImages($request) {
         $this->deleteImages();
-        $this->uploadImages($request);
+        $this->uploadImages($request, false);
     }
 
     public function deleteImages() {
-        $files = json_decode($this->photos);
-        foreach ($files as $file) {
-            Storage::delete("{${env('APP_URL')}}/storage/public/flats/$file");
+        if($this->photos != '["flats\\\\default.png"]') {
+            $files = json_decode($this->photos);
+            foreach ($files as $file) {
+                Storage::disk('public')->delete($file);
+            }
         }
     }
 

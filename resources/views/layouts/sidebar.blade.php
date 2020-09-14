@@ -1,6 +1,6 @@
 
 
-<div class="border-right border-primary h-100 font-18-px" id="super-height">
+<div class="border-right border-primary h-100 font-18-px pt-3" id="super-height">
     <div class="">
         <a href="{{ route('home') }}" class="icons-sidebar">
             <svg id="Outline" viewBox="0 0 512 512" xmlns="http://www.w3.org/2000/svg">
@@ -16,6 +16,7 @@
             Диалоги
         </a>
     </div>
+    @if(Auth::user()->role->name == 'landlord')
     <div class="">
         <a href="{{ route('flats.index') }}" class="icons-sidebar">
             <svg width="20" height="20" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg">
@@ -34,8 +35,10 @@
             Сдача недвижимости
         </a>
     </div>
+    @endif
+    @if(Auth::user()->role->name == 'employee')
     <div class="">
-        <a href="{{ route('services.index') }}" class="icons-sidebar">
+        <a href="{{ route('household_services.index') }}" class="icons-sidebar">
             <svg width="20" height="20" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg">
                 <g clip-path="url(#clip0)">
                     <path d="M10.5612 19.4141H1.75703C1.48824 19.4141 1.26953 19.1954 1.26953 18.9266V3.74506C1.26953 3.58326 1.13836 3.45209 0.976562 3.45209C0.814766 3.45209 0.683594 3.58326 0.683594 3.74506V18.9266C0.683594 19.5185 1.16516 20 1.75703 20H10.5612C10.723 20 10.8542 19.8688 10.8542 19.707C10.8542 19.5453 10.723 19.4141 10.5612 19.4141Z"/>
@@ -53,6 +56,8 @@
             Хозпредложения
         </a>
     </div>
+    @endif
+    @if(Auth::user()->role->name == 'landlord' || Auth::user()->role->name == 'tenant')
     <div class="">
         <a href="{{ route('orders.index') }}" class="icons-sidebar">
             <svg width="20" height="20" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg">
@@ -75,10 +80,11 @@
                     </clipPath>
                 </defs>
             </svg>
-
             Заказы на квартиры
         </a>
     </div>
+    @endif
+    @if(Auth::user()->role->name == 'landlord' || Auth::user()->role->name == 'employee')
     <div class="">
         <a href="{{ route('service-orders.index') }}" class="icons-sidebar">
             <svg width="20" height="20" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg">
@@ -100,8 +106,8 @@
                     </clipPath>
                 </defs>
             </svg>
-
             Заявки на хозработы
         </a>
     </div>
+    @endif
 </div>

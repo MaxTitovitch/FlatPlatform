@@ -5,15 +5,15 @@
         <h1>Диалоги</h1>
     </div>
 
-    @foreach($dialogs as $dialog)
-        <div class="row dialog-list-one my-md-4 href-dialog" data-href="{{ route('dialog-show', ['id' => $dialog->id]) }}">
+    @forelse($dialogs as $dialog)
+        <div class="row dialog-list-one my-md-4 href-dialog" data-href="{{ route($route, ['id' => $dialog->id]) }}">
             <div class="col-md-2 h-100">
                 @if($dialog->first_user_id === Auth::id())
                     @php($otherUser = $dialog->second_user)
                 @else
                     @php($otherUser = $dialog->first_user)
                 @endif
-                <a href="{{ route('dialog-show', ['id' => $dialog->id]) }}">
+                <a href="{{ route($route, ['id' => $dialog->id]) }}">
                     @if($dialog->type === 'Поддержка')
                         <img src="{{ asset('img/avatar.png') }}" alt="" class="rounded-circle w-100 h-100">
                     @else
@@ -23,7 +23,7 @@
             </div>
             <div class="col-md-9">
                 <p>
-                    <a href="{{ route('dialog-show', ['id' => $dialog->id]) }}" class="color-dark-blue font-18-px font-weight-bold">
+                    <a href="{{ route($route, ['id' => $dialog->id]) }}" class="color-dark-blue font-18-px font-weight-bold">
                         @if($dialog->type === 'Поддержка')
                             Варендуру - Техподдержка
                         @else
@@ -31,7 +31,7 @@
                         @endif
                     </a>
                     <br>
-                    <a href="{{ route('dialog-show', ['id' => $dialog->id]) }}" class="text-decoration-none text-dark">{{ $dialog->messages->last()->message }}</a>
+                    <a href="{{ route($route, ['id' => $dialog->id]) }}" class="text-decoration-none text-dark">{{ $dialog->messages->last()->message }}</a>
                 </p>
             </div>
             <div class="col-md-1">
@@ -41,7 +41,9 @@
                 </span>
             </div>
         </div>
-    @endforeach
+    @empty
+        <h2 class="mt-5 text-secondary text-center">У Вас ещё нет диалогов</h2>
+    @endforelse
 
     <div class="row justify-content-center mb-2 mt-4">
         {{ $dialogs->links() }}

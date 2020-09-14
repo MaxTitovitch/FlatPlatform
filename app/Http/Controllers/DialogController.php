@@ -10,8 +10,6 @@ use App\Message;
 use App\Http\Requests\MessageRequest;
 use App\FlatServiceOrder;
 use App\HouseholdServiceOrder;
-use App\HouseholdService;
-use App\Flat;
 
 class DialogController extends Controller
 {
@@ -25,7 +23,7 @@ class DialogController extends Controller
         }
 
         $dialogs = $dialogs->having('messages_count', '>', 0)->paginate(20);
-        return view($viewName, ['dialogs' => $dialogs]);
+        return view($viewName, ['dialogs' => $dialogs, 'route' => $request->route()->getName() == "admin-dialog-list" ? 'admin-dialog-show' : 'dialog-show' ]);
     }
 
     public function show(Request $request, $id) {

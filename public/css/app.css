@@ -125,6 +125,7 @@
 
 .slick-arrow:hover{
     color: rgba(0, 65, 130, 0.4);
+    cursor: pointer;
 }
 
 .arrow-next{
@@ -168,6 +169,10 @@
 
 .text-grey {
     color: gray;
+}
+
+.new-household-main-one {
+    padding: 0!important;
 }
 
 .new-household-main-img img{
@@ -664,6 +669,15 @@ input.fco:focus {
     width: 100%;
 }
 
+.overflow-x-auto {
+    overflow-x: auto;
+}
+
+@media (min-width: 1024px) {
+    .container {
+        max-width: 1000px!important;
+    }
+}
 
 .dialog-support:hover {
     text-decoration: none;
@@ -715,7 +729,7 @@ textarea {
 
 .flat-sort div{
     border: 1px solid rgba(0, 65, 130, 0.5);
-    font-size: 18px;
+    font-size: 14px;
     color: #004182;
 }
 

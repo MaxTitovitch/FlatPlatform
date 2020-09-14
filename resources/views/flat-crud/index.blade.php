@@ -1,7 +1,6 @@
 @extends('layouts.personal')
 
 @section('personal-content')
-
     <div class="mt-md-3">
         <h1>Сдача недвижимости в аренду</h1>
     </div>
@@ -11,6 +10,16 @@
             Добавить объявление
         </a>
     </div>
+    @if (session('status-error'))
+        <div class="alert alert-danger" role="alert">
+            {{ session('status-error') }}
+        </div>
+    @endif
+    @if (session('status-success'))
+        <div class="alert alert-success" role="alert">
+            {{ session('status-success') }}
+        </div>
+    @endif
 
     <table class="table mt-md-3">
         <thead>
@@ -37,9 +46,9 @@
                     <a href="{{ route('flats.edit', ['flat' => $flat->id]) }}" class="py-md-1 text-decoration-none border border-warning text-center btn-block text-warning">
                         <i class="fa fa-pencil" aria-hidden="true"></i> Редактировать
                     </a>
-                    <form action="{{ route('flats.destroy', ['flat' => $flat->id], '_method=path') }}" method="post" class="py-md-1 border border-danger text-center btn-block">
+                    <form action="{{ route('flats.destroy', ['flat' => $flat->id]) }}" method="post" class="py-md-1 border border-danger text-center btn-block">
                         @csrf
-                        <input type="hidden" name="_method" value="PATCH">
+                        <input type="hidden" name="_method" value="DELETE">
                         <button type="submit" class="text-danger btn-nobtn "><i class="fa fa-trash" aria-hidden="true"></i> Удалить</button>
                     </form>
                 </td>

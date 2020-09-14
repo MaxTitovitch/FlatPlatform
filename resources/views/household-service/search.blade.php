@@ -98,9 +98,9 @@
                         @break(!$householdServices[$i])
                         <div class="new-household-main-one col-md-6">
                             <div class="row">
-                                <div class="new-household-main-img mt-3 col-md-5">
+                                <div class="new-household-main-img col-md-5">
                                     <a href="{{ route('household-service-page', [$householdServices[$i]->id]) }}">
-                                        <img src="{{asset('/storage/' . $householdServices[$i]->user->avatar)}}" alt="">
+                                        <img class="w-100 br-50" src="{{asset('/storage/' . $householdServices[$i]->user->avatar)}}" alt="">
                                     </a>
                                 </div>
                                 <div class="col-md-7">
@@ -139,9 +139,9 @@
                 @break(!$householdServices[$i])
                     <div class="new-household-main-one col-md-4">
                         <div class="row">
-                            <div class="new-household-main-img mt-3 col-md-5">
+                            <div class="new-household-main-img col-md-5">
                                 <a href="{{ route('household-service-page', [$householdServices[$i]->id]) }}">
-                                    <img src="{{asset('/storage/' . $householdServices[$i]->user->avatar)}}" alt="">
+                                    <img class="w-100 br-50" src="{{asset('/storage/' . $householdServices[$i]->user->avatar)}}" alt="">
                                 </a>
                             </div>
                             <div class="col-md-7">
