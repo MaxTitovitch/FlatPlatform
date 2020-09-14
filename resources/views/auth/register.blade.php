@@ -210,16 +210,16 @@
                             </div>
                             <div class="socialite-register mt-4 ">
                                 <div class="row justify-content-center">
-                                    <a href="{{ route('socialite.auth', ['provider' => 'facebook']) }}" class="mr-5 btn btn-light">
+                                    <a href="{{ route('socialite.auth', ['provider' => 'facebook']) }}" class="mr-2 btn btn-light">
                                         <i class="fa fa-2x fa-facebook" aria-hidden="true"></i>
                                     </a>
-                                    <a href="{{ route('socialite.auth', ['provider' => 'google']) }}" class=" btn btn-light">
+                                    <a href="{{ route('socialite.auth', ['provider' => 'google']) }}" class="mr-2 btn btn-light">
                                         <i class="fa fa-2x fa-google" aria-hidden="true"></i>
                                     </a>
-                                    <a href="{{ route('socialite.auth', ['provider' => 'instagram']) }}" class="ml-5 btn btn-light">
+                                    <a href="{{ route('socialite.auth', ['provider' => 'instagram']) }}" class="mr-2 btn btn-light">
                                         <i class="fa fa-2x fa-instagram" aria-hidden="true"></i>
                                     </a>
-                                    <a href="{{ route('socialite.auth', ['provider' => 'telegram']) }}" class="ml-5 btn btn-light">
+                                    <a href="{{ route('socialite.auth', ['provider' => 'telegram']) }}" class="mr-2 btn btn-light">
                                         <i class="fa fa-2x fa-telegram" aria-hidden="true"></i>
                                     </a>
                                 </div>

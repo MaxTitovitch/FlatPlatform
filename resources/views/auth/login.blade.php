@@ -65,16 +65,16 @@
                             <div class="socialite mt-4 ">
                                 <p class=" w-100 text-center mb-3">Или войти через соцсети</p>
                                 <div class="row justify-content-center">
-                                    <a href="{{ route('socialite.auth', ['provider' => 'facebook']) }}" class="mr-5 btn btn-light">
+                                    <a href="{{ route('socialite.auth', ['provider' => 'facebook']) }}" class="mr-2 btn btn-light">
                                         <i class="fa fa-2x fa-facebook bg-white" aria-hidden="true"></i>
                                     </a>
-                                    <a href="{{ route('socialite.auth', ['provider' => 'google']) }}" class=" btn btn-light">
+                                    <a href="{{ route('socialite.auth', ['provider' => 'google']) }}" class="mr-2 btn btn-light">
                                         <i class="fa fa-2x fa-google bg-white" aria-hidden="true"></i>
                                     </a>
-                                    <a href="{{ route('socialite.auth', ['provider' => 'instagram']) }}" class="ml-5 btn btn-light">
+                                    <a href="{{ route('socialite.auth', ['provider' => 'instagram']) }}" class="mr-2 btn btn-light">
                                         <i class="fa fa-2x fa-instagram bg-white" aria-hidden="true"></i>
                                     </a>
-                                    <a href="{{ route('socialite.auth', ['provider' => 'telegram']) }}" class="ml-5 btn btn-light">
+                                    <a href="{{ route('socialite.auth', ['provider' => 'telegram']) }}" class="mr-2 btn btn-light">
                                         <i class="fa fa-2x fa-telegram bg-white" aria-hidden="true"></i>
                                     </a>
                                 </div>
