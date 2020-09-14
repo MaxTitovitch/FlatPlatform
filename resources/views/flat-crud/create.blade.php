@@ -125,7 +125,7 @@
                 </div>
 
                 <div class="row justify-content-md-between my-md-4">
-                    <div class="font-weight-bold ">Загрузить фото</div>
+                    <button type="button" class=" btn btn-outline-secondary">Загрузить фото</button>
                     <div class="" style="display: flex">
                         <span class="align-middle h-100 mt-md-1 mr-md-2">Р </span>
                           <input name="price" class="form-control w-100  @error('price') is-invalid @enderror"

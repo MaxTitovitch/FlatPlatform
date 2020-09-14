@@ -1009,7 +1009,11 @@ textarea {
     opacity: 0.7;
 }
 
-
+.btn-outline-secondary:hover {
+    color: black!important;
+    background-color: white!important;
+    border-color: black!important;
+}
 
 
 
