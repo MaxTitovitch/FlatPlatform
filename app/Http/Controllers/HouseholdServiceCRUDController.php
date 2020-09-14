@@ -27,7 +27,7 @@ class HouseholdServiceCRUDController extends Controller
         $service->user_id = Auth::id();
         $service->save();
         Session::flash('status-success', 'Объявление создано!');
-        return redirect()->route('services.edit', ['service' => $service->id]);
+        return redirect()->route('household_service.edit', ['service' => $service->id]);
     }
 
     public function show(HouseholdService $householdService)
@@ -46,13 +46,14 @@ class HouseholdServiceCRUDController extends Controller
         $householdService->user_id = Auth::id();
         $householdService->save();
         Session::flash('status-success', 'Объявление изменено!');
-        return redirect()->route('services.edit', ['service' => $householdService->id]);
+        return redirect()->route('household_service.edit', ['service' => $householdService->id]);
     }
 
     public function destroy(HouseholdService $householdService)
     {
+        dump($householdService);
         $householdService->delete();
         Session::flash('status-success', 'Объявление удалено!');
-        return redirect()->route('services.index');
+        return redirect()->route('household_service.index');
     }
 }

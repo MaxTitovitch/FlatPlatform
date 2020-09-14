@@ -10,8 +10,6 @@ use App\Message;
 use App\Http\Requests\MessageRequest;
 use App\FlatServiceOrder;
 use App\HouseholdServiceOrder;
-use App\HouseholdService;
-use App\Flat;
 
 class DialogController extends Controller
 {

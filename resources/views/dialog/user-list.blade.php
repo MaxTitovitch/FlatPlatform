@@ -4,7 +4,7 @@
     @include('dialog.part.list',  ['dialogs' => $dialogs, 'section' => 'personal-content'])
 @endsection
 
-@section('main-class') col-md-8 @endsection
+@section('main-class') col-md-7 @endsection
 
 @section('right-bar')
     <div class="col-md-2">

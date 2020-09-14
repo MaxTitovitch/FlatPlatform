@@ -9,10 +9,10 @@
 
     <div class="container-fluid">
         <div class="row">
-            <div class="col-md-2">
+            <div class="col-md-3">
                 @include('layouts.sidebar')
             </div>
-            <div class="@section('main-class') col-md-10 @show">
+            <div class="@section('main-class') col-md-9 @show overflow-x-auto">
                 @yield('personal-content')
             </div>
             @section('right-bar')

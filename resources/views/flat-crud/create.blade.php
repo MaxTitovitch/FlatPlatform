@@ -1,7 +1,6 @@
 @extends('layouts.personal')
 
 @section('personal-content')
-    @dump($flat)
     <div class="container">
         <div class="text-left mt-md-3 ">
             <h1>Редактирование объявления</h1>
