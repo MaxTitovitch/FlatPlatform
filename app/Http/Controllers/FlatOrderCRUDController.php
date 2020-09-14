@@ -22,9 +22,4 @@ class FlatOrderCRUDController extends Controller
         }
         return view('order.index', ['orders' => $orders]);
     }
-
-    public function show(FlatServiceOrder $flatServiceOrder)
-    {
-        return view('order.show', ['orders' => $flatServiceOrder]);
-    }
 }

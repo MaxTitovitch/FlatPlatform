@@ -1,38 +1,58 @@
 @extends('layouts.personal')
 
 @section('personal-content')
-    {{--    <div>--}}
-    {{--        @dd($service)--}}
-    {{--    </div>--}}
-
     <div class="container">
         <div class="text-left mt-md-3 ">
-            <h1>Редактирование объявления</h1>
+            <h1>
+                @if($service === null)
+                    Создать объявление
+                @else
+                    Редактирование объявления
+                @endif
+            </h1>
         </div>
 
         <div class="personal-area-flats">
-            <form action="">
-
+            <form class="style-reset" action="{{ $service === null ? route('household_services.store') : route('household_services.update', ['household_service' => $service->id]) }}" method="POST">
+                @if (session('status-error'))
+                    <div class="alert alert-danger" role="alert">
+                        {{ session('status-error') }}
+                    </div>
+                @endif
+                @if (session('status-success'))
+                    <div class="alert alert-success" role="alert">
+                        {{ session('status-success') }}
+                    </div>
+                @endif
+                @csrf
+                @if($service !== null)
+                    <input type="hidden" name="_method" value="put">
+                @endif
+                @if($service === null)
+                    @php($service = new \App\HouseholdService())
+                @endif
                 <div class="row mt-md-5">
                     <div class="col-md-6 ">
                         <div class="">
-                            <input name="title" class="form-control w-100  @error('city') is-invalid @enderror" type="text"
+                            <input name="title" class="form-control w-100  @error('title') is-invalid @enderror" type="text"
                                    placeholder="Введите заголовок" value="{{ $service->title }}" required>
                         </div>
-                        @error('city')
+                        @error('title')
                         <span class="invalid-feedback-home" role="alert">
                             <strong>{{ $message }}</strong>
                         </span>
                         @enderror
                     </div>
                     <div class="col-md-6">
-                        <select name="category" id="" class="w-100  form-control">
-                            <option {{ $service->category->name == 'Сантехника'? 'selected' : '' }}>Сантехника</option>
-                            <option {{ $service->category->name == 'Электрика'? 'selected' : '' }}>Электрика</option>
-                            <option {{ $service->category->name == 'Уборка'? 'selected' : '' }}>Уборка</option>
-                            <option {{ $service->category->name == 'Помощь по дому'? 'selected' : '' }}>Помощь по дому</option>
-                            <option {{ $service->category->name == 'Работа с газом'? 'selected' : '' }}>Работа с газом</option>
-                            <option {{ $service->category->name == 'Дезинфекция'? 'selected' : '' }}>Дезинфекция</option>
+                        <select name="household_service_category_id" id="" class="w-100  form-control">
+                            @foreach(\App\HouseholdServiceCategory::all() as $category)
+                                @if($service->category)
+                                    <option {{ $service->category->id == $category->id ? 'selected' : '' }} value="{{ $category->id }}">{{ $category->name}}</option>
+                                @else
+                                    <option value="{{ $category->id }}">{{ $category->name}}</option>
+                                @endif
+
+                            @endforeach
                         </select>
                     </div>
                 </div>
@@ -55,6 +75,11 @@
                             <input name="price" class="form-control w-100  @error('price') is-invalid @enderror"
                                    type="number" placeholder="Цена" value="{{ $service->price }}" required>
                         </div>
+                        @error('price')
+                        <span class="invalid-feedback-home" role="alert">
+                            <strong>{{ $message }}</strong>
+                        </span>
+                        @enderror
                     </div>
                 </div>
 
@@ -64,27 +89,12 @@
                                   class="form-control w-100  @error('description') is-invalid @enderror"
                                   type="text" placeholder="Описание" required>{{ $service->description }}</textarea>
                     </div>
-                </div>
-                @error('description')
-                <span class="invalid-feedback-home" role="alert">
+                    @error('description')
+                    <span class="invalid-feedback-home" role="alert">
                             <strong>{{ $message }}</strong>
                         </span>
-                @enderror
-
-                <div class="row">
-                    @php($photos = explode("\"", $service->photos))
-                    @for($i = 0; $i < count($photos); $i++)
-                        @if($i % 2 == 1)
-                            <div class="new-flat-main-one col-lg-4 col-xl-4 col-12 col-sm-12 slick-slide-break">
-                                <div class="flat-main-img p-2">
-                                    <span class="cross">x</span>
-                                    <img src="{{asset("/storage/".$photos[$i])}}" alt="">
-                                </div>
-                            </div>
-                        @endif
-                    @endfor
+                    @enderror
                 </div>
-
 
 
                 <div class="row justify-content-center my-md-4 personal-area-flat-save-order">

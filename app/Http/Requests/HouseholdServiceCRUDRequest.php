@@ -13,7 +13,7 @@ class HouseholdServiceCRUDRequest extends FormRequest
      */
     public function authorize()
     {
-        return false;
+        return true;
     }
 
     /**
@@ -26,7 +26,7 @@ class HouseholdServiceCRUDRequest extends FormRequest
         return [
             'title' => 'required|string|min:3|max:255',
             'city' => 'required|string|min:3|max:255',
-            'description' => 'required|text|min:10|max:5000',
+            'description' => 'required|string|min:10|max:5000',
             'price' => 'required|numeric|min:1|max:10000000',
             'household_service_category_id' => 'required|exists:App\HouseholdServiceCategory,id',
         ];

@@ -17,6 +17,18 @@
             <div class="row my-4">
                 <div class="col-md-6 flat-id-up-title">Аренда</div>
                 <div class="col-md-3 flat-id-up-price font-weight-bold">{{ $flat->price }} P/мес.</div>
+                <div class="col-md-12 flat-id-up-title style-reset">
+                    @if (session('status-error'))
+                        <div class="alert alert-danger" role="alert">
+                            {{ session('status-error') }}
+                        </div>
+                    @endif
+                    @if (session('status-success'))
+                        <div class="alert alert-success" role="alert">
+                            {{ session('status-success') }}
+                        </div>
+                    @endif
+                </div>
                 <div class="col-md-3">
                     @guest
                     @else
