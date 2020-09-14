@@ -285,6 +285,24 @@
     background-color: #183E62;
 }
 
+.messages {
+    overflow-y: scroll;
+}
+
+.message-body {
+    flex: 2;
+    display: flex;
+    align-items: center;
+    flex-wrap: wrap;
+    overflow-y: scroll;
+    flex-direction: column;
+    overflow-x: hidden;
+}
+
+.message-body>* {
+    width: 95%;
+}
+
 .link-style a, .link-style{
     color: white;
 }
@@ -292,6 +310,23 @@
 .link-style a:hover{
     text-decoration: none;
     color: lightgrey;
+}
+
+.first-user-message {
+    width: 100%;
+    display: flex;
+    justify-content: flex-start;
+}
+
+.second-user-message {
+    width: 100%;
+    display: flex;
+    justify-content: flex-end;
+}
+
+.second-user-message span, .first-user-message span{
+    max-width: 52%;
+    float: right;
 }
 
 .secondary-row{
@@ -1031,10 +1066,49 @@ textarea {
     height: 100%!important;
 }
 
+::-webkit-scrollbar-button {
+    background-image:url('');
+    background-repeat:no-repeat;
+    width:5px;
+    height:0px
+}
 
+::-webkit-scrollbar-track {
+    background-color:#ecedee
+}
 
+::-webkit-scrollbar-thumb {
+    -webkit-border-radius: 0px;
+    border-radius: 0px;
+    background-color:#004182;
+}
 
+::-webkit-scrollbar-thumb:hover{
+    background-color: rgba(0, 64, 128, 0.6);
+}
 
+::-webkit-resizer{
+    background-image:url('');
+    background-repeat:no-repeat;
+    width:4px;
+    height:0px
+}
+
+::-webkit-scrollbar{
+    width: 4px;
+}
+
+.message-time{
+    font-size: 11px!important;
+    margin-top: 5px;
+    margin-left: 8px;
+    margin-right: 8px;
+    color: #c3c4c6!important
+}
+
+.super-messager{
+    word-wrap:  break-word;
+}
 
 
 

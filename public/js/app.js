@@ -18,3 +18,10 @@ $('.br-50').toArray().forEach(el => {
   $(el).css({'height': $(el).css('width')});
 });
 
+if($('.super-messager').length > 0 ) {
+    let height = $('.message-body').css('height');
+    $('.super-messager').eq(0).removeClass('display-none');
+    $('.super-messager').css({height});
+    $('.message-body')[0].scrollTop = 100000;
+
+}
