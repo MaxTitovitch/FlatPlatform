@@ -19,7 +19,11 @@
                         </div>
                     </div>
                     <div class="float-right my-md-auto">
-                        ПРОЕКТ ЗАВЕРШЕН
+                        @if($dialog->household_service_order)
+                            ПРОЕКТ {{ mb_strtoupper($dialog->household_service_order->status) }}
+                        @elseif($dialog->flat_order)
+                            ПРОЕКТ {{ mb_strtoupper($dialog->flat_order->status) }}
+                        @endif
                     </div>
                 </div>
             </div>

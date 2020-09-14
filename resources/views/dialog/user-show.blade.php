@@ -36,46 +36,91 @@
                     <button type="submit" class="color-bg-dark-blue text-white border-0 py-md-2">ПРОЕКТ ВЫПОЛНЕН</button>
                 </form>
             </div>
-        @elseif($dialog->household_service_order)
-            @php ($order = $dialog->household_service_order)
-            @if($order->status == 'Отменён' || $order->status == 'Отозван')
-                <div class="rounded text-danger">{{ $order->status }}</div>
-            @elseif($order->status == 'Выполнен')
-                <div class="rounded text-success">{{ $order->status }}</div>
-            @else
-                @if(Auth::id() !== $order->landlord_id)
-                    @if(Auth::id() === $order->household_service->user_id)
-                        <div class="border border-primary rounded text-center"><a href="{{ route('dialog-service-create', ['id' => $order->household_service->id]) }}" class="text-primary">Написать</a></div>
-                    @else
-                        <div class="border border-primary rounded text-center"><a href="{{ route('dialog-create', ['id' => $order->landlord_id]) }}" class="text-primary">Написать</a></div>
-                    @endif
-                @else
-                    <div class="border border-danger rounded text-center">
-                        <form action="{{ route('service-reject-request', ['id' => $order->id], '_method=path') }}" method="post">
+        @elseif($dialog->household_service_order || $dialog->flat_order)
+            @php
+                if($dialog->household_service_order) {
+                    $order = $dialog->household_service_order;
+                    $role = 'landlord';
+                    $model = 'household_service';
+                    $modelRoute = 'service';
+                } else {
+                    $order = $dialog->flat_order;
+                    $role = 'tenant';
+                    $model = 'flat';
+                    $modelRoute = 'flat';
+                }
+            @endphp
+
+            @if(Auth::user()->role->name = $role)
+                @switch($order->status)
+                    @case('Создан')
+                        <form action="{{ route("reject-$modelRoute-request", ['id' => $order->id, '_method=path']) }}" method="post" class="mt-md-2 color-bg-dark-blue w-100 text-center">
                             @csrf
                             <input type="hidden" name="_method" value="PATCH">
-                            <button type="submit" class="text-danger btn-nobtn">Отозвать</button>
+                            <button type="submit" class="color-bg-dark-blue text-white border-0 py-md-2">ОТОЗВАТЬ</button>
                         </form>
-                    </div>
-                @endif
-                @if(Auth::id() === $order->household_service->user_id)
-                    @if($order->status === 'Создан')
-                        <div class="border border-success rounded text-center">
-                            <form action="{{ route('service-accept-request', ['id' => $order->id, '_method=path']) }}" method="post">
-                                @csrf
-                                <input type="hidden" name="_method" value="PATCH">
-                                <button type="submit" class="text-success btn-nobtn">Принять</button>
-                            </form>
-                        </div>
-                        <div class="border border-danger rounded text-center">
-                            <form action="{{ route('service-reject-request', ['id' => $order->id, '_method=path']) }}" method="post">
-                                @csrf
-                                <input type="hidden" name="_method" value="PATCH">
-                                <button type="submit" class="text-danger btn-nobtn">Отклонить</button>
-                            </form>
-                        </div>
-                    @endif
-                @endif
+                    @break
+                    @case('Отован')
+                        <form action="{{ route("reject-$modelRoute-request", ['id' => $order->id]) }}" method="post" class="mt-md-2 color-bg-dark-blue w-100 text-center">
+                            @csrf
+                            <input type="hidden" name="_method" value="PATCH">
+                            <button type="submit" class="color-bg-dark-blue text-white border-0 py-md-2">ВЕРНУТЬ СТАВКУ</button>
+                        </form>
+                    @break
+                    @case('Отклонён')
+                    @break
+                    @case('Принят')
+                        <form action="{{ route("confirm-$modelRoute-request", ['id' => $order->id]) }}" method="post" class="mt-md-2 color-bg-dark-blue w-100 text-center">
+                            @csrf
+                            <input type="hidden" name="_method" value="PATCH">
+                            <button type="submit" class="color-bg-dark-blue text-white border-0 py-md-2">ПОДТВЕРДИТЬ</button>
+                        </form>
+                    @break
+                    @case('Утверждён')
+                    @break
+                    @case('Выполнен')
+                    @break
+                @endswitch
+            @else
+                @switch($order->status)
+                    @case('Создан')
+                        <form action="{{ route("accept-$modelRoute-request", ['id' => $order->id]) }}" method="post" class="mt-md-2 color-bg-dark-blue w-100 text-center">
+                            @csrf
+                            <input type="hidden" name="_method" value="PATCH">
+                            <button type="submit" class="color-bg-dark-blue text-white border-0 py-md-2">ПРИНЯТЬ</button>
+                        </form>
+                        <form action="{{ route("reject-$modelRoute-request", ['id' => $order->id]) }}" method="post" class="mt-md-2 color-bg-dark-blue w-100 text-center">
+                            @csrf
+                            <input type="hidden" name="_method" value="PATCH">
+                            <button type="submit" class="color-bg-dark-blue text-white border-0 py-md-2">ОТКЛОНИТЬ</button>
+                        </form>
+                    @break
+                    @case('Отован')
+                    @break
+                    @case('Отклонён')
+                        <form action="{{ route("reject-$modelRoute-request", ['id' => $order->id]) }}" method="post" class="mt-md-2 color-bg-dark-blue w-100 text-center">
+                            @csrf
+                            <input type="hidden" name="_method" value="PATCH">
+                            <button type="submit" class="color-bg-dark-blue text-white border-0 py-md-2">ВЕРНУТЬ СТАВКУ</button>
+                        </form>
+                    @break
+                    @case('Принят')
+                        <form action="{{ route("confirm-$modelRoute-request", ['id' => $order->id]) }}" method="post" class="mt-md-2 color-bg-dark-blue w-100 text-center">
+                            @csrf
+                            <input type="hidden" name="_method" value="PATCH">
+                            <button type="submit" class="color-bg-dark-blue text-white border-0 py-md-2">ПОДТВЕРДИТЬ</button>
+                        </form>
+                    @break
+                    @case('Утверждён')
+                        <form action="{{ route("complete-$modelRoute-request", ['id' => $order->id]) }}" method="post" class="mt-md-2 color-bg-dark-blue w-100 text-center">
+                            @csrf
+                            <input type="hidden" name="_method" value="PATCH">
+                            <button type="submit" class="color-bg-dark-blue text-white border-0 py-md-2">ПРОЕКТ ВЫПОЛНЕН</button>
+                        </form>
+                    @break
+                    @case('Выполнен')
+                    @break
+                @endswitch
             @endif
         @endif
     </div>
