@@ -33,9 +33,9 @@ class User extends \TCG\Voyager\Models\User implements MustVerifyEmail
         return $this->hasMany('App\Flat');
     }
 
-    public function flat_orders()
+    public function tenant_flat_orders()
     {
-        return $this->hasMany('App\Flat');
+        return $this->hasMany('App\FlatServiceOrder', 'tenant_id');
     }
 
     public function dialogs()
@@ -53,9 +53,9 @@ class User extends \TCG\Voyager\Models\User implements MustVerifyEmail
         return $this->hasMany('App\HouseholdService');
     }
 
-    public function household_orders()
+    public function landlord_household_orders()
     {
-        return $this->hasMany('App\HouseholdServiceOrder');
+        return $this->hasMany('App\HouseholdServiceOrder', 'landlord_id');
     }
 
     public function uploadAvatar($request) {

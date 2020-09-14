@@ -266,8 +266,8 @@
 }
 
 .advantage-description span{
-    font-weight: 600;
-    font-size: 25px;
+    font-weight: 500;
+    font-size: 15px;
     line-height: 28px;
     display: flex;
     align-items: center;
@@ -1015,7 +1015,9 @@ textarea {
     border-color: black!important;
 }
 
-
+.personal-area-dialog-img{
+    width: 70px!important;
+}
 
 
 

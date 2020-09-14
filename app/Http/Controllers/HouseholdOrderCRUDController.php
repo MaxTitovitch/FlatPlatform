@@ -11,7 +11,17 @@ class HouseholdOrderCRUDController extends Controller
 
     public function index()
     {
-        return view('service-order.index', ['orders' => Auth::user()->household_orders]);
+        if(Auth::user()->role->name === 'landlord') {
+            $orders = Auth::user()->landlord_household_orders;
+        } else {
+            $orders = collect([]);
+            foreach (Auth::user()->household_services as $services) {
+                foreach ($services->orders as $order) {
+                    $orders->push($order);
+                }
+            }
+        }
+        return view('service-order.index', ['orders' => $orders]);
     }
 
     public function show(HouseholdServiceOrder $householdServiceOrder)

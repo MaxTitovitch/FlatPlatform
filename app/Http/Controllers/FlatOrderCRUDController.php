@@ -10,7 +10,17 @@ class FlatOrderCRUDController extends Controller
 {
     public function index()
     {
-        return view('order.index', ['orders' => Auth::user()->flat_orders]);
+        if(Auth::user()->role->name === 'tenant') {
+            $orders = Auth::user()->tenant_flat_orders;
+        } else {
+            $orders = collect([]);
+            foreach (Auth::user()->flats as $flat) {
+                foreach ($flat->orders as $order) {
+                    $orders->push($order);
+                }
+            }
+        }
+        return view('order.index', ['orders' => $orders]);
     }
 
     public function show(FlatServiceOrder $flatServiceOrder)
