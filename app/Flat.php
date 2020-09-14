@@ -107,7 +107,7 @@ class Flat extends Model
         }
     }
 
-    public function uploadImages($request) {
+    public function uploadImages($request, $isDelete = true) {
         $files = $request->file('photos'); $arrayPhotos = [];
         if($request->hasFile('photos')) {
             foreach ($files as $file) {
@@ -115,12 +115,18 @@ class Flat extends Model
                 $arrayPhotos[] = str_replace('public', '', $path);
             }
         }
+        if(!$isDelete) {
+            if($this->photos != '["flats\\\\default.png"]') {
+                $photosLast = json_decode($this->photos);
+                $arrayPhotos = array_merge($photosLast, $arrayPhotos);
+            }
+        }
         $this->photos = json_encode($arrayPhotos);
     }
 
     public function updateImages($request) {
         $this->deleteImages();
-        $this->uploadImages($request);
+        $this->uploadImages($request, false);
     }
 
     public function deleteImages() {

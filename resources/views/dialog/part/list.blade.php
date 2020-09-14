@@ -5,7 +5,7 @@
         <h1>Диалоги</h1>
     </div>
 
-    @foreach($dialogs as $dialog)
+    @forelse($dialogs as $dialog)
         <div class="row dialog-list-one my-md-4 href-dialog" data-href="{{ route($route, ['id' => $dialog->id]) }}">
             <div class="col-md-2 h-100">
                 @if($dialog->first_user_id === Auth::id())
@@ -41,7 +41,9 @@
                 </span>
             </div>
         </div>
-    @endforeach
+    @empty
+        <h2 class="mt-5 text-secondary text-center">У Вас ещё нет диалогов</h2>
+    @endforelse
 
     <div class="row justify-content-center mb-2 mt-4">
         {{ $dialogs->links() }}
