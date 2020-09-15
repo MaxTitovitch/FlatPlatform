@@ -340,6 +340,10 @@
 
     border-bottom: 2px solid transparent;
 }
+
+.super-messager .super-messager:last-child {
+    margin-bottom: 20px;
+}
 .second-user-message::after {
     z-index: -1;
     content: '';

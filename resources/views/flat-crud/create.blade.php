@@ -54,7 +54,7 @@
                     </div>
                     @error('city')
                     <span class="invalid-feedback-home" role="alert">
-                            <strong>{{ $message }}</strong>
+                            <strong>Город указан неверно</strong>
                         </span>
                     @enderror
                     <div class="col-md-4 ">
@@ -64,7 +64,7 @@
                     </div>
                     @error('street')
                     <span class="invalid-feedback-home" role="alert">
-                            <strong>{{ $message }}</strong>
+                            <strong>Улица указана неверно</strong>
                         </span>
                     @enderror
                     <div class="col-md-4 ">
@@ -74,7 +74,7 @@
                     </div>
                     @error('house_number')
                     <span class="invalid-feedback-home" role="alert">
-                            <strong>{{ $message }}</strong>
+                            <strong>Номер дома указан неверно</strong>
                         </span>
                     @enderror
                 </div>
@@ -87,7 +87,7 @@
                     </div>
                     @error('floor')
                     <span class="invalid-feedback-home" role="alert">
-                            <strong>{{ $message }}</strong>
+                            <strong>Этаж указан неверно</strong>
                         </span>
                     @enderror
                     <div class="col-md-3 ">
@@ -97,7 +97,7 @@
                     </div>
                     @error('number_of_rooms')
                     <span class="invalid-feedback-home" role="alert">
-                            <strong>{{ $message }}</strong>
+                            <strong>Количество комнат указано неверно</strong>
                         </span>
                     @enderror
                     <div class="col-md-3 ">
@@ -106,7 +106,7 @@
                     </div>
                     @error('area')
                     <span class="invalid-feedback-home" role="alert">
-                            <strong>{{ $message }}</strong>
+                            <strong>Площадь указана неверно</strong>
                         </span>
                     @enderror
                     <div class="col-md-3 ">
@@ -115,7 +115,7 @@
                     </div>
                     @error('living_area')
                     <span class="invalid-feedback-home" role="alert">
-                            <strong>{{ $message }}</strong>
+                            <strong>Жилая площадь указана неверно</strong>
                         </span>
                     @enderror
                 </div>
@@ -128,7 +128,7 @@
                 </div>
                 @error('description')
                 <span class="invalid-feedback-home" role="alert">
-                            <strong>{{ $message }}</strong>
+                            <strong>Описание указано неверно</strong>
                         </span>
                 @enderror
 
@@ -165,7 +165,7 @@
                     </div>
                     @error('house_number')
                     <span class="invalid-feedback-home" role="alert">
-                            <strong>{{ $message }}</strong>
+                            <strong>Номер дома указан неверно</strong>
                         </span>
                     @enderror
                 </div>

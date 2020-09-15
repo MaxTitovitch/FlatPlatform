@@ -33,7 +33,7 @@
 
                                     @error('username')
                                     <span class="invalid-feedback" role="alert">
-                                        <strong>{{ $message }}</strong>
+                                        <strong>Введите корректное имя пользователя</strong>
                                     </span>
                                     @enderror
 

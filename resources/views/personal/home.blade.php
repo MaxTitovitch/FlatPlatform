@@ -30,7 +30,7 @@
                 </div>
                 @error('name')
                 <span class="invalid-feedback-home" role="alert">
-                            <strong>{{ $message }}</strong>
+                            <strong>Имя пользователя указано неверно</strong>
                         </span>
                 @enderror
                 <div class="form-group border-bottom">
@@ -38,7 +38,7 @@
                 </div>
                 @error('last_name')
                 <span class="invalid-feedback-home" role="alert">
-                            <strong>{{ $message }}</strong>
+                            <strong>Введите корректную фамилию</strong>
                         </span>
                 @enderror
                 <div class="form-group border-bottom">
@@ -46,7 +46,7 @@
                 </div>
                 @error('phone')
                 <span class="invalid-feedback-home" role="alert">
-                            <strong>{{ $message }}</strong>
+                            <strong>Введите корректный телефон</strong>
                         </span>
                 @enderror
                 <div class="form-group border-bottom">
@@ -54,7 +54,7 @@
                 </div>
                 @error('reserve_phone')
                 <span class="invalid-feedback-home" role="alert">
-                            <strong>{{ $message }}</strong>
+                            <strong>Введите корректный телефон</strong>
                         </span>
                 @enderror
                 <div class="form-group border-bottom">
@@ -63,7 +63,7 @@
                 </div>
                 @error('date_of_birth')
                 <span class="invalid-feedback-home" role="alert">
-                            <strong>{{ $message }}</strong>
+                            <strong>Введите корректную дату рождения</strong>
                         </span>
                 @enderror
                 <div class="form-group border-bottom">
@@ -72,7 +72,7 @@
                 </div>
                     @error('passport_number')
                     <span class="invalid-feedback-home" role="alert">
-                            <strong>{{ $message }}</strong>
+                            <strong>Введите корректный номер паспорта</strong>
                         </span>
                     @enderror
                 <div class="form-group border-bottom">
@@ -81,7 +81,7 @@
                 </div>
                 @error('date_of_issue')
                 <span class="invalid-feedback-home" role="alert">
-                            <strong>{{ $message }}</strong>
+                            <strong>Введите корректную дату выдачи</strong>
                         </span>
                 @enderror
             </div>
@@ -92,7 +92,7 @@
                 <p class="">Требуется, если Вы хотите изменить E-mail или Пароль ниже</p>
                 @error('last_password')
                 <span class="invalid-feedback-home" role="alert">
-                            <strong>{{ $message }}</strong>
+                            <strong>Введите корректный предыдущий пароль</strong>
                         </span>
                 @enderror
                 <div class="form-group border-bottom">
@@ -100,7 +100,7 @@
                 </div>
                 @error('email')
                 <span class="invalid-feedback-home" role="alert">
-                            <strong>{{ $message }}</strong>
+                            <strong>Введите корректный адресс электронной почты</strong>
                         </span>
                 @enderror
                 <p class="mt-md-5 mb-md-4">Для изменения текущего пароля введите новый пароль в обоих полях</p>
@@ -109,7 +109,7 @@
                 </div>
                 @error('password')
                 <span class="invalid-feedback-home" role="alert">
-                            <strong>{{ $message }}</strong>
+                            <strong>Введите корректный пароль</strong>
                         </span>
                 @enderror
                 <div class="form-group border-bottom">
@@ -117,7 +117,7 @@
                 </div>
                 @error('password_confirmation')
                 <span class="invalid-feedback-home" role="alert">
-                    <strong>{{ $message }}</strong>
+                    <strong>Введённые пароли не совпадают</strong>
                 </span>
                 @enderror
                 <button type="submit" class="color-bg-dark-blue w-100">

@@ -39,7 +39,7 @@
                         </div>
                         @error('title')
                         <span class="invalid-feedback-home" role="alert">
-                            <strong>{{ $message }}</strong>
+                            <strong>Введите корректное название</strong>
                         </span>
                         @enderror
                     </div>
@@ -65,7 +65,7 @@
                         </div>
                         @error('city')
                         <span class="invalid-feedback-home" role="alert">
-                            <strong>{{ $message }}</strong>
+                            <strong>Введите корректный город</strong>
                         </span>
                         @enderror
                     </div>
@@ -77,7 +77,7 @@
                         </div>
                         @error('price')
                         <span class="invalid-feedback-home" role="alert">
-                            <strong>{{ $message }}</strong>
+                            <strong>Введите корректную цену</strong>
                         </span>
                         @enderror
                     </div>
@@ -91,7 +91,7 @@
                     </div>
                     @error('description')
                     <span class="invalid-feedback-home" role="alert">
-                            <strong>{{ $message }}</strong>
+                            <strong>Введите корректное описание</strong>
                         </span>
                     @enderror
                 </div>

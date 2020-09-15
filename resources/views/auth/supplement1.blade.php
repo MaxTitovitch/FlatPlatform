@@ -21,7 +21,7 @@
 
                                 @error('role_id')
                                     <span class="invalid-feedback" role="alert">
-                                        <strong>{{ $message }}</strong>
+                                        <strong>Не выбрана корректная роль</strong>
                                     </span>
                                 @enderror
                             </div>
@@ -36,7 +36,7 @@
 
                                     @error('email')
                                         <span class="invalid-feedback" role="alert">
-                                            <strong>{{ $message }}</strong>
+                                            <strong>Введи корректный адрес электронной почты</strong>
                                         </span>
                                     @enderror
                                 </div>
@@ -52,7 +52,7 @@
 
                                 @error('phone')
                                     <span class="invalid-feedback" role="alert">
-                                        <strong>{{ $message }}</strong>
+                                        <strong>Введите корректный номер</strong>
                                     </span>
                                 @enderror
                             </div>
@@ -66,7 +66,7 @@
 
                                 @error('password')
                                     <span class="invalid-feedback" role="alert">
-                                        <strong>{{ $message }}</strong>
+                                        <strong>Введите корректный пароль</strong>
                                     </span>
                                 @enderror
                             </div>
