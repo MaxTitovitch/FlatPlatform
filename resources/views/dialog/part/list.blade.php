@@ -15,14 +15,14 @@
                 @endif
                 <a href="{{ route($route, ['id' => $dialog->id]) }}">
                     @if($dialog->type === 'Поддержка')
-                        <img src="{{ asset('img/avatar.png') }}" alt="" class="rounded-circle w-100 h-100">
+                        <img src="{{ asset('img/avatar.png') }}" alt="" class="rounded-circle w-100 br-50">
                     @else
-                        <img src="{{ asset('/storage/' . $otherUser->avatar ) }}" alt="" class="rounded-circle w-100 h-100">
+                        <img src="{{ asset('/storage/' . $otherUser->avatar ) }}" alt="" class="rounded-circle w-100 br-50">
                     @endif
                 </a>
             </div>
             <div class="col-md-9">
-                <p>
+                <p class="dialog-p">
                     <a href="{{ route($route, ['id' => $dialog->id]) }}" class="color-dark-blue font-18-px font-weight-bold">
                         @if($dialog->type === 'Поддержка')
                             Варендуру - Техподдержка

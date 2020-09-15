@@ -19,7 +19,7 @@ class DialogController extends Controller
         if($viewName === 'dialog.admin-list') {
             $dialogs = $dialogs->where('type', 'Поддержка');
         } else {
-            $dialogs = $dialogs->where("first_user_id", Auth::id())->where("second_user_id", Auth::id());
+            $dialogs = $dialogs->where("first_user_id", Auth::id())->orWhere("second_user_id", Auth::id());
         }
 
         $dialogs = $dialogs->having('messages_count', '>', 0)->paginate(20);
@@ -105,7 +105,7 @@ class DialogController extends Controller
         }
         if($request->file) {
             $type = 'Файл';
-            $message = '';
+            $message = 'QWERTY';
         } else {
             $type = 'Текст';
             $message = $request->message;
@@ -116,7 +116,10 @@ class DialogController extends Controller
             'user_id' => Auth::id(),
             'dialog_id' => $id
         ]);
-        $message->upload($request); $message->save();
+        if($request->file) {
+            $message->message = $message->upload($request);
+        }
+        $message->save();
         return redirect()->route($routeName, ['id' => $message->dialog->id]);
     }
 
@@ -131,6 +134,16 @@ class DialogController extends Controller
             } else {
                 return redirect()->route('index');
             }
+        } else {
+            return redirect()->route('index');
+        }
+    }
+
+    public function getLastMessages($id) {
+        $message = Message::find($id);
+        if($message != null) {
+            $messages = Message::where('dialog_id', $message->dialog_id)->where('id', '>', $message->id)->get();
+            return $messages->toArray();
         } else {
             return redirect()->route('index');
         }

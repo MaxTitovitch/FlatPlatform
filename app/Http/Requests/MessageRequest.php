@@ -13,7 +13,7 @@ class MessageRequest extends FormRequest
      */
     public function authorize()
     {
-        return false;
+        return true;
     }
 
     /**
@@ -25,7 +25,7 @@ class MessageRequest extends FormRequest
     {
         return [
             'message' => 'string|max:255',
-            'file' => 'required_if:message|file',
+            'file' => 'file',
         ];
     }
 }

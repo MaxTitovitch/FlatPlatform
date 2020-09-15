@@ -25,3 +25,11 @@ if($('.super-messager').length > 0 ) {
     $('.message-body')[0].scrollTop = 100000;
 
 }
+
+if($('.summary')) {
+    $('.summary').click(el => {
+        $('summary').eq(0).click();
+        // $('.message-body')[0].scrollTop = $('.summary').offset().top;
+        $('.message-body').animate({scrollTop: $('.summary').offset().top - 200}, 0);
+    })
+}

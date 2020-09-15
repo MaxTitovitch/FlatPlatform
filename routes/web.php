@@ -74,6 +74,7 @@ Route::middleware(['auth', 'verified'])->group(function () {
     Route::get('/dialog/{id}', 'DialogController@show')->name('dialog-show');
     Route::post('/send-message/{id}', 'DialogController@createMessage')->name('send-message');
     Route::post('/remove-message/{id}', 'DialogController@removeMessage')->name('remove-message');
+    Route::get('/get-last-message/{id}', 'DialogController@getLastMessages')->name('get-last-messages');
 });
 
 // Personal area pages & routes
