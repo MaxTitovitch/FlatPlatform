@@ -1001,10 +1001,7 @@ textarea {
 
 .dialog-list-one:not(:last-child){
     border-bottom: 1px solid grey;
-}
 
-.dialog-list-one{
-    height: 13vh;
 }
 
 .dialog-list-connect-support .text-primary:hover {
@@ -1152,7 +1149,8 @@ textarea {
     margin-top: 5px;
     margin-left: 8px;
     margin-right: 8px;
-    color: #c3c4c6!important
+    color: #c3c4c6!important;
+    white-space: nowrap;
 }
 
 .super-messager{
@@ -1164,7 +1162,10 @@ textarea {
     overflow: hidden;
 }
 
-
+.message-user-all img, .message-user-all video{
+    width: 100%!important;
+    padding-top: 5px;
+}
 
 
 

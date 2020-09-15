@@ -40,8 +40,8 @@ setInterval(() => {
             clone.data('idlast', r[i].id);
             clone.appendTo('.super-messager');
         }
-      }
         $('.message-body')[0].scrollTop = 100000;
+      }
     }
   });
 }, 500);

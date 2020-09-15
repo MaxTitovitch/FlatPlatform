@@ -6,7 +6,7 @@
     </div>
 
     @forelse($dialogs as $dialog)
-        <div class="row dialog-list-one my-md-4 href-dialog" data-href="{{ route($route, ['id' => $dialog->id]) }}">
+        <div class="row dialog-list-one pb-md-2 my-md-4 href-dialog" data-href="{{ route($route, ['id' => $dialog->id]) }}">
             <div class="col-md-2 h-100">
                 @if($dialog->first_user_id === Auth::id())
                     @php($otherUser = $dialog->second_user)

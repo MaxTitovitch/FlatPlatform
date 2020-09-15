@@ -15,7 +15,7 @@ class Message extends Model
     public function upload(MessageRequest $request) {
         $file = $request->file('file');
         $path = Storage::disk('public')->putFile('message-file', $file);
-        $path = env('APP_URL') . '/storage/' . $path;
+        $path = '/storage/' . $path;
         return $path;
     }
 
