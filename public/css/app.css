@@ -1144,6 +1144,11 @@ textarea {
     cursor: pointer;
 }
 
+@media (min-width: 1200px) {
+    .container {
+        max-width: 1132px!important;
+    }
+}
 .message-time{
     font-size: 11px!important;
     margin-top: 5px;
@@ -1173,7 +1178,11 @@ textarea {
     display: block !important;
 }
 
-
+.alert-success1{
+    margin-top: 1rem!important;
+    color: #2bac48!important;
+    border-color: #2bac48!important;
+}
 
 
 

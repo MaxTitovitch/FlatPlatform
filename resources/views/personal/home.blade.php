@@ -124,7 +124,10 @@
                     <span class="btn text-white btn-block">СОХРАНИТЬ</span>
                 </button>
             </div>
-            <div class="col-md-4 pl-md-5 ">
+            <div class="col-md-4 pl-md-5">
+                <div class="avatar-text text-center mb-3">
+                    <span class="text-center text-secondary"><big>{{ (Auth::user()->role->display_name) }}</big></span>
+                </div>
                 <div class="avatar-text text-center">
                     <span class="text-center">Аватар</span>
                 </div>
