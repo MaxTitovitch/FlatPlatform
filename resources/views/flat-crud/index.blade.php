@@ -43,6 +43,9 @@
                 <td>{{ $flat->city }}</td>
                 <td>ул. {{ $flat->street }}, {{ $flat->house_number }}</td>
                 <td>
+                    <a href="{{ route('flat-page', ['id' => $flat->id]) }}" class="py-md-1 text-decoration-none border border-primary text-center btn-block text-primary">
+                        <i class="fa fa-yes" aria-hidden="true"></i> Просмотр
+                    </a>
                     <a href="{{ route('flats.edit', ['flat' => $flat->id]) }}" class="py-md-1 text-decoration-none border border-warning text-center btn-block text-warning">
                         <i class="fa fa-pencil" aria-hidden="true"></i> Редактировать
                     </a>

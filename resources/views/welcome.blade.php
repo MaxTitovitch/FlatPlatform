@@ -80,13 +80,13 @@
                             </div>
                         </a>
                         <div class="new-flat-main-cost mb-1">
-                            <span class="">200 000 $</span>
+                            <span class="">{{ $flat->price }} ₽</span>
                         </div>
                         <div class="new-flat-main-text">
-                            <span class="">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Alias dolorem ducimus illo illum impedit ipsa, magni nesciunt nihil provident tempore tenetur ut vel velit, vero, voluptatibus. Dolorem nesciunt reprehenderit vel?</span>
+                            <span class="">{{ $flat->description }}</span>
                         </div>
                         <div class="new-flat-main-position">
-                            <span class="text-secondary">г. Минск</span>
+                            <span class="text-secondary">г. {{ $flat->city }}</span>
                         </div>
                     </div>
                 </div>
@@ -114,7 +114,7 @@
                                 <span>{{ $service->user->name}}</span>
                             </div>
                             <div class="new-household-main-price">
-                                <span>{{ $service->price}} $</span>
+                                <span>{{ $service->price}} ₽</span>
                             </div>
                         </div>
                     </div>

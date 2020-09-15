@@ -122,7 +122,11 @@ class Flat extends Model
                 $arrayPhotos = array_merge($photosLast, $arrayPhotos);
             }
         }
-        $this->photos = json_encode($arrayPhotos);
+        if(count($arrayPhotos) == 0) {
+            $this->photos = '["flats\\\\default.png"]';
+        } else {
+            $this->photos = json_encode($arrayPhotos);
+        }
     }
 
     public function updateImages($request) {
@@ -148,7 +152,7 @@ class Flat extends Model
                 $this->save();
             }
             if(count($files) === 0) {
-                $this->photos = json_encode(["flats\\\\default.png"]);
+                $this->photos = '["flats\\\\default.png"]';
                 $this->save();
             }
         }

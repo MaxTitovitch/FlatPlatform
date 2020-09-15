@@ -30,7 +30,7 @@
                         <div class="search-div-size-half">
                             <input type="text" class="form-control" name="price_end" placeholder="до">
                         </div>
-                        <span class="ml-2 my-auto">P</span>
+                        <span class="ml-2 my-auto">₽</span>
                     </div>
 
                     <div class="form-group">
@@ -115,7 +115,7 @@
                                         <span>{{ $householdServices[$i]->category->name}}</span>
                                     </div>
                                     <div class="new-household-main-price">
-                                        <span>{{ $householdServices[$i]->price}} $</span>
+                                        <span>{{ $householdServices[$i]->price}} ₽</span>
                                     </div>
                                 </div>
                             </div>

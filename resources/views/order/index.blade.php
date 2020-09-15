@@ -28,7 +28,8 @@
     <tr>
         <th scope="col" class="color-dark-blue">Дата начала аренды</th>
         <th scope="col" class="color-dark-blue">Дата завершения аренды</th>
-        <th scope="col" class="color-dark-blue">Статус</th>
+        <th scope="col" class="color-dark-blue">Статус квартиры</th>
+        <th scope="col" class="color-dark-blue">Статус заявки</th>
         <th scope="col" class="color-dark-blue">Квартира</th>
         <th scope="col" class="color-dark-blue">Данные арендодателя</th>
         <th scope="col"></th>
@@ -40,6 +41,16 @@
         <tr>
             <td>{{ $order->date_start }}</td>
             <td>{{ $order->date_end }}</td>
+
+            @if($order->flat->status == "Свободна")
+                <td class="text-success font-weight-bold">
+                    {{ $order->flat->status }}
+                </td>
+            @else
+                <td class="text-danger ">
+                    {{ $order->flat->status }}
+                </td>
+            @endif
 
             @if($order->status == "Создан")
                 <td class="text-dark">
@@ -58,7 +69,7 @@
             <td>
                 <a class="color-dark-blue"
                    href="{{ route('flat-page', ['id' => $order->flat->id]) }}">
-                    <i> {{ $order->flat->street . ", " . $order->flat->house_number}}</i>
+                    <i>г. {{ $order->flat->city . '. ул. ' .$order->flat->street . ", " . $order->flat->house_number}}</i>
                 </a>
             </td>
             <td>
@@ -94,7 +105,6 @@
                                     <input type="hidden" name="_method" value="PATCH">
                                     <button type="submit" class="text-success btn-nobtn">Принять</button>
                                 </form>
-                                {{--                                                <a href="{{ route('flat-accept-request', ['id' => $order->id, '_method=path']) }}" class="text-success">Принять</a>--}}
                             </div>
                             <div class="border border-danger rounded text-center">
                                 <form action="{{ route('flat-reject-request', ['id' => $order->id, '_method=path']) }}" method="post">
@@ -102,35 +112,11 @@
                                     <input type="hidden" name="_method" value="PATCH">
                                     <button type="submit" class="text-danger btn-nobtn">Отклонить</button>
                                 </form>
-                                {{--                                                <a href="{{ route('flat-reject-request', ['id' => $order->id, '_method=path']) }}" class="text-danger">Отклонить</a>--}}
                             </div>
                         @endif
                     @endif
                 @endif
 
-
-
-
-{{--                <form method="post" class="mt-md-1" action="{{ route('household_services.edit', ['household_service' => $order->id]) }}">--}}
-{{--                    @csrf--}}
-{{--                    <input type="hidden" name="_method" value="PATCH">--}}
-{{--                    <button class="py-md-1 text-decoration-none border border-success text-center btn-block text-success">--}}
-{{--                        Принять--}}
-{{--                    </button>--}}
-{{--                </form>--}}
-
-{{--                <form method="post" class="mt-md-1" action="{{ route('household_services.edit', ['household_service' => $order->id]) }}">--}}
-{{--                    @csrf--}}
-{{--                    <input type="hidden" name="_method" value="PATCH">--}}
-{{--                    <button class="py-md-1 text-decoration-none border border-danger text-center btn-block text-danger">--}}
-{{--                        Отклонить--}}
-{{--                    </button>--}}
-{{--                </form>--}}
-
-{{--                <a class="mt-md-1 py-md-1 text-decoration-none border border-primary text-center btn-block text-primary"--}}
-{{--                   href="{{ route('household_services.edit', ['household_service' => $order->id]) }}">--}}
-{{--                    Диалог--}}
-{{--                </a>--}}
             </td>
         </tr>
     @endforeach

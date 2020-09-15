@@ -48,7 +48,7 @@
                         <div class="search-div-size-half">
                             <input type="text" class="form-control to-check" name="price_end" placeholder="до">
                         </div>
-                        <span class="ml-2 my-auto">P</span>
+                        <span class="ml-2 my-auto">₽</span>
                     </div>
 
                     <div class="w-100 mt-4 mb-4">

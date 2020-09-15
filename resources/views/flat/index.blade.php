@@ -16,7 +16,7 @@
             {{--            кол-во комнат, дом/квартира, улица, номер дома, город--}}
             <div class="row my-4">
                 <div class="col-md-6 flat-id-up-title">Аренда</div>
-                <div class="col-md-3 flat-id-up-price font-weight-bold">{{ $flat->price }} P/мес.</div>
+                <div class="col-md-3 flat-id-up-price font-weight-bold">{{ $flat->price }} ₽.</div>
                 <div class="col-md-12 flat-id-up-title style-reset">
                     @if (session('status-error'))
                         <div class="alert alert-danger" role="alert">
@@ -171,7 +171,7 @@
                             </span>
                         </div>
                         <div class="col-md-1 my-auto ">
-                            <span class="flat-id-renter-price">{{ $order->price }}P</span>
+                            <span class="flat-id-renter-price">{{ $order->price }} ₽</span>
                         </div>
                         <div class="col-md-8 my-auto">
                             <div class="flex">

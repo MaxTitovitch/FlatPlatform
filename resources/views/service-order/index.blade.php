@@ -60,7 +60,7 @@
 
                     <a class="color-dark-blue"
                        href="{{ route('flat-page', ['id' => $order->flat->id]) }}">
-                        <i>{{ $order->flat->street . ", " . $order->flat->house_number}}</i>
+                        <i>г. {{ $order->flat->city . '. ул. ' .$order->flat->street . ", " . $order->flat->house_number}}</i>
                     </a>
                 </td>
                 <td>

@@ -46,6 +46,9 @@
                 <td>{{ $service->price }} P</td>
                 <td style="max-width: 300px">{{ $service->description }}</td>
                 <td>
+                    <a href="{{ route('household-service-page', ['id' => $service->id]) }}" class="py-md-1 text-decoration-none border border-primary text-center btn-block text-primary">
+                        <i class="fa fa-yes" aria-hidden="true"></i> Просмотр
+                    </a>
                     <a href="{{ route('household_services.edit', ['household_service' => $service->id]) }}" class="py-md-1 text-decoration-none border border-warning text-center btn-block text-warning">
                         <i class="fa fa-pencil" aria-hidden="true"></i> Редактировать
                     </a>

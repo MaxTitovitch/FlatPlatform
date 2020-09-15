@@ -12,7 +12,7 @@
                     {{ $householdService->title . ", " . $householdService->city }}
                     <p class="font-18-px text-secondary">{{ $householdService->category->name }}</p>
                 </div>
-                <div class="col-md-3 flat-id-up-price font-weight-bold">{{ $householdService->price }} P</div>
+                <div class="col-md-3 flat-id-up-price font-weight-bold">{{ $householdService->price }} ₽</div>
                 <div class="col-md-3">
                     @guest
                     @else
@@ -124,7 +124,7 @@
                         </span>
                     </div>
                     <div class="col-md-1 my-auto ">
-                        <span class="flat-id-renter-price">{{ $order->price }}P</span>
+                        <span class="flat-id-renter-price">{{ $order->price }} ₽</span>
                     </div>
                     <div class="col-md-8 my-auto">
                         <div class="flex">
