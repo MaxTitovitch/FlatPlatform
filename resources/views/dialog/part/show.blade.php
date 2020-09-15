@@ -9,11 +9,19 @@
                     @php
                         $user = $dialog->second_user->id == Auth::id() ? $dialog->first_user : $dialog->second_user
                     @endphp
-                    <img class="personal-area-dialog-img"
-                         src="{{ asset('/storage/' . $user->avatar) }}" alt="">
+
+                    @if($dialog->type === 'Поддержка')
+                        <img class="personal-area-dialog-img" src="{{ asset('img/avatar.png') }}" alt="">
+                    @else
+                        <img class="personal-area-dialog-img" src="{{ asset('/storage/' . $user->avatar) }}" alt="">
+                    @endif
                     <div class="my-md-auto ml-md-2 ">
                         <div class="font-18-px font-weight-bold">
-                            {{ $user->name . " " . $user->last_name }}
+                            @if($dialog->type === 'Поддержка')
+                                Варендуру - Техподдержка
+                            @else
+                                {{ $user->name . " " . $user->last_name }}
+                            @endif
                         </div>
                         <div class="text-secondary">
                             {{ $dialog->type }}
@@ -170,7 +178,6 @@
             </div>
         </form>
     </div>
-
 @endsection
 
 
