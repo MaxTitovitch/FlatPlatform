@@ -317,6 +317,39 @@
     display: flex;
     justify-content: flex-start;
 }
+/*.first-user-message:before {*/
+/*    position: relative;*/
+/*    content: '';*/
+/*    width: 0;*/
+/*    height: 0;*/
+/*    border-right: 17px solid #97C6E3;*/
+/*    border-top: 16px solid transparent;*/
+/*    border-bottom: 16px solid transparent;*/
+/*    top: 0;*/
+/*    left: 0;*/
+/*}*/
+
+.first-user-message::before {
+    z-index: -1;
+    content: '';
+    margin-right: -20px;
+    top: 0;
+    border: 20px solid transparent;
+    border-top: 14px solid #007bff!important;
+    border-right: 20px solid #007bff!important;
+
+    border-bottom: 2px solid transparent;
+}
+.second-user-message::after {
+    z-index: -1;
+    content: '';
+    margin-left: -20px;
+    top: 0;
+    border: 20px solid transparent;
+    border-top: 12px solid #004182!important;
+    border-left: 20px solid #004182!important;
+    border-bottom: 2px solid transparent;
+}
 
 .second-user-message {
     width: 100%;
