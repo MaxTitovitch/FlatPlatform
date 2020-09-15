@@ -26,8 +26,8 @@ class HomeUserRequest extends FormRequest
     {
         $id = Auth::id();
         return [
-            'name' => ['required', 'string', 'max:255'],
-            'last_name' => ['required', 'string', 'max:255'],
+            'name' => ['required', 'string', 'min:3', 'max:255'],
+            'last_name' => ['required', 'string', 'min:3', 'max:255'],
             'email' => ['required', 'string', 'email', 'max:255', "unique:users,id,$id"],
             'password' => ['min:8', 'confirmed', 'nullable'],
             'last_password' => ['min:8', 'string'],

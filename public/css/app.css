@@ -1167,7 +1167,11 @@ textarea {
     padding-top: 5px;
 }
 
+.invalid-feedback-homer{
 
+    color: rgb(242, 67, 84) !important;
+    display: block !important;
+}
 
 
 

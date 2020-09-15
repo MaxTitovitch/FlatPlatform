@@ -53,7 +53,7 @@
                                placeholder="Город" value="{{ $flat->city }}" required>
                     </div>
                     @error('city')
-                    <span class="invalid-feedback-home" role="alert">
+                    <span class="invalid-feedback-homer" role="alert">
                             <strong>Город указан неверно</strong>
                         </span>
                     @enderror
@@ -63,7 +63,7 @@
                                placeholder="Улица" value="{{ $flat->street }}" required>
                     </div>
                     @error('street')
-                    <span class="invalid-feedback-home" role="alert">
+                    <span class="invalid-feedback-homer" role="alert">
                             <strong>Улица указана неверно</strong>
                         </span>
                     @enderror
@@ -73,7 +73,7 @@
                                type="number" placeholder="Номер дома" value="{{ $flat->house_number }}" required>
                     </div>
                     @error('house_number')
-                    <span class="invalid-feedback-home" role="alert">
+                    <span class="invalid-feedback-homer" role="alert">
                             <strong>Номер дома указан неверно</strong>
                         </span>
                     @enderror
@@ -86,7 +86,7 @@
                                placeholder="Этаж" value="{{ $flat->floor }}" required>
                     </div>
                     @error('floor')
-                    <span class="invalid-feedback-home" role="alert">
+                    <span class="invalid-feedback-homer" role="alert">
                             <strong>Этаж указан неверно</strong>
                         </span>
                     @enderror
@@ -96,7 +96,7 @@
                                placeholder="Кол-во комнат" value="{{ $flat->number_of_rooms }}" required>
                     </div>
                     @error('number_of_rooms')
-                    <span class="invalid-feedback-home" role="alert">
+                    <span class="invalid-feedback-homer" role="alert">
                             <strong>Количество комнат указано неверно</strong>
                         </span>
                     @enderror
@@ -105,7 +105,7 @@
                                type="number" placeholder="Общая площадь" value="{{ $flat->area }}" required>
                     </div>
                     @error('area')
-                    <span class="invalid-feedback-home" role="alert">
+                    <span class="invalid-feedback-homer" role="alert">
                             <strong>Площадь указана неверно</strong>
                         </span>
                     @enderror
@@ -114,7 +114,7 @@
                                type="number" placeholder="Жилая площадь" value="{{ $flat->living_area }}" required>
                     </div>
                     @error('living_area')
-                    <span class="invalid-feedback-home" role="alert">
+                    <span class="invalid-feedback-homer" role="alert">
                             <strong>Жилая площадь указана неверно</strong>
                         </span>
                     @enderror
@@ -127,7 +127,7 @@
                     </div>
                 </div>
                 @error('description')
-                <span class="invalid-feedback-home" role="alert">
+                <span class="invalid-feedback-homer" role="alert">
                             <strong>Описание указано неверно</strong>
                         </span>
                 @enderror
@@ -164,13 +164,13 @@
                                type="number" placeholder="Цена" value="{{ $flat->price }}" required>
                     </div>
                     @error('house_number')
-                    <span class="invalid-feedback-home" role="alert">
+                    <span class="invalid-feedback-homer" role="alert">
                             <strong>Номер дома указан неверно</strong>
                         </span>
                     @enderror
                 </div>
                 @error('price')
-                <span class="invalid-feedback-home" role="alert">
+                <span class="invalid-feedback-homer" role="alert">
                             <strong>{{ $message }}</strong>
                         </span>
                 @enderror

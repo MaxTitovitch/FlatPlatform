@@ -38,7 +38,7 @@
                                    placeholder="Введите заголовок" value="{{ $service->title }}" required>
                         </div>
                         @error('title')
-                        <span class="invalid-feedback-home" role="alert">
+                        <span class="invalid-feedback-homer" role="alert">
                             <strong>Введите корректное название</strong>
                         </span>
                         @enderror
@@ -64,7 +64,7 @@
                                    placeholder="Введите заголовок" value="{{ $service->city }}" required>
                         </div>
                         @error('city')
-                        <span class="invalid-feedback-home" role="alert">
+                        <span class="invalid-feedback-homerr" role="alert">
                             <strong>Введите корректный город</strong>
                         </span>
                         @enderror
@@ -76,7 +76,7 @@
                                    type="number" placeholder="Цена" value="{{ $service->price }}" required>
                         </div>
                         @error('price')
-                        <span class="invalid-feedback-home" role="alert">
+                        <span class="invalid-feedback-homer" role="alert">
                             <strong>Введите корректную цену</strong>
                         </span>
                         @enderror
@@ -90,7 +90,7 @@
                                   type="text" placeholder="Описание" required>{{ $service->description }}</textarea>
                     </div>
                     @error('description')
-                    <span class="invalid-feedback-home" role="alert">
+                    <span class="invalid-feedback-homer" role="alert">
                             <strong>Введите корректное описание</strong>
                         </span>
                     @enderror

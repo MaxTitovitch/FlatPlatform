@@ -35,7 +35,7 @@
                 @php
                     $newMessages = null;
                     $messages = \App\Message::where('dialog_id', $dialog->id)->get();
-                    dump($messages);
+
                     if($messages->count() > 20) {
                        $newMessages = collect([
                            $messages->shift(), $messages->shift(), $messages->shift(), $messages->shift(), $messages->shift(),
