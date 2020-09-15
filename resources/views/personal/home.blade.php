@@ -132,7 +132,7 @@
                     <img class="upload-avatar br-50 image-user w-100" src="{{ asset('/storage/' . Auth::user()->avatar) }}" alt="{{ Auth::user()->last_name }}">
                 </div>
                 <div class="custom-file mt-md-3 ">
-                    <input type="file" class="display-none fileblabla" id="validatedCustomFile" name="avatar">
+                    <input type="file" class="display-none fileblabla" id="validatedCustomFile" name="avatar" accept=".jpg, .jpeg, .png, .gif">
                     <p class="upload-avatar color-dark-blue text-center">
                         <i class="fa fa-cloud-upload mr-2" aria-hidden="true"></i> Загрузить
                     </p>

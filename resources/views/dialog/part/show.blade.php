@@ -7,13 +7,21 @@
             <div class=" row w-100 justify-content-between">
                 <div class="row pl-md-5">
                     @php
-                        $user = $dialog->second_user->id = Auth::id() ? $dialog->first_user : $dialog->second_user
+                        $user = $dialog->second_user->id == Auth::id() ? $dialog->first_user : $dialog->second_user
                     @endphp
-                    <img class="personal-area-dialog-img"
-                         src="{{ asset('/storage/' . $user->avatar) }}" alt="">
+
+                    @if($dialog->type === 'Поддержка')
+                        <img class="personal-area-dialog-img" src="{{ asset('img/avatar.png') }}" alt="">
+                    @else
+                        <img class="personal-area-dialog-img" src="{{ asset('/storage/' . $user->avatar) }}" alt="">
+                    @endif
                     <div class="my-md-auto ml-md-2 ">
                         <div class="font-18-px font-weight-bold">
-                            {{ $user->name . " " . $user->last_name }}
+                            @if($dialog->type === 'Поддержка')
+                                Варендуру - Техподдержка
+                            @else
+                                {{ $user->name . " " . $user->last_name }}
+                            @endif
                         </div>
                         <div class="text-secondary">
                             {{ $dialog->type }}
@@ -35,7 +43,6 @@
                 @php
                     $newMessages = null;
                     $messages = \App\Message::where('dialog_id', $dialog->id)->get();
-
                     if($messages->count() > 20) {
                        $newMessages = collect([
                            $messages->shift(), $messages->shift(), $messages->shift(), $messages->shift(), $messages->shift(),
@@ -55,16 +62,36 @@
                                 <div class="message-user-all first-user-message my-md-1 text-white"
                                      data-idlast="{{ $message->id }}">
                                 <span class="bg-primary px-md-2 rounded">
-                                    {{ $message->message }} <span
-                                        class="message-time">{{ substr($message->created_at, 11, 5) }}</span>
+                                    @if($message->type == 'Текст')
+                                        {{ $message->message }}
+                                    @else
+                                        @if(array_search(explode('.', $message->message)[1], ['png', 'git', 'jpeg', 'jpg']) !== false)
+                                            <img src="{{ $message->message }}" alt="">
+                                        @elseif(array_search(explode('.', $message->message)[1], ['ogv', 'mp4', 'webm']) !== false)
+                                            <video src="{{ $message->message }}" controls="controls"></video>
+                                        @else
+                                            <a target="_blank" download href="{{ $message->message }}"><strong><i>Файл {{ mb_strtoupper(explode('.', $message->message)[1]) }}</i></strong></a>
+                                        @endif
+                                    @endif
+                                    <span class="message-time">{{ substr($message->created_at, 11, 5) }}</span>
                                 </span>
                                 </div>
                             @else
                                 <div class="message-user-all second-user-message my-md-1 text-white"
                                      style="margin-right: 15px;" data-idlast="{{ $message->id }}">
                                 <span class="color-bg-dark-blue px-md-2 rounded">
-                                        {{ $message->message }} <span
-                                        class="message-time">{{ substr($message->created_at, 11, 5) }}</span>
+                                                                            @if($message->type == 'Текст')
+                                        {{ $message->message }}
+                                    @else
+                                        @if(array_search(explode('.', $message->message)[1], ['png', 'git', 'jpeg', 'jpg']) !== false)
+                                            <img src="{{ $message->message }}" alt="">
+                                        @elseif(array_search(explode('.', $message->message)[1], ['ogv', 'mp4', 'webm']) !== false)
+                                            <video src="{{ $message->message }}" controls="controls"></video>
+                                        @else
+                                            <a target="_blank" download href="{{ $message->message }}"><strong><i>Файл {{ mb_strtoupper(explode('.', $message->message)[1]) }}</i></strong></a>
+                                        @endif
+                                    @endif
+                                    <span class="message-time">{{ substr($message->created_at, 11, 5) }}</span>
                                 </span>
                                 </div>
                             @endif
@@ -82,8 +109,19 @@
                             <div class="message-user-all first-user-message my-md-1  text-white"
                                  data-idlast="{{ $message->id }}">
                                 <span class="bg-primary px-md-2 rounded">
-                                    {{ $message->message }} <span
-                                        class="message-time">{{ substr($message->created_at, 11, 5) }}</span>
+                                    @if($message->type == 'Текст')
+                                        {{ $message->message }}
+                                    @else
+                                        @if(array_search(explode('.', $message->message)[1], ['png', 'git', 'jpeg', 'jpg']) !== false)
+                                            <img src="{{ $message->message }}" alt="">
+                                        @elseif(array_search(explode('.', $message->message)[1], ['ogv', 'mp4', 'webm']) !== false)
+                                            <video src="{{ $message->message }}" controls="controls"></video>
+                                        @else
+                                            <a target="_blank" download href="{{ $message->message }}"><strong><i>Файл {{ mb_strtoupper(explode('.', $message->message)[1]) }}</i></strong></a>
+                                        @endif
+                                    @endif
+
+                                    <span class="message-time">{{ substr($message->created_at, 11, 5) }}</span>
                                 </span>
                             </div>
                         @else
@@ -94,18 +132,14 @@
                                     @if($message->type == 'Текст')
                                         {{ $message->message }}
                                     @else
-                                        @if(array_search(explode('.', $message->message)[1], ['png', 'git', 'jpeg', 'jpg']))
+                                        @if(array_search(explode('.', $message->message)[1], ['png', 'git', 'jpeg', 'jpg']) !== false)
                                             <img src="{{ $message->message }}" alt="">
-                                        @elseif(array_search(explode('.', $message->message)[1], ['ogv', 'mp4', 'webm']))
+                                        @elseif(array_search(explode('.', $message->message)[1], ['ogv', 'mp4', 'webm']) !== false)
                                             <video src="{{ $message->message }}" controls="controls"></video>
                                         @else
                                             <a target="_blank" download href="{{ $message->message }}"><strong><i>Файл {{ mb_strtoupper(explode('.', $message->message)[1]) }}</i></strong></a>
                                         @endif
                                     @endif
-
-
-
-
 
                                     <span class="message-time">{{ substr($message->created_at, 11, 5) }}</span>
                                 </span>
@@ -144,7 +178,6 @@
             </div>
         </form>
     </div>
-
 @endsection
 
 
