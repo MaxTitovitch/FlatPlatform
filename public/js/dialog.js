@@ -11,17 +11,18 @@ $('#messageSender').submit(function(event) {
         _token: $(this).find('[name="_token"]').eq(0).val(),
       },
       success: r => {
-        $(this).find('.message-input').eq(0).val('')
+          $(this).find('.message-input').eq(0).val('');
       },
       error: e => {
         console.log(e);
       }
     });
   }
+    $(this).find('.message-input').eq(0).val('');
 });
 
 setInterval(() => {
-  let id = $('.first-user-message, .second-user-message:last').data('idlast');
+  let id = $('.message-user-all:last').data('idlast');
   let userId = $('.message-body').eq(0).data('user-id');
   $.get({
     url: $('.get-action-message').data('message-action').replace('TOREPLACE', id),
@@ -40,6 +41,7 @@ setInterval(() => {
             clone.appendTo('.super-messager');
         }
       }
+        $('.message-body')[0].scrollTop = 100000;
     }
   });
 }, 500);

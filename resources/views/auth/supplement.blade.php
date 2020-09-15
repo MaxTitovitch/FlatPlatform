@@ -33,7 +33,7 @@
                                                            value="{{ old('email') }}">
                                                     @error('email')
                                                     <span class="invalid-feedback" role="alert">
-                                                    <strong>{{ $message }}</strong>
+                                                    <strong>Введите корректный адресс электронной почты</strong>
                                                 </span>
                                                     @enderror
                                                     <label for="email">Ваше e-mail</label>
@@ -56,7 +56,7 @@
 
                                             @error('phone')
                                             <span class="invalid-feedback" role="alert">
-                                                <strong>{{ $message }}</strong>
+                                                <strong>Введите корректный номер</strong>
                                             </span>
                                             @enderror
 
@@ -76,7 +76,7 @@
 
                                             @error('password')
                                             <span class="invalid-feedback" role="alert">
-                                                <strong>{{ $message }}</strong>
+                                                <strong>Введите корректный пароль</strong>
                                             </span>
                                             @enderror
 
@@ -97,7 +97,7 @@
 
                                             @error('password_confirmation')
                                             <span class="invalid-feedback" role="alert">
-                                                <strong>{{ $message }}</strong>
+                                                <strong>Пароли не совпадают</strong>
                                             </span>
                                             @enderror
 
@@ -125,7 +125,7 @@
 
                                     @error('role_id')
                                     <span class="invalid-feedback" role="alert">
-                                        <strong>{{ $message }}</strong>
+                                        <strong>Неверная роль</strong>
                                     </span>
                                     @enderror
 

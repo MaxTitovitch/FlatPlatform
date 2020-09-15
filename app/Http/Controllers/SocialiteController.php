@@ -16,15 +16,15 @@ class SocialiteController extends Controller
     }
 
     public function callback($provider) {
-//        $isNeedEmail = false;
-//        $socialiteUser = Socialite::driver($provider)->user();
-//        $user = $this->findOrCreateUser($provider, $socialiteUser, $isNeedEmail);
-//        if($user) {
-//            Auth::login($user, true);
-//            return redirect()->route('index');
-//        } else {
+        $isNeedEmail = false;
+        $socialiteUser = Socialite::driver($provider)->user();
+        $user = $this->findOrCreateUser($provider, $socialiteUser, $isNeedEmail);
+        if($user) {
+            Auth::login($user, true);
+            return redirect()->route('index');
+        } else {
             return view('auth.supplement', ['isNeedEmail' => true, 'provider' => $provider]);
-//        }
+        }
     }
 
     public function save(UserSocialRequest $request, $provider) {

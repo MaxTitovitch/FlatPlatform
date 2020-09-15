@@ -32,7 +32,7 @@
                                                        value="{{ old('last_name') }}">
                                                 @error('last_name')
                                                 <span class="invalid-feedback" role="alert">
-                                                    <strong>{{ $message }}</strong>
+                                                    <strong>Введите корректную фамилию</strong>
                                                 </span>
                                                 @enderror
                                                 <label for="last_name">Ваш фамилия</label>
@@ -50,7 +50,7 @@
                                                        value="{{ old('name') }}">
                                                 @error('name')
                                                 <span class="invalid-feedback" role="alert">
-                                                    <strong>{{ $message }}</strong>
+                                                    <strong>Введите имя корректной длинны</strong>
                                                 </span>
                                                 @enderror
                                                 <label for="name">Ваше имя</label>
@@ -68,7 +68,7 @@
                                                        value="{{ old('email') }}">
                                                 @error('email')
                                                 <span class="invalid-feedback" role="alert">
-                                                    <strong>{{ $message }}</strong>
+                                                    <strong>Введите корректный адресс электронной почты</strong>
                                                 </span>
                                                 @enderror
                                                 <label for="email">Ваше e-mail</label>
@@ -90,7 +90,7 @@
 
                                             @error('phone')
                                             <span class="invalid-feedback" role="alert">
-                                                <strong>{{ $message }}</strong>
+                                                <strong>Введите корректный номер телефона</strong>
                                             </span>
                                             @enderror
 
@@ -110,7 +110,7 @@
 
                                             @error('reserve_phone')
                                             <span class="invalid-feedback" role="alert">
-                                                <strong>{{ $message }}</strong>
+                                                <strong>Введите корректный номер телефона</strong>
                                             </span>
                                             @enderror
 
@@ -130,7 +130,7 @@
 
                                             @error('password')
                                             <span class="invalid-feedback" role="alert">
-                                                <strong>{{ $message }}</strong>
+                                                <strong>Введите корректный пароль</strong>
                                             </span>
                                             @enderror
 
@@ -151,7 +151,7 @@
 
                                             @error('password_confirmation')
                                             <span class="invalid-feedback" role="alert">
-                                                <strong>{{ $message }}</strong>
+                                                <strong>Пароли не совпадают</strong>
                                             </span>
                                             @enderror
 

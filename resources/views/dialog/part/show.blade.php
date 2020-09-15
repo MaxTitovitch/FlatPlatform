@@ -6,11 +6,14 @@
         <div class=" row my-md-3 pb-md-2 border-bottom border-primary" style="margin-right: 15px;">
             <div class=" row w-100 justify-content-between">
                 <div class="row pl-md-5">
+                    @php
+                        $user = $dialog->second_user->id = Auth::id() ? $dialog->first_user : $dialog->second_user
+                    @endphp
                     <img class="personal-area-dialog-img"
-                         src="{{ asset('/storage/' . $dialog->second_user->avatar) }}" alt="">
+                         src="{{ asset('/storage/' . $user->avatar) }}" alt="">
                     <div class="my-md-auto ml-md-2 ">
                         <div class="font-18-px font-weight-bold">
-                            {{ $dialog->second_user->name . " " . $dialog->second_user->last_name }}
+                            {{ $user->name . " " . $user->last_name }}
                         </div>
                         <div class="text-secondary">
                             {{ $dialog->type }}
@@ -47,13 +50,13 @@
                 <details>
                     @foreach($messages as $message)
                         @if(Auth::id() !== $message->user_id)
-                            <div class="first-user-message mt-md-2  text-white"  data-idlast="{{ $message->id }}">
+                            <div class="message-user-all first-user-message my-md-1 text-white"  data-idlast="{{ $message->id }}">
                                 <span class="bg-primary px-md-2 rounded">
                                     {{ $message->message }} <span class="message-time">{{ substr($message->created_at, 11, 5) }}</span>
                                 </span>
                             </div>
                         @else
-                            <div class="second-user-message mt-md-2  text-white" style="margin-right: 15px;"  data-idlast="{{ $message->id }}">
+                            <div class="message-user-all second-user-message my-md-1 text-white" style="margin-right: 15px;"  data-idlast="{{ $message->id }}">
                                 <span class="color-bg-dark-blue px-md-2 rounded">
                                     {{ $message->message }} <span class="message-time">{{ substr($message->created_at, 11, 5) }}</span>
                                 </span>
@@ -67,13 +70,13 @@
                 @if($newMessages)
                     @foreach($newMessages as $message)
                         @if(Auth::id() !== $message->user_id)
-                            <div class="first-user-message mt-md-2  text-white" data-idlast="{{ $message->id }}">
+                            <div class="message-user-all first-user-message my-md-1  text-white" data-idlast="{{ $message->id }}">
                                 <span class="bg-primary px-md-2 rounded">
                                     {{ $message->message }} <span class="message-time">{{ substr($message->created_at, 11, 5) }}</span>
                                 </span>
                             </div>
                         @else
-                            <div class="second-user-message mt-md-2  text-white" style="margin-right: 15px;" data-idlast="{{ $message->id }}">
+                            <div class="message-user-all second-user-message my-md-1  text-white" style="margin-right: 15px;" data-idlast="{{ $message->id }}">
                                 <span class="color-bg-dark-blue px-md-2 rounded">
                                     {{ $message->message }} <span class="message-time">{{ substr($message->created_at, 11, 5) }}</span>
                                 </span>
