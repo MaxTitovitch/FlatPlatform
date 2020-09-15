@@ -146,6 +146,19 @@
                             </div>
                         @endif
                     @endforeach
+                    <div class="display-none message-user-all first-user-message my-md-1  text-white">
+                            <span class="bg-primary px-md-2 rounded">
+                                Text
+                                <span class="message-time">12:02</span>
+                            </span>
+                    </div>
+                    <div class="display-none message-user-all second-user-message my-md-1  text-white"
+                         style="margin-right: 15px;">
+                            <span class="color-bg-dark-blue px-md-2 rounded">
+                                Text
+                                <span class="message-time">12:02</span>
+                            </span>
+                    </div>
                 @endif
             </div>
         </div>

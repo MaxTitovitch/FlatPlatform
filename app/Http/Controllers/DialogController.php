@@ -140,12 +140,16 @@ class DialogController extends Controller
     }
 
     public function getLastMessages($id) {
-        $message = Message::find($id);
-        if($message != null) {
-            $messages = Message::where('dialog_id', $message->dialog_id)->where('id', '>', $message->id)->get();
-            return $messages->toArray();
+        if(count(explode('i', $id)) == 2) {
+            return Message::where('dialog_id', explode('i', $id)[1] )->get()->toArray();
         } else {
-            return redirect()->route('index');
+            $message = Message::find($id);
+            if ($message != null) {
+                $messages = Message::where('dialog_id', $message->dialog_id)->where('id', '>', $message->id)->get();
+                return $messages->toArray();
+            } else {
+                return redirect()->route('index');
+            }
         }
     }
 

@@ -9,8 +9,7 @@
 
                         <h1>Подтвердите e-mail</h1>
                         <div class="mb-5">
-                            Lorem ipsum dolor sit amet, consectetur adipisicing elit. Alias, at consectetur delectus
-                            ipsa ipsam reiciendis?
+                            Вам на почту должно было придти письмо верификации. Не пришло? Подтвердите!
                         </div>
                         @if (session('resent'))
                             <div class="alert alert-success" role="alert">
@@ -42,7 +41,7 @@
                             <div class="mt-5 btn-block">
                                 <a href="{{ route('logout') }}" onclick="event.preventDefault();
                                                      document.getElementById('logout-form').submit();" type="button"
-                                   class="btn auth-button">ВЫЙТИ</a>
+                                   class="btn auth-button w-100">ВЫЙТИ</a>
                             </div>
                         </div>
                     </div>

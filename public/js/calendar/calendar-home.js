@@ -6,12 +6,12 @@ $.fn.datepicker.dates['ru'] = {
     monthsShort: ["Jan", "Feb", "Mar", "Apr", "May", "Jun", "Jul", "Aug", "Sep", "Oct", "Nov", "Dec"],
     today: "Today",
     clear: "Clear",
-    format: "dd-mm-yyyy",
+    format: "yyyy-mm-dd",
     titleFormat: "MM yyyy", /* Leverages same syntax as 'format' */
     weekStart: 1
 };
 $('.datepicker').datepicker({
-    format: 'dd-mm-yyyy',
+    format: "yyyy-mm-dd",
     language: 'ru',
     orientation: 'bottom'
 });

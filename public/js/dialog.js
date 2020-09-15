@@ -23,6 +23,7 @@ $('#messageSender').submit(function(event) {
 
 let uppendData = (className, ri) => {
   let clone = $(`.${className}:last`).clone();
+  console.log(clone);
   let message = '';
   if(ri.type == 'Текст') {
     message = ri.message;
@@ -37,11 +38,12 @@ let uppendData = (className, ri) => {
   }
   clone.find('.rounded').html(message + '<span class="message-time">' + ri.created_at.substr(11, 5) + '</span>');
   clone.data('idlast', ri.id);
+  clone.removeClass('display-none')
   clone.appendTo('.super-messager');
 }
 
 setInterval(() => {
-  let id = $('.message-user-all:last').data('idlast');
+  let id = $('.message-user-all:last').data('idlast') || ('i' + location.href.split('/').reverse()[0]);
   let userId = $('.message-body').eq(0).data('user-id');
   $.get({
     url: $('.get-action-message').data('message-action').replace('TOREPLACE', id),
