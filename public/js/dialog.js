@@ -21,6 +21,25 @@ $('#messageSender').submit(function(event) {
     $(this).find('.message-input').eq(0).val('');
 });
 
+let uppendData = (className, ri) => {
+  let clone = $(`.${className}:last`).clone();
+  let message = '';
+  if(ri.type == 'Текст') {
+    message = ri.message;
+  } else {
+    if(['png', 'git', 'jpeg', 'jpg'].indexOf( ri.message.split('.')[1] ) != -1) {
+      message = `<img src="${ ri.message }" alt="">`;
+    } else if (['ogv', 'mp4', 'webm'].indexOf( ri.message.split('.')[1] ) != -1) {
+      message = `<video src="${ ri.message}" controls="controls"></video>`;
+    } else {
+      message = `<a target="_blank" download href="${ ri.message }"><strong><i>Файл ${  ri.message.split('.')[1].toUpperCase() }</i></strong></a>`;
+    }
+  }
+  clone.find('.rounded').html(message + '<span class="message-time">' + ri.created_at.substr(11, 5) + '</span>');
+  clone.data('idlast', ri.id);
+  clone.appendTo('.super-messager');
+}
+
 setInterval(() => {
   let id = $('.message-user-all:last').data('idlast');
   let userId = $('.message-body').eq(0).data('user-id');
@@ -35,10 +54,9 @@ setInterval(() => {
             } else {
               className = 'first-user-message';
             }
-            let clone = $(`.${className}:last`).clone();
-            clone.find('.rounded').html(r[i].message + '<span class="message-time">' + r[i].created_at.substr(11, 5) + '</span>');
-            clone.data('idlast', r[i].id);
-            clone.appendTo('.super-messager');
+            if(!(r[i].type == 'Файл' && r[i].message == 'QWERTY')) {
+              uppendData(className, r[i]);
+            }
         }
         $('.message-body')[0].scrollTop = 100000;
       }

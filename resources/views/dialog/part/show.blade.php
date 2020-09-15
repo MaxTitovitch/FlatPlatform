@@ -7,7 +7,7 @@
             <div class=" row w-100 justify-content-between">
                 <div class="row pl-md-5">
                     @php
-                        $user = $dialog->second_user->id = Auth::id() ? $dialog->first_user : $dialog->second_user
+                        $user = $dialog->second_user->id == Auth::id() ? $dialog->first_user : $dialog->second_user
                     @endphp
                     <img class="personal-area-dialog-img"
                          src="{{ asset('/storage/' . $user->avatar) }}" alt="">
@@ -57,9 +57,9 @@
                                     @if($message->type == 'Текст')
                                         {{ $message->message }}
                                     @else
-                                        @if(array_search(explode('.', $message->message)[1], ['png', 'git', 'jpeg', 'jpg']))
+                                        @if(array_search(explode('.', $message->message)[1], ['png', 'git', 'jpeg', 'jpg']) !== false)
                                             <img src="{{ $message->message }}" alt="">
-                                        @elseif(array_search(explode('.', $message->message)[1], ['ogv', 'mp4', 'webm']))
+                                        @elseif(array_search(explode('.', $message->message)[1], ['ogv', 'mp4', 'webm']) !== false)
                                             <video src="{{ $message->message }}" controls="controls"></video>
                                         @else
                                             <a target="_blank" download href="{{ $message->message }}"><strong><i>Файл {{ mb_strtoupper(explode('.', $message->message)[1]) }}</i></strong></a>
@@ -75,9 +75,9 @@
                                                                             @if($message->type == 'Текст')
                                         {{ $message->message }}
                                     @else
-                                        @if(array_search(explode('.', $message->message)[1], ['png', 'git', 'jpeg', 'jpg']))
+                                        @if(array_search(explode('.', $message->message)[1], ['png', 'git', 'jpeg', 'jpg']) !== false)
                                             <img src="{{ $message->message }}" alt="">
-                                        @elseif(array_search(explode('.', $message->message)[1], ['ogv', 'mp4', 'webm']))
+                                        @elseif(array_search(explode('.', $message->message)[1], ['ogv', 'mp4', 'webm']) !== false)
                                             <video src="{{ $message->message }}" controls="controls"></video>
                                         @else
                                             <a target="_blank" download href="{{ $message->message }}"><strong><i>Файл {{ mb_strtoupper(explode('.', $message->message)[1]) }}</i></strong></a>
@@ -104,9 +104,9 @@
                                     @if($message->type == 'Текст')
                                         {{ $message->message }}
                                     @else
-                                        @if(array_search(explode('.', $message->message)[1], ['png', 'git', 'jpeg', 'jpg']))
+                                        @if(array_search(explode('.', $message->message)[1], ['png', 'git', 'jpeg', 'jpg']) !== false)
                                             <img src="{{ $message->message }}" alt="">
-                                        @elseif(array_search(explode('.', $message->message)[1], ['ogv', 'mp4', 'webm']))
+                                        @elseif(array_search(explode('.', $message->message)[1], ['ogv', 'mp4', 'webm']) !== false)
                                             <video src="{{ $message->message }}" controls="controls"></video>
                                         @else
                                             <a target="_blank" download href="{{ $message->message }}"><strong><i>Файл {{ mb_strtoupper(explode('.', $message->message)[1]) }}</i></strong></a>
@@ -124,9 +124,9 @@
                                     @if($message->type == 'Текст')
                                         {{ $message->message }}
                                     @else
-                                        @if(array_search(explode('.', $message->message)[1], ['png', 'git', 'jpeg', 'jpg']))
+                                        @if(array_search(explode('.', $message->message)[1], ['png', 'git', 'jpeg', 'jpg']) !== false)
                                             <img src="{{ $message->message }}" alt="">
-                                        @elseif(array_search(explode('.', $message->message)[1], ['ogv', 'mp4', 'webm']))
+                                        @elseif(array_search(explode('.', $message->message)[1], ['ogv', 'mp4', 'webm']) !== false)
                                             <video src="{{ $message->message }}" controls="controls"></video>
                                         @else
                                             <a target="_blank" download href="{{ $message->message }}"><strong><i>Файл {{ mb_strtoupper(explode('.', $message->message)[1]) }}</i></strong></a>
