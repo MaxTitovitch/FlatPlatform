@@ -1,7 +1,7 @@
 @extends('layouts.personal')
 
 @section('personal-content')
-    @include('dialog.part.show', ['dialog' => $dialog, 'section' => 'personal-content'])
+    @include('dialog.part.show', ['dialog' => $dialog, 'section' => 'personal-content', 'jsSection' => 'scripts', 'cssSection' => null])
 @endsection
 
 @if($dialog->household_service_order || $dialog->flat_order)

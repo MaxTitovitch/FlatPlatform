@@ -49,7 +49,7 @@ setInterval(() => {
   if(lastDate){
     lastDate = lastDate.innerText
   }
-  // console.log(lastDate)
+  console.log(lastDate)
   $.get({
     url: $('.get-action-message').data('message-action').replace('TOREPLACE', id),
     success: r => {

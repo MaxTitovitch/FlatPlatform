@@ -1,4 +1,4 @@
-@extends('layouts.app')
+
 
 @section($section)
     <div class="text-center mt-md-3">
