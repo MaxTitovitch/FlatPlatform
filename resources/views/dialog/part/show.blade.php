@@ -40,8 +40,21 @@
         <div class="message-body" data-user-id="{{ Auth::id() }}">
             <div class="display-none super-messager get-action-message"
                  data-message-action="{{ route('get-last-messages', ['id' => 'TOREPLACE']) }}">
+                <div class="display-none message-user-all first-user-message my-md-1  text-white">
+                            <span class="bg-primary px-md-2 rounded">
+                                Text
+                                <span class="message-time">12:02</span>
+                            </span>
+                </div>
+                <div class="display-none message-user-all second-user-message my-md-1  text-white"
+                     style="margin-right: 15px;">
+                            <span class="color-bg-dark-blue px-md-2 rounded">
+                                Text
+                                <span class="message-time">12:02</span>
+                            </span>
+                </div>
                 @php
-                    $newMessages = null;
+                    $newMessages = null; $lastData = null;
                     $messages = \App\Message::where('dialog_id', $dialog->id)->get();
                     if($messages->count() > 20) {
                        $newMessages = collect([
@@ -58,6 +71,10 @@
                 @if($messages != [])
                     <details>
                         @foreach($messages as $message)
+                            @if($lastData != substr($message->created_at, 0, 10))
+                                @php($lastData = substr($message->created_at, 0, 10))
+                                <div class="last-data my-4 text-center text-primary w-100">{{ $lastData }}</div>
+                            @endif
                             @if(Auth::id() !== $message->user_id)
                                 <div class="message-user-all first-user-message my-md-1 text-white"
                                      data-idlast="{{ $message->id }}">
@@ -105,6 +122,10 @@
                     <!-- ogv mp4 webm - video  -->
                     <!-- other - other  -->
                     @foreach($newMessages as $message)
+                        @if($lastData != substr($message->created_at, 0, 10))
+                            @php($lastData = substr($message->created_at, 0, 10))
+                            <div class="last-data my-4 text-center text-primary w-100">{{ $lastData }}</div>
+                        @endif
                         @if(Auth::id() !== $message->user_id)
                             <div class="message-user-all first-user-message my-md-1  text-white"
                                  data-idlast="{{ $message->id }}">
@@ -146,19 +167,7 @@
                             </div>
                         @endif
                     @endforeach
-                    <div class="display-none message-user-all first-user-message my-md-1  text-white">
-                            <span class="bg-primary px-md-2 rounded">
-                                Text
-                                <span class="message-time">12:02</span>
-                            </span>
-                    </div>
-                    <div class="display-none message-user-all second-user-message my-md-1  text-white"
-                         style="margin-right: 15px;">
-                            <span class="color-bg-dark-blue px-md-2 rounded">
-                                Text
-                                <span class="message-time">12:02</span>
-                            </span>
-                    </div>
+
                 @endif
             </div>
         </div>

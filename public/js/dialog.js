@@ -45,6 +45,11 @@ let uppendData = (className, ri) => {
 setInterval(() => {
   let id = $('.message-user-all:last').data('idlast') || ('i' + location.href.split('/').reverse()[0]);
   let userId = $('.message-body').eq(0).data('user-id');
+  let lastDate = $('.last-data').toArray().reverse()[0];
+  if(lastDate){
+    lastDate = lastDate.innerText
+  }
+  // console.log(lastDate)
   $.get({
     url: $('.get-action-message').data('message-action').replace('TOREPLACE', id),
     success: r => {
@@ -55,6 +60,12 @@ setInterval(() => {
               className = 'second-user-message';
             } else {
               className = 'first-user-message';
+            }
+            if(lastDate) {
+              if (r[i].created_at.substr(0, 10) !== lastDate) {
+                lastDate = r[i].created_at.substr(0, 10);
+                $('.super-messager').append(`<div class="last-data my-4 text-center text-primary w-100">${lastDate}</div>`)
+              }
             }
             if(!(r[i].type == 'Файл' && r[i].message == 'QWERTY')) {
               uppendData(className, r[i]);

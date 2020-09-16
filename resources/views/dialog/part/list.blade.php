@@ -21,7 +21,7 @@
                     @endif
                 </a>
             </div>
-            <div class="col-md-9">
+            <div class="col-md-8">
                 <p class="dialog-p">
                     <a href="{{ route($route, ['id' => $dialog->id]) }}" class="color-dark-blue font-18-px font-weight-bold">
                         @if($dialog->type === 'Поддержка')
@@ -31,12 +31,23 @@
                         @endif
                     </a>
                     <br>
-                    <a href="{{ route($route, ['id' => $dialog->id]) }}" class="text-decoration-none text-dark">{{ $dialog->messages->last()->message }}</a>
+                    <a href="{{ route($route, ['id' => $dialog->id]) }}" class="text-decoration-none text-dark">
+                        @if($dialog->messages->last())
+                            @if($dialog->messages->last()->type == 'Файл')
+                                <span class="text-primary">Файл</span>
+                            @else
+                                {{ $dialog->messages->last()->message }}
+                            @endif
+                        @endif
+                    </a>
                 </p>
             </div>
-            <div class="col-md-1">
+            <div class="col-md-2 text-right">
                 <span class="text-secondary" style="font-size: 12px">
-                    {{ explode(" ", $dialog->messages->last()->created_at)[1]  }} <br>
+                    @if($dialog->messages->last())
+                        {{ explode(" ", $dialog->messages->last()->created_at)[1]  }}
+                    @endif
+                    <br>
                     {{ $dialog->type }}
                 </span>
             </div>

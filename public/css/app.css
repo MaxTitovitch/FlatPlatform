@@ -69,6 +69,28 @@
     max-height: 10vh;
 }
 
+.font-size-20 {
+    font-size: 20px!important;
+}
+
+.alert-status-success {
+    font-weight: bold;
+    color: #0b820b;
+    border: 1.5px solid #0b820b36;
+    background: #97e397;
+}
+.alert-status-dark {
+    font-weight: bold;
+    color: #0c81e1;
+    border: 1.5px solid #0c81e136;
+    background: #92c6f1;
+}
+.alert-status-danger {
+    font-weight: bold;
+    color: #cc0e40;
+    border: 1.5px solid #cc0e4036;
+    background: #f192ab;
+}
 
 .slick-prev,
 .slick-next {

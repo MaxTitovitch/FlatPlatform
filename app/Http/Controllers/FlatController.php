@@ -92,7 +92,8 @@ class FlatController extends Controller
                     $flatOrder->status = 'Утверждён';
                 }
                 $flatOrder->save();
-                return redirect()->route('dialog-show', ['id' => $flatOrder->dialogs->first()->id]);
+//                return redirect()->route('dialog-show', ['id' => $flatOrder->dialogs->first()->id]);
+                return redirect()->back();
             }
         );
     }
@@ -116,7 +117,8 @@ class FlatController extends Controller
                     $request->session()->forget('status-success');
                     $request->session()->flash('status-error', $messageError);
                 }
-                return redirect()->route('dialog-show', ['id' => $flatOrder->dialogs->first()->id]);
+//                return redirect()->route('dialog-show', ['id' => $flatOrder->dialogs->first()->id]);
+                return redirect()->back();
             }
         );
     }
@@ -148,7 +150,7 @@ class FlatController extends Controller
         } elseif($user->id !== $flatOrder->$userType->id) {
             $request->session()->flash('status-error', $messageError);
         } else {
-            if($status == $flatOrder->status && ($status == 'Отклонён' || $status == 'Отозван')) {
+            if($status == $flatOrder->status && ($status == 'Отменён' || $status == 'Отозван')) {
                 $flatOrder->status = 'Создан';
             } else {
                 $flatOrder->status = $status;
@@ -159,7 +161,8 @@ class FlatController extends Controller
         if(is_callable($callback)) {
             return $callback($flatOrder, $request, $messageError);
         } else {
-            return redirect()->route('flat-page', ['id' => $flatOrder->flat->id]);
+//            return redirect()->route('flat-page', ['id' => $flatOrder->flat->id]);
+            return redirect()->back();
         }
     }
 }

@@ -16,7 +16,9 @@
             Диалоги
         </a>
     </div>
-    @if(Auth::user()->role->name == 'landlord')
+    @php($role = \TCG\Voyager\Models\Role::find(Auth::user()->role_id)->name)
+{{--    @dump(Auth::user()->role)--}}
+    @if($role == 'landlord')
     <div class="">
         <a href="{{ route('flats.index') }}" class="icons-sidebar">
             <svg width="20" height="20" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg">
@@ -36,7 +38,7 @@
         </a>
     </div>
     @endif
-    @if(Auth::user()->role->name == 'employee')
+    @if($role == 'employee')
     <div class="">
         <a href="{{ route('household_services.index') }}" class="icons-sidebar">
             <svg width="20" height="20" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg">
@@ -57,7 +59,7 @@
         </a>
     </div>
     @endif
-    @if(Auth::user()->role->name == 'landlord' || Auth::user()->role->name == 'tenant')
+    @if($role == 'landlord' || $role == 'tenant')
     <div class="">
         <a href="{{ route('orders.index') }}" class="icons-sidebar">
             <svg width="20" height="20" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg">
@@ -84,7 +86,7 @@
         </a>
     </div>
     @endif
-    @if(Auth::user()->role->name == 'landlord' || Auth::user()->role->name == 'employee')
+    @if($role == 'landlord' || $role == 'employee')
     <div class="">
         <a href="{{ route('service-orders.index') }}" class="icons-sidebar">
             <svg width="20" height="20" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg">

@@ -10,19 +10,24 @@ use App\Message;
 use App\Http\Requests\MessageRequest;
 use App\FlatServiceOrder;
 use App\HouseholdServiceOrder;
+use Illuminate\Support\Facades\DB;
 
 class DialogController extends Controller
 {
     public function index(Request $request) {
         $viewName = $request->route()->getName() == "admin-dialog-list" ? 'dialog.admin-list' : 'dialog.user-list';
-        $dialogs = Dialog::withCount('messages');
+        $dialogs = Dialog::join('messages', 'messages.dialog_id', '=', 'dialogs.id')
+            ->select('dialogs.*', DB::raw('MAX(messages.created_at) as messages_max_date'), DB::raw('COUNT(messages.id) as messages_count'));
         if($viewName === 'dialog.admin-list') {
-            $dialogs = $dialogs->where('type', 'Поддержка');
+            $dialogs = $dialogs->where('dialogs.type', 'Поддержка');
         } else {
-            $dialogs = $dialogs->where("first_user_id", Auth::id())->orWhere("second_user_id", Auth::id());
+            $dialogs = $dialogs->where("dialogs.first_user_id", Auth::id())->orWhere("dialogs.second_user_id", Auth::id());
         }
-
-        $dialogs = $dialogs->having('messages_count', '>', 0)->paginate(20);
+        $dialogs = $dialogs
+            ->groupBy('dialogs.id')
+            ->having('messages_count', '>', 0)
+            ->orderBy('messages_max_date', 'desc')
+            ->paginate(20);
         return view($viewName, ['dialogs' => $dialogs, 'route' => $request->route()->getName() == "admin-dialog-list" ? 'admin-dialog-show' : 'dialog-show' ]);
     }
 

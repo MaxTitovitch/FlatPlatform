@@ -76,45 +76,135 @@
                 {{ $order->tenant->name . " " . $order->tenant->last_name}}
             </td>
             <td>
-                @if($order->status == 'Отменён' || $order->status == 'Отозван')
-                    <div class="rounded text-danger">{{ $order->status }}</div>
-                @elseif($order->status == 'Принят' || $order->status == 'Утверждён' || $order->status == 'Выполнен')
-                    <div class="rounded text-success">{{ $order->status }}</div>
-                @elseif($order->flat->status == 'Свободна')
+
+                @if($order->flat->status == 'Свободна')
                     @if(Auth::id() !== $order->tenant_id)
                         @if(Auth::id() === $order->flat->user_id)
                             <div class="border border-primary rounded text-center"><a href="{{ route('dialog-flat-create', ['id' => $order->flat->id]) }}" class="text-primary">Написать</a></div>
                         @else
                             <div class="border border-primary rounded text-center"><a href="{{ route('dialog-create', ['id' => $order->tenant_id]) }}" class="text-primary">Написать</a></div>
                         @endif
-                    @else
-                        <div class="border border-danger rounded text-center">
-                            <form action="{{ route('flat-reject-request', ['id' => $order->id], '_method=path') }}" method="post">
-                                @csrf
-                                <input type="hidden" name="_method" value="PATCH">
-                                <button type="submit" class="text-danger btn-nobtn">Отозвать</button>
-                            </form>
-                        </div>
                     @endif
-                    @if(Auth::id() === $order->flat->user_id)
-                        @if($order->status === 'Создан')
+                    @if(Auth::user()->role->name == 'tenant')
+                        @switch($order->status)
+                            @case('Создан')
+                            <div class="border border-danger rounded text-center">
+                                <form action="{{ route("service-reject-request", ['id' => $order->id, '_method=path']) }}" method="post" >
+                                    @csrf
+                                    <input type="hidden" name="_method" value="PATCH">
+                                    <button type="submit" class="text-danger btn-nobtn">ОТОЗВАТЬ</button>
+                                </form>
+                            </div>
+                            @break
+                            @case('Отован')
+                            <div class="border border-warning rounded text-center">
+                                <form action="{{ route("service-reject-request", ['id' => $order->id]) }}" method="post" >
+                                    @csrf
+                                    <input type="hidden" name="_method" value="PATCH">
+                                    <button type="submit" class="text-warning btn-nobtn">ВЕРНУТЬ СТАВКУ</button>
+                                </form>
+                            </div>
+                            @break
+                            @case('Отменён')
+                            @break
+                            @case('Принят')
+                            @if($order->tenant_confirmation == 0 && Auth::user()->role->name == 'tenant')
+                                <div class="border border-success rounded text-center">
+                                    <form action="{{ route("service-confirm-request", ['id' => $order->id]) }}" method="post" >
+                                        @csrf
+                                        <input type="hidden" name="_method" value="PATCH">
+                                        <button type="submit" class="text-success btn-nobtn">ПОДТВЕРДИТЬ</button>
+                                    </form>
+                                </div>
+                            @endif
+                            @break
+                            @case('Утверждён')
+                            @break
+                            @case('Выполнен')
+                            @break
+                        @endswitch
+                    @else
+                        @switch($order->status)
+                            @case('Создан')
+                            <div class="border border-warning rounded text-center">
+                                <form action="{{ route("service-accept-request", ['id' => $order->id]) }}" method="post">
+                                    @csrf
+                                    <input type="hidden" name="_method" value="PATCH">
+                                    <button type="submit" class="text-warning btn-nobtn">ПРИНЯТЬ</button>
+                                </form>
+                            </div>
+
+                            <div class="border border-danger rounded text-center">
+                                <form action="{{ route("service-reject-request", ['id' => $order->id]) }}" method="post">
+                                    @csrf
+                                    <input type="hidden" name="_method" value="PATCH">
+                                    <button type="submit" class="text-danger btn-nobtn">ОТКЛОНИТЬ</button>
+                                </form>
+                            </div>
+                            @break
+                            @case('Отован')
+                            @break
+                            @case('Отменён')
+                            <div class="border border-warning rounded text-center">
+                                <form action="{{ route("service-reject-request", ['id' => $order->id]) }}" method="post" >
+                                    @csrf
+                                    <input type="hidden" name="_method" value="PATCH">
+                                    <button type="submit" class="text-warning btn-nobtn">ВЕРНУТЬ СТАВКУ</button>
+                                </form>
+                            </div>
+                            @break
+                            @case('Принят')
+                            @if($order->landlord_confirmation == 0 && Auth::user()->role->name == 'landlord')
+                                <div class="border border-success rounded text-center">
+                                    <form action="{{ route("service-confirm-request", ['id' => $order->id]) }}" method="post" >
+                                        @csrf
+                                        <input type="hidden" name="_method" value="PATCH">
+                                        <button type="submit" class="text-success btn-nobtn">ПОДТВЕРДИТЬ</button>
+                                    </form>
+                                </div>
+                            @endif
+                            @break
+                            @case('Утверждён')
 
                             <div class="border border-success rounded text-center">
-                                <form action="{{ route('flat-accept-request', ['id' => $order->id, '_method=path']) }}" method="post">
+                                <form action="{{ route("service-complete-request", ['id' => $order->id]) }}" method="post">
                                     @csrf
                                     <input type="hidden" name="_method" value="PATCH">
-                                    <button type="submit" class="text-success btn-nobtn">Принять</button>
+                                    <button type="submit" class="text-success btn-nobtn">ПРОЕКТ ВЫПОЛНЕН</button>
                                 </form>
                             </div>
-                            <div class="border border-danger rounded text-center">
-                                <form action="{{ route('flat-reject-request', ['id' => $order->id, '_method=path']) }}" method="post">
-                                    @csrf
-                                    <input type="hidden" name="_method" value="PATCH">
-                                    <button type="submit" class="text-danger btn-nobtn">Отклонить</button>
-                                </form>
-                            </div>
-                        @endif
+                            @break
+                            @case('Выполнен')
+                            @break
+                        @endswitch
                     @endif
+{{--                        <div class="border border-danger rounded text-center">--}}
+{{--                            <form action="{{ route('flat-reject-request', ['id' => $order->id], '_method=path') }}" method="post">--}}
+{{--                                @csrf--}}
+{{--                                <input type="hidden" name="_method" value="PATCH">--}}
+{{--                                <button type="submit" class="text-danger btn-nobtn">Отозвать</button>--}}
+{{--                            </form>--}}
+{{--                        </div>--}}
+{{--                    @endif--}}
+{{--                    @if(Auth::id() === $order->flat->user_id)--}}
+{{--                        @if($order->status === 'Создан')--}}
+
+{{--                            <div class="border border-success rounded text-center">--}}
+{{--                                <form action="{{ route('flat-accept-request', ['id' => $order->id, '_method=path']) }}" method="post">--}}
+{{--                                    @csrf--}}
+{{--                                    <input type="hidden" name="_method" value="PATCH">--}}
+{{--                                    <button type="submit" class="text-success btn-nobtn">Принять</button>--}}
+{{--                                </form>--}}
+{{--                            </div>--}}
+{{--                            <div class="border border-danger rounded text-center">--}}
+{{--                                <form action="{{ route('flat-reject-request', ['id' => $order->id, '_method=path']) }}" method="post">--}}
+{{--                                    @csrf--}}
+{{--                                    <input type="hidden" name="_method" value="PATCH">--}}
+{{--                                    <button type="submit" class="text-danger btn-nobtn">Отклонить</button>--}}
+{{--                                </form>--}}
+{{--                            </div>--}}
+{{--                        @endif--}}
+{{--                    @endif--}}
                 @endif
 
             </td>

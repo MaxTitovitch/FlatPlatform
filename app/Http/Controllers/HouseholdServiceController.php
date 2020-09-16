@@ -76,7 +76,8 @@ class HouseholdServiceController extends Controller
                     $dialog = Dialog::create(['first_user_id' => $serviceOrder->employee->id, 'second_user_id' => $serviceOrder->landlord->id, 'type' => 'Робота', 'household_service_order_id' => $serviceOrder->id]);
                 }
                 $dialog->save();
-                return redirect()->route('dialog-show', ['id' => $dialog->id]);
+//                return redirect()->route('dialog-show', ['id' => $dialog->id]);
+                return redirect()->back();
             }
         );
     }
@@ -99,7 +100,8 @@ class HouseholdServiceController extends Controller
                     $serviceOrder->status = 'Утверждён';
                 }
                 $serviceOrder->save();
-                return redirect()->route('dialog-show', ['id' => $serviceOrder->dialogs->first()->id]);
+//                return redirect()->route('dialog-show', ['id' => $serviceOrder->dialogs->first()->id]);
+                return redirect()->back();
             }
         );
     }
@@ -120,7 +122,8 @@ class HouseholdServiceController extends Controller
                     $request->session()->forget('status-success');
                     $request->session()->flash('status-error', $messageError);
                 }
-                return redirect()->route('dialog-show', ['id' => $serviceOrder->dialogs->first()->id]);
+//                return redirect()->route('dialog-show', ['id' => $serviceOrder->dialogs->first()->id]);
+                return redirect()->back();
             }
         );
     }
@@ -144,7 +147,7 @@ class HouseholdServiceController extends Controller
         } elseif($user->id !== $serviceOrder->$userType->id) {
             $request->session()->flash('status-error', $messageError);
         } else {
-            if($status == $serviceOrder->status && ($status == 'Отклонён' || $status == 'Отозван')) {
+            if($status == $serviceOrder->status && ($status == 'Отменён' || $status == 'Отозван')) {
                 $serviceOrder->status = 'Создан';
             } else {
                 $serviceOrder->status = $status;
@@ -155,7 +158,8 @@ class HouseholdServiceController extends Controller
         if(is_callable($callback)) {
             return $callback($serviceOrder, $request, $messageError);
         } else {
-            return redirect()->route('household-service-page', ['id' => $serviceOrder->household_service->id]);
+//            return redirect()->route('household-service-page', ['id' => $serviceOrder->household_service->id]);
+            return redirect()->back();
         }
     }
 
