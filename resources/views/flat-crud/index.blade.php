@@ -7,7 +7,7 @@
 
     <div class="mt-md-4">
         <a href="{{ route('flats.create') }}" class="personal-area-flats-plus color-bg-dark-blue text-white px-md-5 py-md-1">
-            Добавить объявление
+            <big><i class="fa fa-plus-circle" aria-hidden="true"></i></big> Добавить объявление
         </a>
     </div>
     @if (session('status-error'))
@@ -25,6 +25,7 @@
         <thead>
         <tr>
             <th scope="col">Фотография</th>
+            <th scope="col">Статус</th>
             <th scope="col">Тип жилья</th>
             <th scope="col">Тип аренды</th>
             <th scope="col">Кол-во комнат</th>
@@ -37,6 +38,13 @@
         @foreach($flats as $flat)
             <tr>
                 <td class="personal-area-flats-table-img"><img src="{{ asset('/storage/' . explode('"', $flat->photos)[1])  }}" alt=""></td>
+                <td>
+                    @if($flat->status == 'Сдаётся')
+                        <span class="text-success font-weight-bold">{{ $flat->status }}</span>
+                    @else
+                        <span class="text-danger font-weight-bold">{{ $flat->status }}</span>
+                    @endif
+                </td>
                 <td>{{ $flat->type_of_premises }}</td>
                 <td>{{ $flat->rental_period }}</td>
                 <td>{{ $flat->number_of_rooms }}</td>

@@ -13,7 +13,7 @@ class HouseholdServiceCRUDController extends Controller
     public function index()
     {
         $services = Auth::user()->household_services;
-        return view('service-crud.index', ['services' => $services]);
+        return view('service-crud.index', ['services' => $services->reverse()]);
     }
 
     public function create()

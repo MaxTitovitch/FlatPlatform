@@ -144,7 +144,7 @@
                             @else
                                 @if(Auth::id() !== $flat->user->id)
                                     <div class="w-25 text-center align-middle my-auto">
-                                        <a href="{{ route('dialog-flat-create', ['id' => $flat->id]) }}">
+                                        <a href="{{ route('dialog-flat-create', ['id' => $order->id]) }}">
                                             <i class="fa fa-3x fa-envelope-o text-white" aria-hidden="true"></i>
                                         </a>
                                     </div>
@@ -170,7 +170,7 @@
                             </span>
                         </div>
                         <div class="col-md-1 my-auto ">
-                            <span class="flat-id-renter-price">{{ $order->price }} ₽</span>
+                            <span class="flat-id-renter-price">{{ $order->price }}₽</span>
                         </div>
                         <div class="col-md-8 my-auto">
                             <div class="flex">
@@ -181,7 +181,7 @@
                                 @elseif($flat->status == 'Свободна')
                                     @if(Auth::id() !== $order->tenant_id)
                                         @if(Auth::id() === $flat->user_id)
-                                            <div class="border border-primary rounded text-center"><a href="{{ route('dialog-flat-create', ['id' => $flat->id]) }}" class="text-primary">Написать</a></div>
+                                            <div class="border border-primary rounded text-center"><a href="{{ route('dialog-flat-create', ['id' => $order->id]) }}" class="text-primary">Написать</a></div>
                                         @else
                                             <div class="border border-primary rounded text-center"><a href="{{ route('dialog-create', ['id' => $order->tenant_id]) }}" class="text-primary">Написать</a></div>
                                         @endif

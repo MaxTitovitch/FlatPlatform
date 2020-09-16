@@ -21,6 +21,6 @@ class HouseholdOrderCRUDController extends Controller
                 }
             }
         }
-        return view('service-order.index', ['orders' => $orders]);
+        return view('service-order.index', ['orders' => $orders->reverse()]);
     }
 }

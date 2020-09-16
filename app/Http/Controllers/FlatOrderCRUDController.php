@@ -20,6 +20,6 @@ class FlatOrderCRUDController extends Controller
                 }
             }
         }
-        return view('order.index', ['orders' => $orders]);
+        return view('order.index', ['orders' => $orders->reverse()]);
     }
 }

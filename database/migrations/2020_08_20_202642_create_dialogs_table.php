@@ -15,7 +15,7 @@ class CreateDialogsTable extends Migration
     {
         Schema::create('dialogs', function (Blueprint $table) {
             $table->id();
-            $table->enum('type', ['Обычный', 'Квартира', 'Робота', 'Поддержка']);
+            $table->enum('type', ['Обычный', 'Квартира', 'Работа', 'Поддержка']);
             $table->foreignId('first_user_id')->unsigned();
             $table->foreignId('second_user_id')->unsigned();
             $table->foreignId('flat_order_id')->unsigned()->nullable();

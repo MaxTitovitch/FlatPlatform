@@ -7,7 +7,7 @@
 
     <div class="mt-md-4">
         <a href="{{ route('household_services.create') }}" class="personal-area-flats-plus color-bg-dark-blue text-white px-md-5 py-md-1">
-            Добавить объявление
+            <big><i class="fa fa-plus-circle" aria-hidden="true"></i></big> Добавить объявление
         </a>
     </div>
 

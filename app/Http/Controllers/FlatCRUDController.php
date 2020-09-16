@@ -13,7 +13,7 @@ class FlatCRUDController extends Controller
     public function index()
     {
         $flats = Auth::user()->flats;
-        return view('flat-crud.index', ['flats' => $flats]);
+        return view('flat-crud.index', ['flats' => $flats->reverse()]);
     }
 
     public function create()

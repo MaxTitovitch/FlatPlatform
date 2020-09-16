@@ -124,7 +124,7 @@
                         </span>
                     </div>
                     <div class="col-md-1 my-auto ">
-                        <span class="flat-id-renter-price">{{ $order->price }} ₽</span>
+                        <span class="flat-id-renter-price">{{ $order->price }}₽</span>
                     </div>
                     <div class="col-md-8 my-auto">
                         <div class="flex">
@@ -135,7 +135,7 @@
                             @else
                                 @if(Auth::id() !== $order->landlord_id)
                                     @if(Auth::id() === $householdService->user_id)
-                                        <div class="border border-primary rounded text-center"><a href="{{ route('dialog-service-create', ['id' => $householdService->id]) }}" class="text-primary">Написать</a></div>
+                                        <div class="border border-primary rounded text-center"><a href="{{ route('dialog-service-create', ['id' => $order->id]) }}" class="text-primary">Написать</a></div>
                                     @else
                                         <div class="border border-primary rounded text-center"><a href="{{ route('dialog-create', ['id' => $order->landlord_id]) }}" class="text-primary">Написать</a></div>
                                     @endif
