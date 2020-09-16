@@ -62,6 +62,15 @@ class Message extends Model
         ]);
     }
 
+    public static function createPriceMessage($men, $price, $id) {
+        Message::create([
+            'message' => "$men предлагает изменить стоимость на {$price}₽",
+            'type' => 'Служебное',
+            'user_id' => null,
+            'dialog_id' => $id
+        ]);
+    }
+
 
     public function deleteFile() {
         Storage::delete($this->message);

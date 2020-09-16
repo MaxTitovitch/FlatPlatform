@@ -127,6 +127,15 @@
                     @break
                 @endswitch
             @endif
+            @if($order->status == 'Принят')
+                <form action="{{ route("$modelRoute-update-price", ['id' => $order->id]) }}" method="post" class="mt-md-2 w-100 text-center">
+                    @csrf
+                    <input type="hidden" name="_method" value="PATCH">
+                    <label for="orderPrice">Изменить стоимость:</label>
+                    <input  class="form-control" min="1" id="orderPrice" type="number" name="price" value="{{ $order->price }}">
+                    <button type="submit" class="color-bg-dark-blue text-white border-0 py-md-2 w-100">ИЗМЕНИТЬ</button>
+                </form>
+            @endif
         </div>
     @endsection
 @endif

@@ -141,8 +141,16 @@ class FlatController extends Controller
             $request->session()->flash('status-error', 'Вы не имеете доступа к данному действию!');
             return redirect()->route('index');
         } else {
-            $flatOrder->update($request->all());
-            $request->session()->flash('status-success', 'Заявка на квартиру обновлена!');
+            if($flatOrder->price !== $request->price || $flatOrder->date_start !== $request->date_start || $flatOrder->date_end !== $request->date_end) {
+                if ($flatOrder->price !== $request->price) {
+                    Message::createPriceMessage($user->role->display_name, $request->price, $flatOrder->dialogs[0]->id);
+                }
+                $flatOrder->update($request->all());
+                $flatOrder->landlord_confirmation = 0;
+                $flatOrder->tenant_confirmation = 0;
+                $flatOrder->save();
+                $request->session()->flash('status-success', 'Заявка на квартиру обновлена!');
+            }
             return redirect()->route('dialog-show', ['id' => $flatOrder->dialogs[0]->id]);
         }
     }

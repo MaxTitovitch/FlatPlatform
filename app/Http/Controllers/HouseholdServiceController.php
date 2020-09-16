@@ -138,8 +138,16 @@ class HouseholdServiceController extends Controller
             $request->session()->flash('status-error', 'Вы не имеете доступа к данному действию!');
             return redirect()->route('index');
         } else {
-            $serviceOrder->update($request->all());
-            $request->session()->flash('status-success', 'Заявка на роботу обновлена!');
+            if($serviceOrder->price !== $request->price || $serviceOrder->date_of_completion !== $request->date_of_completion) {
+                if($serviceOrder->price !== $request->price) {
+                    Message::createPriceMessage($user->role->display_name, $request->price, $serviceOrder->dialogs[0]->id);
+                }
+                $serviceOrder->update($request->all());
+                $serviceOrder->employee_confirmation = 0;
+                $serviceOrder->landlord_confirmation = 0;
+                $serviceOrder->save();
+                $request->session()->flash('status-success', 'Заявка на роботу обновлена!');
+            }
             return redirect()->route('dialog-show', ['id' => $serviceOrder->dialogs[0]->id]);
         }
     }
