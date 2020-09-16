@@ -21,6 +21,11 @@ class HouseholdService extends Model
         return $this->belongsTo('App\HouseholdServiceCategory', 'household_service_category_id');
     }
 
+    public function dialogs()
+    {
+        return $this->hasMany('App\Dialog');
+    }
+
     public function orders()
     {
         return $this->hasMany('App\HouseholdServiceOrder');

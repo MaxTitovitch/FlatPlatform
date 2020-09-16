@@ -79,7 +79,7 @@
 
                 @if(Auth::id() !== $order->landlord_id)
                     @if(Auth::id() === $order->household_service->user_id)
-                        <div class="border border-primary rounded text-center"><a href="{{ route('dialog-service-create', ['id' => $order->household_service->id]) }}" class="text-primary">Написать</a></div>
+                        <div class="border border-primary rounded text-center"><a href="{{ route('dialog-service-create', ['id' => $order->id]) }}" class="text-primary">Написать</a></div>
                     @else
                         <div class="border border-primary rounded text-center"><a href="{{ route('dialog-create', ['id' => $order->landlord_id]) }}" class="text-primary">Написать</a></div>
                     @endif
@@ -95,7 +95,7 @@
                             </form>
                         </div>
                         @break
-                        @case('Отован')
+                        @case('Отозван')
                         <div class="border border-warning rounded text-center">
                             <form action="{{ route("service-reject-request", ['id' => $order->id]) }}" method="post" >
                                 @csrf
@@ -141,7 +141,7 @@
                             </form>
                         </div>
                         @break
-                        @case('Отован')
+                        @case('Отозван')
                         @break
                         @case('Отменён')
                         <div class="border border-warning rounded text-center">

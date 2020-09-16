@@ -16,8 +16,8 @@ class CreateMessagesTable extends Migration
         Schema::create('messages', function (Blueprint $table) {
             $table->id();
             $table->text('message');
-            $table->enum('type', ['Текст', 'Файл']);
-            $table->foreignId('user_id')->unsigned();
+            $table->enum('type', ['Текст', 'Файл', 'Служебное']);
+            $table->foreignId('user_id')->unsigned()->nullable()->default(null);
             $table->foreignId('dialog_id')->unsigned();
             $table->timestamps();
 

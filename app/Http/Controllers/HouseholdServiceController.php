@@ -13,6 +13,7 @@ use App\Http\Requests\DateIssueRequest;
 use App\HouseholdServiceOrder;
 use App\Dialog;
 use App\Http\Requests\HouseholdServiceRequest;
+use App\Message;
 
 class HouseholdServiceController extends Controller
 {
@@ -75,6 +76,7 @@ class HouseholdServiceController extends Controller
                 if(!$dialog) {
                     $dialog = Dialog::create(['first_user_id' => $serviceOrder->employee->id, 'second_user_id' => $serviceOrder->landlord->id, 'type' => 'Робота', 'household_service_order_id' => $serviceOrder->id]);
                 }
+                Message::createStatusMessage($serviceOrder->status, $serviceOrder->dialogs[0]->id, false);
                 $dialog->save();
 //                return redirect()->route('dialog-show', ['id' => $dialog->id]);
                 return redirect()->back();
@@ -100,6 +102,7 @@ class HouseholdServiceController extends Controller
                     $serviceOrder->status = 'Утверждён';
                 }
                 $serviceOrder->save();
+                Message::createStatusMessage($serviceOrder->status, $serviceOrder->dialogs[0]->id, false);
 //                return redirect()->route('dialog-show', ['id' => $serviceOrder->dialogs->first()->id]);
                 return redirect()->back();
             }
@@ -115,9 +118,10 @@ class HouseholdServiceController extends Controller
             'Сделка выполнена!',
             'employee',
             function ($serviceOrder, $request, $messageError) {
-                if($serviceOrder->employee_confirmation && $serviceOrder->landlord_confirmation && $serviceOrder->status == 'Утверждён') {
+                if($serviceOrder->employee_confirmation && $serviceOrder->landlord_confirmation) {
                     $serviceOrder->status = 'Выполнен';
                     $serviceOrder->save();
+                    Message::createStatusMessage($serviceOrder->status, $serviceOrder->dialogs[0]->id, false);
                 } else {
                     $request->session()->forget('status-success');
                     $request->session()->flash('status-error', $messageError);
@@ -136,18 +140,19 @@ class HouseholdServiceController extends Controller
         } else {
             $serviceOrder->update($request->all());
             $request->session()->flash('status-success', 'Заявка на роботу обновлена!');
-            return redirect()->route('dialog-show', ['id' => $serviceOrder->dialog->id]);
+            return redirect()->route('dialog-show', ['id' => $serviceOrder->dialogs[0]->id]);
         }
     }
 
     private function patchStatus(Request $request, $id, $status, $messageError, $messageSuccess, $userType, $callback = null) {
-        $user = Auth::user(); $serviceOrder = HouseholdServiceOrder::find($id);
+        $user = Auth::user(); $serviceOrder = HouseholdServiceOrder::find($id); $isChangeStatus = false;
         if(!$serviceOrder) {
             return redirect()->route('index');
         } elseif($user->id !== $serviceOrder->$userType->id) {
             $request->session()->flash('status-error', $messageError);
         } else {
             if($status == $serviceOrder->status && ($status == 'Отменён' || $status == 'Отозван')) {
+                $isChangeStatus = true;
                 $serviceOrder->status = 'Создан';
             } else {
                 $serviceOrder->status = $status;
@@ -158,6 +163,7 @@ class HouseholdServiceController extends Controller
         if(is_callable($callback)) {
             return $callback($serviceOrder, $request, $messageError);
         } else {
+            Message::createStatusMessage($serviceOrder->status, $serviceOrder->dialogs[0]->id, false, $isChangeStatus);
 //            return redirect()->route('household-service-page', ['id' => $serviceOrder->household_service->id]);
             return redirect()->back();
         }

@@ -23,9 +23,9 @@ $('#messageSender').submit(function(event) {
 
 let uppendData = (className, ri) => {
   let clone = $(`.${className}:last`).clone();
-  console.log(clone);
+
   let message = '';
-  if(ri.type == 'Текст') {
+  if(ri.type == 'Текст' || ri.type == 'Служебное') {
     message = ri.message;
   } else {
     if(['png', 'git', 'jpeg', 'jpg'].indexOf( ri.message.split('.')[1] ) != -1) {
@@ -36,7 +36,9 @@ let uppendData = (className, ri) => {
       message = `<a target="_blank" download href="${ ri.message }"><strong><i>Файл ${  ri.message.split('.')[1].toUpperCase() }</i></strong></a>`;
     }
   }
-  clone.find('.rounded').html(message + '<span class="message-time">' + ri.created_at.substr(11, 5) + '</span>');
+  if(ri.type != 'Служебное') {
+    clone.find('.rounded').html(message + '<span class="message-time">' + ri.created_at.substr(11, 5) + '</span>');
+  }
   clone.data('idlast', ri.id);
   clone.removeClass('display-none')
   clone.appendTo('.super-messager');
@@ -59,6 +61,10 @@ setInterval(() => {
               className = 'second-user-message';
             } else {
               className = 'first-user-message';
+            }
+            if(r[i].type == 'Служебное') {
+              className = 'no-user-message';
+              window.location.reload();
             }
             if(lastDate) {
               if (r[i].created_at.substr(0, 10) !== lastDate) {

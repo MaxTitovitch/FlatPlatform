@@ -29,6 +29,11 @@ class Flat extends Model
         return $this->hasMany('App\HouseholdServiceOrder');
     }
 
+    public function dialog()
+    {
+        return $this->hasMany('App\Dialog');
+    }
+
 
     public function calculateReservedDates() {
         $daysFlat = [];

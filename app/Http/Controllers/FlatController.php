@@ -10,6 +10,7 @@ use App\Http\Requests\DateRequest;
 use App\Dialog;
 use App\Http\Requests\FlatRequest;
 use Symfony\Component\Console\Input\Input;
+use App\Message;
 
 class FlatController extends Controller
 {
@@ -69,6 +70,7 @@ class FlatController extends Controller
                     $dialog = Dialog::create(['first_user_id' => $flatOrder->landlord->id, 'second_user_id' => $flatOrder->tenant->id, 'type' => 'Квартира', 'flat_order_id' => $flatOrder->id]);
                 }
                 $dialog->save();
+                Message::createStatusMessage($flatOrder->status, $flatOrder->dialogs[0]->id, true);
                 return redirect()->route('dialog-show', ['id' => $dialog->id]);
             }
         );
@@ -92,6 +94,7 @@ class FlatController extends Controller
                     $flatOrder->status = 'Утверждён';
                 }
                 $flatOrder->save();
+                Message::createStatusMessage($flatOrder->status, $flatOrder->dialogs[0]->id, true);
 //                return redirect()->route('dialog-show', ['id' => $flatOrder->dialogs->first()->id]);
                 return redirect()->back();
             }
@@ -110,9 +113,10 @@ class FlatController extends Controller
                 $flat = $flatOrder->flat;
                 $flat->status = 'Свободна';
                 $flat->save();
-                if($flatOrder->tenant_confirmation && $flatOrder->landlord_confirmation && $flatOrder->status == 'Утверждён') {
+                if($flatOrder->tenant_confirmation && $flatOrder->landlord_confirmation) {
                     $flatOrder->status = 'Выполнен';
                     $flatOrder->save();
+                    Message::createStatusMessage($flatOrder->status, $flatOrder->dialogs[0]->id, true);
                 } else {
                     $request->session()->forget('status-success');
                     $request->session()->flash('status-error', $messageError);
@@ -139,18 +143,19 @@ class FlatController extends Controller
         } else {
             $flatOrder->update($request->all());
             $request->session()->flash('status-success', 'Заявка на квартиру обновлена!');
-            return redirect()->route('dialog-show', ['id' => $flatOrder->dialog->id]);
+            return redirect()->route('dialog-show', ['id' => $flatOrder->dialogs[0]->id]);
         }
     }
 
     private function patchStatus(Request $request, $id, $status, $messageError, $messageSuccess, $userType, $callback = null) {
-        $user = Auth::user(); $flatOrder = FlatServiceOrder::find($id);
+        $user = Auth::user(); $flatOrder = FlatServiceOrder::find($id); $isChangeStatus = false;
         if(!$flatOrder) {
             return redirect()->route('index');
         } elseif($user->id !== $flatOrder->$userType->id) {
             $request->session()->flash('status-error', $messageError);
         } else {
             if($status == $flatOrder->status && ($status == 'Отменён' || $status == 'Отозван')) {
+                $isChangeStatus = true;
                 $flatOrder->status = 'Создан';
             } else {
                 $flatOrder->status = $status;
@@ -161,6 +166,7 @@ class FlatController extends Controller
         if(is_callable($callback)) {
             return $callback($flatOrder, $request, $messageError);
         } else {
+            Message::createStatusMessage($flatOrder->status, $flatOrder->dialogs[0]->id, true, $isChangeStatus);
 //            return redirect()->route('flat-page', ['id' => $flatOrder->flat->id]);
             return redirect()->back();
         }

@@ -39,28 +39,33 @@
             <div class="display-none super-messager get-action-message"
                  data-message-action="{{ route('get-last-messages', ['id' => 'TOREPLACE']) }}">
                 <div class="display-none message-user-all first-user-message my-md-1  text-white">
-                            <span class="bg-primary px-md-2 rounded">
-                                Text
-                                <span class="message-time">12:02</span>
-                            </span>
+                    <span class="bg-primary px-md-2 rounded">
+                        Text
+                        <span class="message-time">12:02</span>
+                    </span>
                 </div>
                 <div class="display-none message-user-all second-user-message my-md-1  text-white"
                      style="margin-right: 15px;">
-                            <span class="color-bg-dark-blue px-md-2 rounded">
-                                Text
-                                <span class="message-time">12:02</span>
-                            </span>
+                    <span class="color-bg-dark-blue px-md-2 rounded">
+                        Text
+                        <span class="message-time">12:02</span>
+                    </span>
+                </div>
+                <div class="message-user-all no-user-message my-md-1 text-secondary text-center display-none">
+                    <span class="px-md-2 rounded">
+                        Text
+                    </span>
                 </div>
                 @php
                     $newMessages = null; $lastData = null;
-                    $messages = \App\Message::where('dialog_id', $dialog->id)->get();
+                    $messages = \App\Message::where('dialog_id', $dialog->id)->orderBy('created_at', 'asc')->get();
                     if($messages->count() > 20) {
                        $newMessages = collect([
-                           $messages->shift(), $messages->shift(), $messages->shift(), $messages->shift(), $messages->shift(),
-                           $messages->shift(), $messages->shift(), $messages->shift(), $messages->shift(), $messages->shift(),
-                           $messages->shift(), $messages->shift(), $messages->shift(), $messages->shift(), $messages->shift(),
-                           $messages->shift(), $messages->shift(), $messages->shift(), $messages->shift(), $messages->shift(),
-                       ]);
+                           $messages->pop(), $messages->pop(), $messages->pop(), $messages->pop(), $messages->pop(),
+                           $messages->pop(), $messages->pop(), $messages->pop(), $messages->pop(), $messages->pop(),
+                           $messages->pop(), $messages->pop(), $messages->pop(), $messages->pop(), $messages->pop(),
+                           $messages->pop(), $messages->pop(), $messages->pop(), $messages->pop(), $messages->pop(),
+                       ])->reverse();
                     } else {
                         $newMessages = $messages;
                         $messages = [];
@@ -69,6 +74,14 @@
                 @if($messages != [])
                     <details>
                         @foreach($messages as $message)
+                            @if($message->type == 'Служебное')
+                                <div class="message-user-all no-user-message my-md-1 text-secondary text-center" data-idlast="{{ $message->id }}">
+                                    <span class="px-md-2 rounded">
+                                        {{ $message->message }}
+                                    </span>
+                                </div>
+                                @continue
+                            @endif
                             @if($lastData != substr($message->created_at, 0, 10))
                                 @php($lastData = substr($message->created_at, 0, 10))
                                 <div class="last-data my-4 text-center text-primary w-100">{{ $lastData }}</div>
@@ -120,6 +133,15 @@
                     <!-- ogv mp4 webm - video  -->
                     <!-- other - other  -->
                     @foreach($newMessages as $message)
+                        @if($message->type == 'Служебное')
+                            <div class="message-user-all no-user-message my-md-1 text-secondary text-center" data-idlast="{{ $message->id }}">
+                                <span class="px-md-2 rounded">
+                                    {{ $message->message }}
+                                </span>
+                            </div>
+                            @continue
+                            @continue
+                        @endif
                         @if($lastData != substr($message->created_at, 0, 10))
                             @php($lastData = substr($message->created_at, 0, 10))
                             <div class="last-data my-4 text-center text-primary w-100">{{ $lastData }}</div>

@@ -44,7 +44,7 @@
                             <button type="submit" class="color-bg-dark-blue text-white border-0 py-md-2">ОТОЗВАТЬ</button>
                         </form>
                     @break
-                    @case('Отован')
+                    @case('Отозван')
                         @php($count++)
                         <form action="{{ route("$modelRoute-reject-request", ['id' => $order->id]) }}" method="post" class="mt-md-2 color-bg-dark-blue w-100 text-center">
                             @csrf
@@ -63,6 +63,11 @@
                                 <button type="submit" class="color-bg-dark-blue text-white border-0 py-md-2">ПОДТВЕРДИТЬ</button>
                             </form>
                        @endif
+                        <form action="{{ route("$modelRoute-reject-request", ['id' => $order->id, '_method=path']) }}" method="post" class="mt-md-2 color-bg-dark-blue w-100 text-center">
+                            @csrf
+                            <input type="hidden" name="_method" value="PATCH">
+                            <button type="submit" class="color-bg-dark-blue text-white border-0 py-md-2">ОТОЗВАТЬ</button>
+                        </form>
                     @break
                     @case('Утверждён')
                     @break
@@ -84,7 +89,7 @@
                             <button type="submit" class="color-bg-dark-blue text-white border-0 py-md-2">ОТКЛОНИТЬ</button>
                         </form>
                     @break
-                    @case('Отован')
+                    @case('Отозван')
                     @break
                     @case('Отменён')
                         @php($count++)
@@ -104,6 +109,11 @@
                                 <button type="submit" class="color-bg-dark-blue text-white border-0 py-md-2">ПОДТВЕРДИТЬ</button>
                             </form>
                         @endif
+                        <form action="{{ route("$modelRoute-reject-request", ['id' => $order->id]) }}" method="post" class="mt-md-2 color-bg-dark-blue w-100 text-center">
+                            @csrf
+                            <input type="hidden" name="_method" value="PATCH">
+                            <button type="submit" class="color-bg-dark-blue text-white border-0 py-md-2">ОТКЛОНИТЬ</button>
+                        </form>
                     @break
                     @case('Утверждён')
                         @php($count++)

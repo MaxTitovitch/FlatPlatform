@@ -80,7 +80,7 @@
                 @if($order->flat->status == 'Свободна')
                     @if(Auth::id() !== $order->tenant_id)
                         @if(Auth::id() === $order->flat->user_id)
-                            <div class="border border-primary rounded text-center"><a href="{{ route('dialog-flat-create', ['id' => $order->flat->id]) }}" class="text-primary">Написать</a></div>
+                            <div class="border border-primary rounded text-center"><a href="{{ route('dialog-flat-create', ['id' => $order->id]) }}" class="text-primary">Написать</a></div>
                         @else
                             <div class="border border-primary rounded text-center"><a href="{{ route('dialog-create', ['id' => $order->tenant_id]) }}" class="text-primary">Написать</a></div>
                         @endif
@@ -96,7 +96,7 @@
                                 </form>
                             </div>
                             @break
-                            @case('Отован')
+                            @case('Отозван')
                             <div class="border border-warning rounded text-center">
                                 <form action="{{ route("service-reject-request", ['id' => $order->id]) }}" method="post" >
                                     @csrf
@@ -142,7 +142,7 @@
                                 </form>
                             </div>
                             @break
-                            @case('Отован')
+                            @case('Отозван')
                             @break
                             @case('Отменён')
                             <div class="border border-warning rounded text-center">
