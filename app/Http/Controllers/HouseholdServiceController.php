@@ -72,6 +72,8 @@ class HouseholdServiceController extends Controller
             'Заявка на роботу принята!',
             'employee',
             function ($serviceOrder, $request, $messageError) {
+                $serviceOrder->read_status = 'Прочитано';
+                $serviceOrder->save();
                 $dialog = Dialog::where("household_service_order_id", $serviceOrder->id)->first();
                 if(!$dialog) {
                     $dialog = Dialog::create(['first_user_id' => $serviceOrder->employee->id, 'second_user_id' => $serviceOrder->landlord->id, 'type' => 'Работа', 'household_service_order_id' => $serviceOrder->id]);
@@ -164,6 +166,9 @@ class HouseholdServiceController extends Controller
                 $serviceOrder->status = 'Создан';
             } else {
                 $serviceOrder->status = $status;
+            }
+            if($status == 'Отменён'){
+                $serviceOrder->read_status = 'Прочитано';
             }
             $serviceOrder->save();
             $request->session()->flash('status-success', $messageSuccess);

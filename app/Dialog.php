@@ -3,6 +3,7 @@
 namespace App;
 
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Support\Facades\Auth;
 
 class Dialog extends Model
 {
@@ -33,5 +34,27 @@ class Dialog extends Model
     public function household_service_order()
     {
         return $this->belongsTo('App\HouseholdServiceOrder');
+    }
+
+    public function readMessages() {
+        $id = 0;
+        foreach ($this->messages as $message) {
+            if($message->user_id !== Auth::id() && $message->read_status != 'Прочитано') {
+                $message->read_status = 'Прочитано';
+                $message->save();
+                $id++;
+            }
+        }
+        return $id;
+    }
+
+    public function getUnreadMessagesQuantity() {
+        $count = 0;
+        foreach ($this->messages as $message) {
+            if ($message->read_status !== 'Прочитано' && $message->user_id != Auth::id()) {
+                $count++;
+            }
+        }
+        return $count;
     }
 }

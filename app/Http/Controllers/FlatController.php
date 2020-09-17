@@ -63,6 +63,8 @@ class FlatController extends Controller
             'landlord',
             function ($flatOrder, $request, $messageError) {
                 $flat = $flatOrder->flat;
+                $flatOrder->read_status = 'Прочитано';
+                $flatOrder->save();
                 $flat->status = 'Сдаётся';
                 $flat->save();
                 $dialog = Dialog::where("flat_order_id", $flatOrder->id)->first();
@@ -167,6 +169,9 @@ class FlatController extends Controller
                 $flatOrder->status = 'Создан';
             } else {
                 $flatOrder->status = $status;
+            }
+            if($status == 'Отменён'){
+                $flatOrder->read_status = 'Прочитано';
             }
             $flatOrder->save();
             $request->session()->flash('status-success', $messageSuccess);

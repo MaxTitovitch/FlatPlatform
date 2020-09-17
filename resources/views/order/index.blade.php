@@ -38,7 +38,7 @@
     <tbody>
 {{--            @dump($orders)--}}
     @foreach($orders as $order)
-        <tr>
+        <tr class="{{ $order->read_status != 'Прочитано' ? 'unread-entity' : '' }}">
             <td>{{ $order->date_start }}</td>
             <td>{{ $order->date_end }}</td>
 

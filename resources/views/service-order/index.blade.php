@@ -38,7 +38,7 @@
         <tbody>
 {{--                @dump($orders)--}}
         @foreach($orders as $order)
-            <tr>
+            <tr class="{{ $order->read_status != 'Прочитано' ? 'unread-entity' : '' }}">
                 <td>{{ $order->date_of_completion }}</td>
                 <td>{{ $order->household_service->category->name }}</td>
 

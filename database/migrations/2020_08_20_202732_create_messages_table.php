@@ -17,6 +17,7 @@ class CreateMessagesTable extends Migration
             $table->id();
             $table->text('message');
             $table->enum('type', ['Текст', 'Файл', 'Служебное']);
+            $table->enum('read_status', ['Прочитано', 'Непрочитано'])->default('Непрочитано');
             $table->foreignId('user_id')->unsigned()->nullable()->default(null);
             $table->foreignId('dialog_id')->unsigned();
             $table->timestamps();

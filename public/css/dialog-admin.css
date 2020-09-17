@@ -1,4 +1,12 @@
 
+.unread-entity{
+    background: #c5c5e396;
+}
+
+.message-user-all.unread-entity {
+    background: #c5c5e3!important;
+    opacity: 0.8!important;
+}
 
 .display-none {
     display: block!important;

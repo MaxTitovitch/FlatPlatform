@@ -17,6 +17,7 @@ class CreateHouseholdServiceOrdersTable extends Migration
             $table->id();
             $table->double('price', 15, 2);
             $table->enum('status', ['Создан', "Принят", 'Утверждён', 'Выполнен', 'Отменён', 'Отозван']);
+            $table->enum('read_status', ['Прочитано', 'Непрочитано'])->default('Непрочитано');
             $table->boolean('employee_confirmation');
             $table->boolean('landlord_confirmation');
             $table->date('date_of_completion');

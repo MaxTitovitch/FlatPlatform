@@ -1081,12 +1081,53 @@ textarea {
     font-size: 16px;
 }
 
+a:hover .icon-unread {
+    text-decoration: none!important;
+    color: white;
+}
+
+.icon-unread {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: 50%;
+    background: rgb(220, 21, 83);
+    color: white;
+    padding: 2px;
+    width: 22px;
+    height: 22px;
+    font-size: 12px;
+    box-shadow: rgb(125 78 78) 2px 4px 3px 0px;
+    font-weight: 500;
+    z-index: 10000;
+    margin-right: 10px;
+}
+.icons-sidebar:hover .icon-unread{
+    opacity: 0.8;
+}
+
+.unread-entity{
+    background: #c5c5e396;
+}
+
+.message-user-all.unread-entity {
+    background: #c5c5e3!important;
+    opacity: 0.8!important;
+}
+
 .icons-sidebar {
     color: #004182;
     fill: #004182;
     display: flex;
     align-items: center;
     width: 100%;
+    justify-content: space-between;
+}
+.icons-sidebar:hover :not(.icon-unread) {
+    text-decoration: underline;
+}
+.icons-sidebar:hover {
+    text-decoration: none;
 }
 
 .icons-sidebar svg {

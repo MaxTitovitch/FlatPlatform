@@ -41,6 +41,9 @@ let uppendData = (className, ri) => {
   }
   clone.data('idlast', ri.id);
   clone.removeClass('display-none')
+  if(className !== 'second-user-message') {
+    clone.addClass('unread-entity');
+  }
   clone.appendTo('.super-messager');
 }
 
@@ -115,4 +118,12 @@ $('[name="file"]').change(function (event) {
       }
     });
   }
+});
+
+$('body').mousemove(function (event) {
+  setTimeout(() => {
+    $('.unread-entity').toArray().forEach(function (element) {
+      $(element).removeClass('unread-entity');
+    });
+  }, 500);
 });

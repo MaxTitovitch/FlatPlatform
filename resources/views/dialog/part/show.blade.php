@@ -36,22 +36,22 @@
             </div>
         </div>
         <div class="message-body" data-user-id="{{ Auth::id() }}">
-            <div class="display-none super-messager get-action-message"
+            <div class="display-none super-messager get-action-message "
                  data-message-action="{{ route('get-last-messages', ['id' => 'TOREPLACE']) }}">
-                <div class="display-none message-user-all first-user-message my-md-1  text-white">
+                <div class="display-none message-user-all first-user-message my-md-1 text-white unread-entity">
                     <span class="bg-primary px-md-2 rounded">
                         Text
                         <span class="message-time">12:02</span>
                     </span>
                 </div>
-                <div class="display-none message-user-all second-user-message my-md-1  text-white"
+                <div class="display-none message-user-all second-user-message my-md-1 text-white unread-entity"
                      style="margin-right: 15px;">
                     <span class="color-bg-dark-blue px-md-2 rounded">
                         Text
                         <span class="message-time">12:02</span>
                     </span>
                 </div>
-                <div class="message-user-all no-user-message my-md-1 text-secondary text-center display-none">
+                <div class="message-user-all no-user-message my-md-1 text-secondary text-center display-none unread-entity">
                     <span class="px-md-2 rounded">
                         Text
                     </span>
@@ -59,8 +59,10 @@
                 @php
                     $newMessages = null; $lastData = null;
                     $messages = \App\Message::where('dialog_id', $dialog->id)->orderBy('created_at', 'asc')->get();
+                    $realCount = $messages->count() - $count; $id = 0;
                     if($messages->count() > 20) {
                        $newMessages = collect([
+                           $messages->pop(), $messages->pop(), $messages->pop(), $messages->pop(), $messages->pop(),
                            $messages->pop(), $messages->pop(), $messages->pop(), $messages->pop(), $messages->pop(),
                            $messages->pop(), $messages->pop(), $messages->pop(), $messages->pop(), $messages->pop(),
                            $messages->pop(), $messages->pop(), $messages->pop(), $messages->pop(), $messages->pop(),
@@ -75,7 +77,7 @@
                     <details>
                         @foreach($messages as $message)
                             @if($message->type == 'Служебное')
-                                <div class="message-user-all no-user-message my-md-1 text-secondary text-center" data-idlast="{{ $message->id }}">
+                                <div class="message-user-all no-user-message my-md-1 text-secondary text-center {{ $id >= $realCount ? 'unread-entity' : '' }}" data-idlast="{{ $message->id }}">
                                     <span class="px-md-2 rounded">
                                         {{ $message->message }}
                                     </span>
@@ -87,7 +89,7 @@
                                 <div class="last-data my-4 text-center text-primary w-100">{{ $lastData }}</div>
                             @endif
                             @if(Auth::id() !== $message->user_id)
-                                <div class="message-user-all first-user-message my-md-1 text-white"
+                                <div class="message-user-all first-user-message my-md-1 text-white {{ $id >= $realCount ? 'unread-entity' : '' }}"
                                      data-idlast="{{ $message->id }}">
                                 <span class="bg-primary px-md-2 rounded">
                                     @if($message->type == 'Текст')
@@ -105,7 +107,7 @@
                                 </span>
                                 </div>
                             @else
-                                <div class="message-user-all second-user-message my-md-1 text-white"
+                                <div class="message-user-all second-user-message my-md-1 text-white {{ $id >= $realCount ? 'unread-entity' : '' }}"
                                      style="margin-right: 15px;" data-idlast="{{ $message->id }}">
                                 <span class="color-bg-dark-blue px-md-2 rounded">
                                                                             @if($message->type == 'Текст')
@@ -123,6 +125,7 @@
                                 </span>
                                 </div>
                             @endif
+                            @php ($id++)
                         @endforeach
                         <summary class="display-none">Все сообщения</summary>
                     </details>
@@ -134,7 +137,7 @@
                     <!-- other - other  -->
                     @foreach($newMessages as $message)
                         @if($message->type == 'Служебное')
-                            <div class="message-user-all no-user-message my-md-1 text-secondary text-center" data-idlast="{{ $message->id }}">
+                            <div class="message-user-all no-user-message my-md-1 text-secondary text-center {{ $id >= $realCount? 'unread-entity' : '' }}" data-idlast="{{ $message->id }}">
                                 <span class="px-md-2 rounded">
                                     {{ $message->message }}
                                 </span>
@@ -147,7 +150,7 @@
                             <div class="last-data my-4 text-center text-primary w-100">{{ $lastData }}</div>
                         @endif
                         @if(Auth::id() !== $message->user_id)
-                            <div class="message-user-all first-user-message my-md-1  text-white"
+                            <div class="message-user-all first-user-message my-md-1 text-white {{ $id >= $realCount ? 'unread-entity' : '' }}"
                                  data-idlast="{{ $message->id }}">
                                 <span class="bg-primary px-md-2 rounded">
                                     @if($message->type == 'Текст')
@@ -166,7 +169,7 @@
                                 </span>
                             </div>
                         @else
-                            <div class="message-user-all second-user-message my-md-1  text-white"
+                            <div class="message-user-all second-user-message my-md-1 text-white {{ $id >= $realCount ? 'unread-entity' : '' }}"
                                  style="margin-right: 15px;" data-idlast="{{ $message->id }}">
                                 <span class="color-bg-dark-blue px-md-2 rounded">
 
@@ -186,6 +189,7 @@
                                 </span>
                             </div>
                         @endif
+                        @php ($id++)
                     @endforeach
 
                 @endif
@@ -195,7 +199,7 @@
               action="{{ route('send-message', ['id' => $dialog->id]) }}" method="post">
             @csrf
             <div class="row bg-white mx-md-5  justify-content-center" style="border-radius: 25px">
-                <input name="message" type="text" placeholder="Введите сообщение" class="border-0 message-input"
+                <input name="message" type="text" placeholder="Введите сообщение" class="border-0 message-input" autocomplete="off"
                        style="border-radius: 25px; flex: 2; padding: 0 15px;">
                 <div class="">
                     <input name="file" type="file" class="display-none">

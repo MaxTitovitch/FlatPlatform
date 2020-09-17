@@ -38,7 +38,8 @@ class DialogController extends Controller
             if(!($dialog->first_user_id == Auth::id() || $dialog->second_user_id == Auth::id() || Auth::user()->role->name == 'admin')) {
                 return redirect()->route('index');
             }
-            return view($viewName, ['dialog' => $dialog]);
+            $count = $dialog->readMessages();
+            return view($viewName, ['dialog' => $dialog, 'count' => $count]);
         } else {
             return redirect()->route('index');
         }
@@ -69,6 +70,10 @@ class DialogController extends Controller
         } else {
             $id = $flatService->tenant_id;
         }
+        if(Auth::user()->role->name == 'landlord') {
+            $flatService->read_status = 'Прочитано';
+            $flatService->save();
+        }
         $dialog = Dialog::where("flat_order_id", $flatService->id)->first();
         if(!$dialog) {
             $dialog = Dialog::create(['first_user_id' => $authId, 'second_user_id' => $id, 'type' => 'Квартира', 'flat_order_id' => $flatService->id]);
@@ -84,6 +89,10 @@ class DialogController extends Controller
             $id = $serviceOrder->household_service->user_id;
         } else {
             $id = $serviceOrder->landlord_id;
+        }
+        if(Auth::user()->role->name == 'employee') {
+            $serviceOrder->read_status = 'Прочитано';
+            $serviceOrder->save();
         }
         $dialog = Dialog::where("household_service_order_id", $serviceOrder->id)->first();
         if(!$dialog) {
@@ -146,10 +155,12 @@ class DialogController extends Controller
 
     public function getLastMessages($id) {
         if(count(explode('i', $id)) == 2) {
+            Dialog::find(explode('i', $id)[1])->readMessages();
             return Message::where('dialog_id', explode('i', $id)[1] )->get()->toArray();
         } else {
             $message = Message::find($id);
             if ($message != null) {
+                $message->dialog->readMessages();
                 $messages = Message::where('dialog_id', $message->dialog_id)->where('id', '>', $message->id)->get();
                 return $messages->toArray();
             } else {

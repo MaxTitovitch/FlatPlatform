@@ -21,6 +21,7 @@ class CreateFlatOrderTable extends Migration
             $table->date('date_start');
             $table->date('date_end');
             $table->enum('status', ['Создан', "Принят", 'Утверждён', 'Выполнен', 'Отменён', 'Отозван']);
+            $table->enum('read_status', ['Прочитано', 'Непрочитано'])->default('Непрочитано');
             $table->foreignId('tenant_id')->unsigned();
             $table->foreignId('flat_id')->unsigned();
             $table->timestamps();

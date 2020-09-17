@@ -7,6 +7,7 @@ use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
 use Illuminate\Support\Facades\Storage;
 use Illuminate\Support\Str;
+use Illuminate\Support\Facades\Auth;
 
 class User extends \TCG\Voyager\Models\User implements MustVerifyEmail
 {
@@ -91,5 +92,46 @@ class User extends \TCG\Voyager\Models\User implements MustVerifyEmail
             }
         }
         return true;
+    }
+
+    public function getUnreadDialogsQuantity() {
+        $count = 0;
+        $dialog = Dialog::where("dialogs.first_user_id", $this->id)->orWhere("dialogs.second_user_id", $this->id)->get();
+        foreach ($dialog as $dialog) {
+            foreach ($dialog->messages as $message) {
+                if($message->read_status !== 'Прочитано' && $message->user_id != Auth::id()) {
+                    $count++;
+                }
+            }
+        }
+        return $count;
+    }
+
+    public function getUnreadServicesQuantity() {
+        $count = 0;
+        if(Auth::user()->role->name == 'employee') {
+            foreach ($this->household_services as $household_service) {
+                foreach ($household_service->orders as $order) {
+                    if ($order->read_status !== 'Прочитано') {
+                        $count++;
+                    }
+                }
+            }
+        }
+        return $count;
+    }
+
+    public function getUnreadFlatsQuantity() {
+        $count = 0;
+        if(Auth::user()->role->name == 'landlord') {
+            foreach ($this->flats as $flat) {
+                foreach ($flat->orders as $order) {
+                    if ($order->read_status !== 'Прочитано') {
+                        $count++;
+                    }
+                }
+            }
+        }
+        return $count;
     }
 }

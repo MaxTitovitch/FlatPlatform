@@ -6,7 +6,7 @@
     </div>
 
     @forelse($dialogs as $dialog)
-        <div class="row dialog-list-one pb-md-2 my-md-4 href-dialog" data-href="{{ route($route, ['id' => $dialog->id]) }}">
+        <div class="row dialog-list-one pb-md-2 my-md-4 href-dialog {{ $dialog->getUnreadMessagesQuantity() ? 'unread-entity' : '' }}" data-href="{{ route($route, ['id' => $dialog->id]) }}">
             <div class="col-md-2 h-100">
                 @if($dialog->first_user_id === Auth::id())
                     @php($otherUser = $dialog->second_user)
@@ -49,6 +49,11 @@
                     @endif
                     <br>
                     {{ $dialog->type }}
+                    <a href="{{ route($route, ['id' => $dialog->id]) }}" class="text-decoration-none text-dark">
+                        @if($count = $dialog->getUnreadMessagesQuantity())
+                            <div class="icon-unread">{{$count}}</div>
+                        @endif
+                    </a>
                 </span>
             </div>
         </div>
