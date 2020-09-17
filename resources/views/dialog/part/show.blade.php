@@ -36,7 +36,7 @@
             </div>
         </div>
         <div class="message-body" data-user-id="{{ Auth::id() }}">
-            <div class="display-none super-messager get-action-message "
+            <div class="display-none display-none2 super-messager get-action-message "
                  data-message-action="{{ route('get-last-messages', ['id' => 'TOREPLACE']) }}">
                 <div class="display-none message-user-all first-user-message my-md-1 text-white unread-entity">
                     <span class="bg-primary px-md-2 rounded">
@@ -231,8 +231,8 @@
     @section ($cssSection)
         <link href="{{ asset('css/app.css') }}" rel="stylesheet">
         <link href="{{ asset('css/dialog-admin.css') }}" rel="stylesheet">
-{{--        <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"--}}
-{{--              integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">--}}
+        <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"
+              integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
     @endsection
 @endif
 

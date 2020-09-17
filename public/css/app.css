@@ -390,6 +390,7 @@
 .second-user-message span, .first-user-message span{
     max-width: 52%;
     float: right;
+    z-index: 200;
 }
 
 .secondary-row{
@@ -1211,6 +1212,10 @@ a:hover .icon-unread {
     cursor: pointer;
 }
 
+.display-none.message-user-all {
+    display: none!important;
+}
+
 @media (min-width: 1200px) {
     .container {
         max-width: 1132px!important;
@@ -1251,7 +1256,9 @@ a:hover .icon-unread {
     border-color: #2bac48!important;
 }
 
-
+span a strong i{
+    color: white!important;
+}
 
 
 
