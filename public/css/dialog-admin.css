@@ -19,11 +19,18 @@
 input.display-none {
     display: none!important;
 }
+/*
+form div .color-bg-dark-blue {
+     background-color: white!important;
+}
 
+form div div{
+    background-color: white!important;
+}
 
-
-
-
+.row{
+    display: flex;
+}*/
 
 
 

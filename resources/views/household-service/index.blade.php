@@ -102,11 +102,16 @@
                                     </span>
                                 </div>
                             </div>
-                            <div class="w-25 text-center align-middle my-auto">
-                                <a href="{{ route('dialog-create', ['id' => $householdService->user->id]) }}">
-                                    <i class="fa fa-3x fa-envelope-o text-white" aria-hidden="true"></i>
-                                </a>
-                            </div>
+                            @guest
+                            @else
+                                @if(Auth::id() !== $flat->user->id)
+                                    <div class="w-25 text-center align-middle my-auto">
+                                        <a href="{{ route('dialog-create', ['id' => $householdService->user->id]) }}">
+                                            <i class="fa fa-3x fa-envelope-o text-white" aria-hidden="true"></i>
+                                        </a>
+                                    </div>
+                                @endif
+                            @endguest
                         </div>
                     </div>
                 </div>
