@@ -132,6 +132,7 @@
                         <div class="row">
                             <div class="my-md-3 w-25">
                                 <img class="w-100 ml-md-2 br-50" src="{{ asset('/storage/' . $flat->user->avatar) }}" alt="">
+
                             </div>
                             <div class="w-50">
                                 <div class="text-md-left ml-md-4 h-100">

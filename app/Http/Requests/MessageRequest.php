@@ -24,7 +24,7 @@ class MessageRequest extends FormRequest
     public function rules()
     {
         return [
-            'message' => 'string|max:255',
+            'message' => 'string|min:1',
             'file' => 'file',
         ];
     }
