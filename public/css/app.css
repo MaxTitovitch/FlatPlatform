@@ -273,9 +273,8 @@
 }
 
 .new-advantage-main-img img{
-
-    max-height: 6vh;
-    min-height: 6vh;
+    max-height: 8vh;
+    min-height: 8vh;
 }
 
 .new-advantage-main-img{
@@ -293,7 +292,9 @@
 
 .advantage-description span{
     font-weight: 500;
-    font-size: 18px;
+    padding-left: 13px;
+    padding-right: 13px;
+    font-size: 22px;
     line-height: 22px;
     display: flex;
     align-items: center;
