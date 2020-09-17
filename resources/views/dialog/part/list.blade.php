@@ -14,17 +14,17 @@
                     @php($otherUser = $dialog->first_user)
                 @endif
                 <a href="{{ route($route, ['id' => $dialog->id]) }}">
-                    @if($dialog->type === 'Поддержка')
-                        <img src="{{ asset('img/avatar.png') }}" alt="" class="rounded-circle w-100 br-50">
+                    @if($dialog->type === 'Поддержка' && $section != 'content')
+                        <img src="{{ asset('img/avatar.png') }}" alt="" class="rounded-circle w-100 br-50" style="{{ $dialog->type === 'Поддержка' ? 'width: 100px; height: 100px;' : '' }} border-radius: 50%">
                     @else
-                        <img src="{{ asset('/storage/' . $otherUser->avatar ) }}" alt="" class="rounded-circle w-100 br-50">
+                        <img src="{{ asset('/storage/' . $otherUser->avatar ) }}" alt="" class="rounded-circle w-100 br-50" style="{{ $dialog->type === 'Поддержка' ? 'width: 100px; height: 100px;' : '' }} border-radius: 50%">
                     @endif
                 </a>
             </div>
             <div class="col-md-8">
                 <p class="dialog-p">
                     <a href="{{ route($route, ['id' => $dialog->id]) }}" class="color-dark-blue font-18-px font-weight-bold">
-                        @if($dialog->type === 'Поддержка')
+                        @if($dialog->type === 'Поддержка' && $section != 'content')
                             Варендуру - Техподдержка
                         @else
                             {{ $otherUser->name . " " . $otherUser->last_name }}

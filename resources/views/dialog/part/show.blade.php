@@ -8,14 +8,14 @@
                         $user = $dialog->second_user->id == Auth::id() ? $dialog->first_user : $dialog->second_user
                     @endphp
 
-                    @if($dialog->type === 'Поддержка')
+                    @if($dialog->type === 'Поддержка' && $section != 'content')
                         <img class="personal-area-dialog-img" src="{{ asset('img/avatar.png') }}" alt="">
                     @else
                         <img class="personal-area-dialog-img" src="{{ asset('/storage/' . $user->avatar) }}" alt="">
                     @endif
                     <div class="my-md-auto ml-md-2 ">
                         <div class="font-18-px font-weight-bold">
-                            @if($dialog->type === 'Поддержка')
+                            @if($dialog->type === 'Поддержка' && $section != 'content')
                                 Варендуру - Техподдержка
                             @else
                                 {{ $user->name . " " . $user->last_name }}
@@ -229,7 +229,7 @@
 
 @if($cssSection)
     @section ($cssSection)
-{{--        <link href="{{ asset('css/app.css') }}" rel="stylesheet">--}}
+        <link href="{{ asset('css/app.css') }}" rel="stylesheet">
         <link href="{{ asset('css/dialog-admin.css') }}" rel="stylesheet">
 {{--        <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"--}}
 {{--              integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">--}}
