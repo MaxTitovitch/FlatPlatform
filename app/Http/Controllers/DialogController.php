@@ -51,7 +51,7 @@ class DialogController extends Controller
         if($user != null) {
             $authId = Auth::id(); $id = $user->id;
             $type = Auth::user()->role->name == 'admin' ? 'Поддержка' : 'Обычный';
-            $dialog = Dialog::whereRaw("first_user_id in ($authId, $id)")->orWhereRaw("second_user_id in ($authId, $id)")->where('type', $type)->first();
+            $dialog = Dialog::whereRaw("first_user_id in ($authId, $id)")->whereRaw("second_user_id in ($authId, $id)")->where('type', $type)->first();
             if(!$dialog) {
                 $dialog = Dialog::create(['first_user_id' => $authId, 'second_user_id' => $id, 'type' => $type]);
                 $dialog->save();

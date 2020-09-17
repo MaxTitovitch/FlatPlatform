@@ -329,6 +329,10 @@
     width: 95%;
 }
 
+.btn-nobtn {
+    background: rgba(0,0,0,0) !important;
+}
+
 .link-style a, .link-style{
     color: white;
 }

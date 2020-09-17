@@ -15,9 +15,9 @@
                 @endif
                 <a href="{{ route($route, ['id' => $dialog->id]) }}">
                     @if($dialog->type === 'Поддержка' && $section != 'content')
-                        <img src="{{ asset('img/avatar.png') }}" alt="" class="rounded-circle w-100 br-50" style="{{ $dialog->type === 'Поддержка' ? 'width: 100px; height: 100px;' : '' }} border-radius: 50%">
+                        <img src="{{ asset('img/avatar.png') }}" alt="" class="rounded-circle w-100 br-50" style="{{ $dialog->type === 'Поддержка' ? 'width: 100px; height: 100px; margin-left: 10px;' : '' }} border-radius: 50%">
                     @else
-                        <img src="{{ asset('/storage/' . $otherUser->avatar ) }}" alt="" class="rounded-circle w-100 br-50" style="{{ $dialog->type === 'Поддержка' ? 'width: 100px; height: 100px;' : '' }} border-radius: 50%">
+                        <img src="{{ asset('/storage/' . $otherUser->avatar ) }}" alt="" class="rounded-circle w-100 br-50" style="{{ $dialog->type === 'Поддержка' ? 'width: 100px; height: 100px; margin-left: 10px;' : '' }} border-radius: 50%">
                     @endif
                 </a>
             </div>

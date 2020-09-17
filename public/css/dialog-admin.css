@@ -21,31 +21,12 @@ input.display-none {
 }
 
 
-
-.second-user-message span {
-    float: right!important;
-}
-
-.first-user-message span {
-    float: left!important;
-}
-
-.message-time{
-    float: right!important;
-}
-
 .first-user-message span {
     float: right!important;
 }
 .row.w-100.justify-content-between{
     justify-content: center!important;
 }
-
-/*.first-user-message {*/
-/*    width: 100%;*/
-/*    display: flex;*/
-/*    justify-content: flex-start;*/
-/*}*/
 
 
 .first-user-message::before {

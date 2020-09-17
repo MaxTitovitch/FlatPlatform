@@ -132,6 +132,7 @@
                         <div class="row">
                             <div class="my-md-3 w-25">
                                 <img class="w-100 ml-md-2 br-50" src="{{ asset('/storage/' . $flat->user->avatar) }}" alt="">
+
                             </div>
                             <div class="w-50">
                                 <div class="text-md-left ml-md-4 h-100">
@@ -144,7 +145,7 @@
                             @else
                                 @if(Auth::id() !== $flat->user->id)
                                     <div class="w-25 text-center align-middle my-auto">
-                                        <a href="{{ route('dialog-flat-create', ['id' => $order->id]) }}">
+                                        <a href="{{ route('dialog-create', ['id' => $flat->user->id]) }}">
                                             <i class="fa fa-3x fa-envelope-o text-white" aria-hidden="true"></i>
                                         </a>
                                     </div>

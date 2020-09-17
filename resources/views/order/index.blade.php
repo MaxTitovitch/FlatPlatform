@@ -77,14 +77,14 @@
             </td>
             <td>
 
+{{--                @if(Auth::id() !== $order->tenant_id)--}}
+{{--                    @if(Auth::id() !== $order->flat->user_id)--}}
+                        <div class="border border-primary rounded text-center"><a href="{{ route('dialog-flat-create', ['id' => $order->id]) }}" class="text-primary">Написать</a></div>
+{{--                    @else--}}
+{{--                        <div class="border border-primary rounded text-center"><a href="{{ route('dialog-create', ['id' => $order->tenant_id]) }}" class="text-primary">Написать</a></div>--}}
+{{--                    @endif--}}
+{{--                @endif--}}
                 @if($order->flat->status == 'Свободна')
-                    @if(Auth::id() !== $order->tenant_id)
-                        @if(Auth::id() === $order->flat->user_id)
-                            <div class="border border-primary rounded text-center"><a href="{{ route('dialog-flat-create', ['id' => $order->id]) }}" class="text-primary">Написать</a></div>
-                        @else
-                            <div class="border border-primary rounded text-center"><a href="{{ route('dialog-create', ['id' => $order->tenant_id]) }}" class="text-primary">Написать</a></div>
-                        @endif
-                    @endif
                     @if(Auth::user()->role->name == 'tenant')
                         @switch($order->status)
                             @case('Создан')
