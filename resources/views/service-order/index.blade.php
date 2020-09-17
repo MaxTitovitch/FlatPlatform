@@ -77,13 +77,13 @@
                 <td>
 
 
-                @if(Auth::id() !== $order->landlord_id)
-                    @if(Auth::id() === $order->household_service->user_id)
+{{--                @if(Auth::id() !== $order->landlord_id)--}}
+{{--                    @if(Auth::id() !== $order->household_service->user_id)--}}
                         <div class="border border-primary rounded text-center"><a href="{{ route('dialog-service-create', ['id' => $order->id]) }}" class="text-primary">Написать</a></div>
-                    @else
-                        <div class="border border-primary rounded text-center"><a href="{{ route('dialog-create', ['id' => $order->landlord_id]) }}" class="text-primary">Написать</a></div>
-                    @endif
-                @endif
+{{--                    @else--}}
+{{--                        <div class="border border-primary rounded text-center"><a href="{{ route('dialog-create', ['id' => $order->landlord_id]) }}" class="text-primary">Написать</a></div>--}}
+{{--                    @endif--}}
+{{--                @endif--}}
                 @if(Auth::user()->role->name == 'landlord')
                     @switch($order->status)
                         @case('Создан')
