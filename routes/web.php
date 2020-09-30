@@ -29,6 +29,7 @@ Route::group(['prefix' => 'admin'], function () {
 
 // Auth & Socialite routes
 Auth::routes(['verify' => true]);
+Route::get('/preregister', "StaticController@preregister")->name('preregister');
 Route::get('/socialite/{provider}', "SocialiteController@index")->name('socialite.auth');
 Route::get('/socialite/{provider}/callback', "SocialiteController@callback");
 Route::post('/socialite/{provider}/save', "SocialiteController@save")->name('socialite.save');

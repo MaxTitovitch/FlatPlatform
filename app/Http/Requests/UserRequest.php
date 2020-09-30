@@ -30,7 +30,7 @@ class UserRequest extends FormRequest
             'password' => ['string', 'min:8', 'confirmed'],
             'phone' => ['required', 'string', 'regex:/^(\s*)?(\+)?([- _():=+]?\d[- _():=+]?){10,14}(\s*)?$/'],
             'reserve_phone' => ['nullable', 'regex:/^(\s*)?(\+)?([- _():=+]?\d[- _():=+]?){10,14}(\s*)?$/'],
-            'passport_number' => ['string', 'regex:/^[0-9]{9}$/'],
+            'passport_number' => ['string', 'regex:/^[0-9]{10}$/'],
             'date_of_birth' => ['date', 'before:today'],
             'date_of_issue' => ['date', 'before:today'],
             'avatar' => ['image'],

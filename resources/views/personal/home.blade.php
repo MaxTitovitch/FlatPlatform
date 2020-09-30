@@ -59,7 +59,7 @@
                 @enderror
                 <div class="form-group border-bottom">
                     <input class="border-0 w-100 datepicker @error('date_of_birth') is-invalid @enderror" type="text" data-provide="datepicker" required
-                           name="date_of_birth" autocomplete="off" placeholder="Дата рождения" value="{{ Auth::user()->date_of_birth }}">
+                           name="date_of_birth" autocomplete="off" placeholder="Дата рождения" value="{{ date('d-m-Y',strtotime(Auth::user()->date_of_birth)) }}">
                 </div>
                 @error('date_of_birth')
                 <span class="invalid-feedback-home" role="alert">
@@ -77,7 +77,7 @@
                     @enderror
                 <div class="form-group border-bottom">
                     <input name="date_of_issue" class="datepicker border-0 w-100 @error('date_of_issue') is-invalid @enderror" placeholder="Дата выдачи паспорта" required
-                           data-provide="datepicker" type="text" autocomplete="off" value="{{ Auth::user()->date_of_issue }}">
+                           data-provide="datepicker" type="text" autocomplete="off" value="{{ date('d-m-Y',strtotime(Auth::user()->date_of_issue)) }}">
                 </div>
                 @error('date_of_issue')
                 <span class="invalid-feedback-home" role="alert">

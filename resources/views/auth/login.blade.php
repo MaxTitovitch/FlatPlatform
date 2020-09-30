@@ -90,7 +90,7 @@
                                 <p><span style="font-size: 16px">Он сделает Вашу работу наного удобнее</span></p>
                             </div>
                             <div class="mt-5 btn-block">
-                                <a href="{{ route('register') }}" type="button"
+                                <a href="{{ route('preregister') }}" type="button"
                                    class="btn auth-button">ЗАРЕГИСТРИРОВАТЬСЯ</a>
                             </div>
                         </div>

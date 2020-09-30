@@ -33,3 +33,8 @@ if($('.summary')) {
         $('.message-body').animate({scrollTop: $('.summary').offset().top - 200}, 0);
     })
 }
+
+let role = $('[name="role_id"]');
+if(role.length !== 0){
+    role.val((new URLSearchParams(window.location.search)).get('type') || 2);
+}

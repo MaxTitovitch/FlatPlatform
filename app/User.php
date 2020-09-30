@@ -2,6 +2,7 @@
 
 namespace App;
 
+use App\Notifications\ResetPasswordNotification;
 use Illuminate\Contracts\Auth\MustVerifyEmail;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
@@ -133,5 +134,9 @@ class User extends \TCG\Voyager\Models\User implements MustVerifyEmail
             }
         }
         return $count;
+    }
+
+    public function sendPasswordResetNotification($token) {
+        $this->notify(new ResetPasswordNotification($token));
     }
 }

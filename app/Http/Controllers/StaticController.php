@@ -22,6 +22,11 @@ class StaticController extends Controller
         ]);
     }
 
+    public function preregister()
+    {
+        return view('auth.preregister');
+    }
+
     public function about()
     {
         return view('about');

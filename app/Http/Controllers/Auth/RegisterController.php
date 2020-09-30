@@ -60,7 +60,7 @@ class RegisterController extends Controller
             'password' => ['required', 'string', 'min:8', 'confirmed'],
             'phone' => ['required', 'string', 'regex:/^(\s*)?(\+)?([- _():=+]?\d[- _():=+]?){10,14}(\s*)?$/'],
             'reserve_phone' => ['nullable', 'regex:/^(\s*)?(\+)?([- _():=+]?\d[- _():=+]?){10,14}(\s*)?$/'],
-//            'passport_number' => ['string', 'regex:/^[0-9]{9}$/'],
+//            'passport_number' => ['string', 'regex:/^[0-9]{10}$/'],
 //            'date_of_birth' => ['date', 'before:today'],
 //            'date_of_issue' => ['date', 'before:today'],
             'role_id' => ['required', 'exists:TCG\Voyager\Models\Role,id'],

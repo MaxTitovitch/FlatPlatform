@@ -159,23 +159,24 @@
                                     </div>
 
 
-                                    <div class="w-100">
-                                        <div class="form-check form-check-inline">
-                                            <input class="form-check-input" type="radio" name="role_id"
-                                                   id="inlineRadio1" value="3" checked>
-                                            <label class="form-check-label" for="inlineRadio1">Арендатор</label>
-                                        </div>
-                                        <div class="form-check form-check-inline">
-                                            <input class="form-check-input" type="radio" name="role_id"
-                                                   id="inlineRadio3" value="4">
-                                            <label class="form-check-label" for="inlineRadio3">Работник</label>
-                                        </div>
-                                        <div class="form-check form-check-inline">
-                                            <input class="form-check-input" type="radio" name="role_id"
-                                                   id="inlineRadio2" value="2">
-                                            <label class="form-check-label" for="inlineRadio2">Арендадатель</label>
-                                        </div>
-                                    </div>
+                                    <input type="hidden" name="role_id" >
+{{--                                    <div class="w-100">--}}
+{{--                                        <div class="form-check form-check-inline">--}}
+{{--                                            <input class="form-check-input" type="radio" name="role_id"--}}
+{{--                                                   id="inlineRadio1" value="3" checked>--}}
+{{--                                            <label class="form-check-label" for="inlineRadio1">Арендатор</label>--}}
+{{--                                        </div>--}}
+{{--                                        <div class="form-check form-check-inline">--}}
+{{--                                            <input class="form-check-input" type="radio" name="role_id"--}}
+{{--                                                   id="inlineRadio3" value="4">--}}
+{{--                                            <label class="form-check-label" for="inlineRadio3">Работник</label>--}}
+{{--                                        </div>--}}
+{{--                                        <div class="form-check form-check-inline">--}}
+{{--                                            <input class="form-check-input" type="radio" name="role_id"--}}
+{{--                                                   id="inlineRadio2" value="2">--}}
+{{--                                            <label class="form-check-label" for="inlineRadio2">Арендадатель</label>--}}
+{{--                                        </div>--}}
+{{--                                    </div>--}}
 
                                     @error('role_id')
                                     <span class="invalid-feedback" role="alert">

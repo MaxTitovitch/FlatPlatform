@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use Illuminate\Support\Facades\Auth;
 use App\Http\Requests\HomeUserRequest;
+use Illuminate\Support\Facades\Log;
 use Illuminate\Support\Facades\Session;
 use Illuminate\Support\Facades\Hash;
 
@@ -20,6 +21,7 @@ class HomeController extends Controller
             if ($user->email !== $request->email) {
                 $user->email_verified_at = null;
             }
+            Log::debug($request->except($except));
             $user->update($request->except($except));
             if($request->password) {
                 $user->password = Hash::make($request->password);

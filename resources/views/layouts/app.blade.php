@@ -60,8 +60,14 @@
                     @guest
                         <li class="nav-item sign-in-block">
                             <a class="nav-link" href="{{ route('login') }}">
-                                <i class="fa fa-sign-in fa-3x" aria-hidden="true"></i>
-                                <span class="sign-in my-auto ml-1">{{ __('Войти') }}</span>
+                                <i class="fa fa-sign-in fa-2x" aria-hidden="true"></i>
+                                <span class="sign-in my-auto ml-1">{{ __('Вход') }}</span>
+                            </a>
+                        </li>
+                        <li class="nav-item sign-in-block">
+                            <a class="nav-link" href="{{ route('preregister') }}">
+                                <i class="fa fa-user fa-2x" aria-hidden="true"></i>
+                                <span class="sign-in my-auto ml-1">{{ __('Регистрация') }}</span>
                             </a>
                         </li>
                     @else
